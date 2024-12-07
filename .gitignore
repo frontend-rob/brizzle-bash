@@ -1,6 +1,9 @@
-# ingnore all .DS_Store
+# ignore system files
 **/.DS_Store
 
 
-# ingnore all background .png sprites
+# ignore all exklusive .png sprites in specific folders and subfolders
 assets/img/background/**/*.png
+assets/img/character/**/*.png
+assets/img/monsters/**/*.png
+assets/img/ornaments/**/*.png
