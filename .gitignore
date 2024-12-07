@@ -2,7 +2,7 @@
 **/.DS_Store
 
 
-# ignore all exklusive .png sprites in specific folders and subfolders
+# ignore all exclusive .png sprites in specific folders and subfolders
 assets/img/background/**/*.png
 assets/img/character/**/*.png
 assets/img/monsters/**/*.png
