@@ -8,6 +8,7 @@ The backgrounds are organized in a sequential layering system for dynamic map re
 
 ```
 assets/img/background/ 
+
     ├── layer-1.png
     ├── layer-2.png
     ├── layer-3.png

@@ -15,18 +15,18 @@ assets/sounds/
     └── walking.mp3
 ```
 
-### Credits
+### ✏️ Credits
 
 Below is the list of sound assets and their respective authors:
 
 - **jump.mp3** by *acebrian*
-**Source:** [Freesound Source](https://freesound.org/s/380471/)  
+**Source:** [Freesound Source](https://freesound.org/s/380471/)
 **License:** [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
-- **punch.mp3** by *rcroller*  
-**Source:** [Freesound Source](https://freesound.org/s/424144/)  
+- **punch.mp3** by *rcroller*
+**Source:** [Freesound Source](https://freesound.org/s/424144/)
 **License:** [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
-- **walking.mp3** by *Geoff-Bremner-Audio*  
-**Source:** [Freesound Source](https://freesound.org/s/745654/)  
+- **walking.mp3** by *Geoff-Bremner-Audio*
+**Source:** [Freesound Source](https://freesound.org/s/745654/)
 **License:** [Creative Commons 0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
