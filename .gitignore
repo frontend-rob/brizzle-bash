@@ -3,4 +3,4 @@
 
 
 # ingnore all background .png sprites
-./assets/img/background/**/*.png
+assets/img/background/**/*.png
