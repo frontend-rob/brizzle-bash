@@ -1,0 +1,6 @@
+# ingnore all .DS_Store
+**/.DS_Store
+
+
+# ingnore all background .png sprites
+./assets/img/background/*.png
