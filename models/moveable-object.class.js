@@ -58,6 +58,7 @@ class MovableObject {
     //     }
     // }
 
+    // ! temporary collision function without enemies
     drawCollisionFrame(ctx) {
         if (MovableObject.debugMode && (this instanceof Character )) {
             ctx.beginPath();
@@ -142,7 +143,6 @@ class MovableObject {
 
     down() {
         if (this.world.keyboard.DOWN) {
-            this.Y = 320;
             return true;
         } else {
             return false;

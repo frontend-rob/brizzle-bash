@@ -390,7 +390,7 @@ class Character extends MovableObject {
         down: { widthFactor: 1.25, heightFactor: 0.8 },
         punch: { widthFactor: 1.8, heightFactor: 1.0 },
         hit: { widthFactor: 1.2, heightFactor: 1.0 },
-        dead: { widthFactor: 2.0, heightFactor: 1.0 },
+        dead: { widthFactor: 2.2, heightFactor: 1.25 },
 
     };
 
@@ -436,7 +436,7 @@ class Character extends MovableObject {
 
             this.world.camFrameX = -this.X + 80;
 
-            this.drawLifeBar(ctx);
+            // this.drawLifeBar(ctx);
 
         }, 1000 / 60);
 
@@ -447,7 +447,20 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+    // ! prioization from top to down
     getCharacterState() {
+        if (this.isDead()) {
+            return 'dead';
+        }
+        if (this.isHurt()) {
+            return 'hit';
+        }
+        if (this.punch()) {
+            return 'punch';
+        }
+        if (this.down()) {
+            return 'down';
+        }
         if (this.isAboveGround()) {
             return 'jumping';
         }
@@ -456,18 +469,6 @@ class Character extends MovableObject {
         }
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             return 'walking';
-        }
-        if (this.isHurt()) {
-            return 'hit';
-        }
-        if (this.isDead()) {
-            return 'dead';
-        }
-        if (this.down()) {
-            return 'down';
-        }
-        if (this.punch()) {
-            return 'punch';
         }
         return 'idle';
     }
@@ -483,6 +484,15 @@ class Character extends MovableObject {
             punch: this.IMAGES_PUNCH,
             hit: this.IMAGES_HIT,
             dead: this.IMAGES_DEAD,
+        };
+
+        // ! adjust Y position because of different img sizes
+        if (state === 'dead') {
+            this.Y = 260;
+        };
+
+        if (state === 'down') {
+            this.Y = 320;
         };
 
         const scale = this.animationScales[state];
