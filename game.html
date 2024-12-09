@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>2S Game</title>
+
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/assets.css">
+    <link rel="stylesheet" href="./styles/style.css">
+
+
+    <script src="./models/moveable-object.class.js"></script>
+    <script src="./models/background-object.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./levels/level-01.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./js/script.js"></script>
+
+</head>
+
+<body onload="initGame()">
+
+    <header>
+        <div class="header-inner">
+            <div class="main-logo">
+                <img class="logo" src="" alt="">
+                <span class="logo-text">
+                    Brizzly
+                </span>
+            </div>
+            <div class="setting-bar">
+                <button id="btn-volume" class="btn tooltip" aria-label="volume-btn" onclick="toggleSound()">
+                    <svg id="btn-volume-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM32,96H72v64H32ZM144,207.64,88,164.09V91.91l56-43.55Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z">
+                        </path>
+                    </svg>
+                    <span id="btn-volume-tooltip" class="tooltip-text">Sound Off</span>
+                </button>
+                <button id="btn-settings" class="btn tooltip" aria-label="settings-btn" onclick="showGameSettings()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z">
+                        </path>
+                    </svg>
+                    <span class="tooltip-text">Settings</span>
+                </button>
+                <button id="btn-game-guide" class="btn tooltip" aria-label="help-btn" onclick="showInfoGuide()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M208,144H136V95.19a40,40,0,1,0-16,0V144H48a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V160A16,16,0,0,0,208,144ZM104,56a24,24,0,1,1,24,24A24,24,0,0,1,104,56ZM208,208H48V160H208v48Zm-40-96h32a8,8,0,0,1,0,16H168a8,8,0,0,1,0-16Z">
+                        </path>
+                    </svg>
+                    <span class="tooltip-text">Control</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="canvas-container">
+            <div class="progress-wrapper">
+                <div class="progress-bar-item">
+                    <div class="progress-icon-health">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                            <path
+                                d="M178,36c-20.09,0-37.92,7.93-50,21.56C115.92,43.93,98.09,36,78,36a66.08,66.08,0,0,0-66,66c0,72.34,105.81,130.14,110.31,132.57a12,12,0,0,0,11.38,0C138.19,232.14,244,174.34,244,102A66.08,66.08,0,0,0,178,36Zm-5.49,142.36A328.69,328.69,0,0,1,128,210.16a328.69,328.69,0,0,1-44.51-31.8C61.82,159.77,36,131.42,36,102A42,42,0,0,1,78,60c17.8,0,32.7,9.4,38.89,24.54a12,12,0,0,0,22.22,0C145.3,69.4,160.2,60,178,60a42,42,0,0,1,42,42C220,131.42,194.18,159.77,172.51,178.36Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div id="progress-container-health">
+                        <div id="progress-bar-health"></div>
+                    </div>
+                </div>
+                <div class="progress-bar-item">
+                    <div class="progress-icon-bomb">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                            <path
+                                d="M244,28a12,12,0,0,0-12,12A48.71,48.71,0,0,1,228.67,56C224.23,66.64,217.43,68,212,68c-8.81,0-14.91-8.5-23.91-22.49C178.5,30.58,166.55,12,144,12c-18.14,0-32,9.78-39.14,27.54A68.26,68.26,0,0,0,101.27,52H88A20,20,0,0,0,68,72v7.18A92,92,0,0,0,112,252h1.66A92,92,0,0,0,156,79.18V72a20,20,0,0,0-20-20H125.93a40.89,40.89,0,0,1,1.4-4c4.44-10.62,11.24-12,16.67-12,8.81,0,14.91,8.5,23.91,22.49C177.5,73.42,189.45,92,212,92c18.14,0,32-9.78,39.14-27.54A71.91,71.91,0,0,0,256,40,12,12,0,0,0,244,28ZM139.2,97.65a68,68,0,1,1-54.4,0,12,12,0,0,0,7.2-11V76h19.5c.17,0,.33,0,.5,0s.34,0,.51,0H132V86.66A12,12,0,0,0,139.2,97.65ZM111.45,201.76A12,12,0,0,1,100,210.17a12.2,12.2,0,0,1-3.6-.55A51.79,51.79,0,0,1,60,160a12,12,0,0,1,24,0,27.89,27.89,0,0,0,19.6,26.72A12,12,0,0,1,111.45,201.76Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div id="progress-container-bomb">
+                        <div id="progress-bar-bomb"></div>
+                    </div>
+                </div>
+            </div>
+            <canvas id="canvas" width="720" height="480"></canvas>
+            <button onclick="pauseGame()">Pause</button>
+        </div>
+    </main>
+
+
+    <section id="info-guide-modal" class="modal hidden">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-headline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M208,144H136V95.19a40,40,0,1,0-16,0V144H48a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V160A16,16,0,0,0,208,144ZM104,56a24,24,0,1,1,24,24A24,24,0,0,1,104,56ZM208,208H48V160H208v48Zm-40-96h32a8,8,0,0,1,0,16H168a8,8,0,0,1,0-16Z">
+                        </path>
+                    </svg>
+                    Control
+                </h2>
+                <button class="btn btn-circle" onclick="closeInfoGuide()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="tabs">
+                <button class="btn tab-btn active" onclick="switchTab(event, 'desktop-controls')">
+                    Desktop
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"></path>
+                    </svg>
+                </button>
+                <button class="btn tab-btn" onclick="switchTab(event, 'mobile-controls')">
+                    Mobile
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path d="M232,128A104,104,0,1,1,128,24,104.13,104.13,0,0,1,232,128Z"></path>
+                    </svg>
+                </button>
+                <div class="tab-content-controls">
+                    <section id="desktop-controls" class="modal-content">
+                        <div class="modal-guide-item">
+                            <h3>Movement</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>A</kbd> / <kbd>D</kbd> - <span>Use the A key to move left and the D key to move right</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>W</kbd> / <kbd>␣</kbd> - <span>Use the W key or Spacebar to make the character jump.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>S</kbd> - <span>Hold the S key to duck or crouch.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>⇧</kbd> - <span>Hold Shift to run faster during gameplay.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-guide-item">
+                            <h3>Attacks</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>J</kbd> - <span>Press the J key to unleash a quick, close-range power punch.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>K</kbd> - <span>Press the K key to fire a precise, long-range gunshot.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>P</kbd> - <span>Press the P key to activate a special attack with devastating power.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-guide-item">
+                            <h3>Collectibles</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>
+                                        <svg class="health-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                            <path
+                                                d="M178,40c-20.65,0-38.73,8.88-50,23.89C116.73,48.88,98.65,40,78,40a62.07,62.07,0,0,0-62,62c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,228.66,240,172,240,102A62.07,62.07,0,0,0,178,40ZM128,214.8C109.74,204.16,32,155.69,32,102A46.06,46.06,0,0,1,78,56c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,155.61,146.24,204.15,128,214.8Z">
+                                            </path>
+                                        </svg>
+                                    </kbd> - <span>Pick up hearts to heal your character and restore health.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>
+                                        <svg class="bomb-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                            <path
+                                                d="M248,32h0a8,8,0,0,0-8,8,52.66,52.66,0,0,1-3.57,17.39C232.38,67.22,225.7,72,216,72c-11.06,0-18.85-9.76-29.49-24.65C176,32.66,164.12,16,144,16c-16.39,0-29,8.89-35.43,25a66.07,66.07,0,0,0-3.9,15H88A16,16,0,0,0,72,72v9.59A88,88,0,0,0,112,248h1.59A88,88,0,0,0,152,81.59V72a16,16,0,0,0-16-16H120.88a46.76,46.76,0,0,1,2.69-9.37C127.62,36.78,134.3,32,144,32c11.06,0,18.85,9.76,29.49,24.65C184,71.34,195.88,88,216,88c16.39,0,29-8.89,35.43-25A68.69,68.69,0,0,0,256,40,8,8,0,0,0,248,32ZM140.8,94a72,72,0,1,1-57.6,0A8,8,0,0,0,88,86.66V72h48V86.66A8,8,0,0,0,140.8,94ZM111.89,209.32A8,8,0,0,1,104,216a8.52,8.52,0,0,1-1.33-.11,57.5,57.5,0,0,1-46.57-46.57,8,8,0,1,1,15.78-2.64,41.29,41.29,0,0,0,33.43,33.43A8,8,0,0,1,111.89,209.32Z">
+                                            </path>
+                                        </svg>
+                                    </kbd> - <span>Pick up bombs to unleash special attacks with devastating power.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-guide-item">
+                            <h3>Utility Keys</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>␛</kbd> - <span>Press Esc to pause the game and access the menu.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="mobile-controls" class="modal-content hidden">
+                        <div class="modal-guide-item">
+                            <h3>Movement</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> / <kbd>X</kbd> - <span>Use the A key to move left and the D key to move right</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> / <kbd>␣</kbd> - <span>Use the W key or Spacebar to make the character jump.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> - <span>Hold the S key to duck or crouch.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> - <span>Hold Shift to run faster during gameplay.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-guide-item">
+                            <h3>Attacks</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> - <span>Press the J key to unleash a quick, close-range power punch.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> - <span>Press the K key to fire a precise, long-range gunshot.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> - <span>Press the P key to activate a special attack with devastating power.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-guide-item">
+                            <h3>Collectibles</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>
+                                        <svg class="health-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                            <path
+                                                d="M178,40c-20.65,0-38.73,8.88-50,23.89C116.73,48.88,98.65,40,78,40a62.07,62.07,0,0,0-62,62c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,228.66,240,172,240,102A62.07,62.07,0,0,0,178,40ZM128,214.8C109.74,204.16,32,155.69,32,102A46.06,46.06,0,0,1,78,56c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,155.61,146.24,204.15,128,214.8Z">
+                                            </path>
+                                        </svg>
+                                    </kbd> - <span>Pick up hearts to heal your character and restore health.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>
+                                        <svg class="bomb-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                            <path
+                                                d="M248,32h0a8,8,0,0,0-8,8,52.66,52.66,0,0,1-3.57,17.39C232.38,67.22,225.7,72,216,72c-11.06,0-18.85-9.76-29.49-24.65C176,32.66,164.12,16,144,16c-16.39,0-29,8.89-35.43,25a66.07,66.07,0,0,0-3.9,15H88A16,16,0,0,0,72,72v9.59A88,88,0,0,0,112,248h1.59A88,88,0,0,0,152,81.59V72a16,16,0,0,0-16-16H120.88a46.76,46.76,0,0,1,2.69-9.37C127.62,36.78,134.3,32,144,32c11.06,0,18.85,9.76,29.49,24.65C184,71.34,195.88,88,216,88c16.39,0,29-8.89,35.43-25A68.69,68.69,0,0,0,256,40,8,8,0,0,0,248,32ZM140.8,94a72,72,0,1,1-57.6,0A8,8,0,0,0,88,86.66V72h48V86.66A8,8,0,0,0,140.8,94ZM111.89,209.32A8,8,0,0,1,104,216a8.52,8.52,0,0,1-1.33-.11,57.5,57.5,0,0,1-46.57-46.57,8,8,0,1,1,15.78-2.64,41.29,41.29,0,0,0,33.43,33.43A8,8,0,0,1,111.89,209.32Z">
+                                            </path>
+                                        </svg>
+                                    </kbd> - <span>Pick up bombs to unleash special attacks with devastating power.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="modal-guide-item">
+                            <h3>Utility Keys</h3>
+                            <div class="kbd-control">
+                                <div class="kbd-control-row">
+                                    <kbd>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                            <path
+                                                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM112,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z">
+                                            </path>
+                                        </svg>
+                                    </kbd> - <span>Press Esc to pause the game and access the menu.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="game-settings-modal" class="modal hidden">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-headline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z">
+                        </path>
+                    </svg>
+                    Settings
+                </h2>
+                <button class="btn btn-circle" onclick="closeGameSettings()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <section class="tab-content-settings">
+                <div class="modal-content">
+                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-sound')">
+                        <h3>Game Sound</h3>
+                        <input type="checkbox" name="checkbox-sound" id="chk-sound" class="checkbox">
+                    </div>
+                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-full-screen')">
+                        <h3>Full Screen</h3>
+                        <input type="checkbox" name="checkbox-full-screen" id="chk-full-screen" class="checkbox">
+                    </div>
+                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-debug')">
+                        <h3>Debugging Mode
+                            <sup class="asteriks">*</sup>
+                        </h3>
+                        <input type="checkbox" name="checkbox-debug-mode" id="chk-debug" class="checkbox">
+                    </div>
+                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-console')">
+                        <h3>Console Logs
+                            <sup class="asteriks">*</sup>
+                        </h3>
+                        <input type="checkbox" name="checkbox-console-logs" id="chk-console" class="checkbox">
+                    </div>
+                </div>
+            </section>
+            <div class="modal-content-explanation">
+                <span class="asteriks">*</span>
+                <p>This feature will be enabled after reload.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- <footer>
+        <div class="footer-inner"></div>
+    </footer> -->
+
+</body>
+
+</html>

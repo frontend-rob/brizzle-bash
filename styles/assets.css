@@ -1,0 +1,105 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: .5rem;
+    height: 3rem;
+    padding: 0 1rem;
+    background-color: color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
+    color: var(--base-content);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: transform 100ms cubic-bezier(0, 0, 0.2, 1), background-color 100ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: var(--base-content);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn:hover {
+    background-color: var(--bg-neutral);
+
+    svg {
+        fill: var(--primary-content);
+    }
+}
+
+.btn-circle {
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: .5rem;
+    border-radius: 2rem;
+}
+
+.tab-btn {
+    border: 1px dashed var(--bg-neutral);
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+    background-color: unset;
+    border-bottom: unset;
+    height: 2.5rem;
+}
+
+.tab-btn svg {
+    height: .75rem;
+    width: .75rem;
+    fill: var(--bg-neutral);
+}
+
+.tab-btn.active {
+    color: var(--primary-content);
+    svg {
+        fill: var(--primary);
+    }
+}
+
+.checkbox {
+    flex-shrink: 0;
+    background-color: var(--bg-base-100);
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.5rem;
+    border: 1px solid var(--bg-neutral);
+}
+
+.checkbox:checked,
+.checkbox[aria-checked=true] {
+    background-repeat: no-repeat;
+    animation: checkmark 125ms ease;
+    border: 1px solid var(--success);
+    background-color: var(--success);
+    background-image: linear-gradient(-45deg, transparent 65%, var(--success) 65.99%),
+        linear-gradient(45deg, transparent 75%, var(--success) 75.99%),
+        linear-gradient(-45deg, var(--success) 40%, transparent 40.99%),
+        linear-gradient(45deg, var(--success) 30%, var(--primary-content) 30.99%, var(--primary-content) 40%, transparent 40.99%),
+        linear-gradient(-45deg, var(--primary-content) 50%, var(--success) 50.99%);
+}
+
+@keyframes checkmark {
+    0% {
+        background-position: 0 1rem;
+        opacity: 0;
+    }
+
+    100% {
+        background-position: 0 0;
+        opacity: 1;
+    }
+}
