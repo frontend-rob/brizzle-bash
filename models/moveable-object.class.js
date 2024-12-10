@@ -1,5 +1,5 @@
 class MovableObject {
-    X = 88;
+    X = 96;
     Y = 288;
     img;
     width = 64;
@@ -10,11 +10,9 @@ class MovableObject {
     speedX = 0.5;
     speedY = 0;
     acceleration = 1.5;
-
     characterLife = 100;
     lastHitTime = 0;
     hitCooldown = 1000;
-
     static debugMode = false;
 
     static setDebugMode(isEnabled) {
@@ -24,6 +22,8 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
+            if (this.world.isPaused) return;
+
             if (this.isAboveGround() || this.speedY > 0) {
                 this.Y -= this.speedY;
                 this.speedY -= this.acceleration;
@@ -34,6 +34,7 @@ class MovableObject {
             }
         }, 1000 / 60);
     }
+
 
     isAboveGround() {
         return this.Y < 288;
@@ -79,21 +80,22 @@ class MovableObject {
     }
 
     getHit() {
+        if (this.world.isPaused) return;
+
         const currentTime = new Date().getTime();
         if (this.lastHitTime && (currentTime - this.lastHitTime) < this.hitCooldown) {
             return;
         }
 
-        // Leben reduzieren und Fortschrittsbalken aktualisieren
         this.characterLife -= 10;
         if (this.characterLife < 0) {
             this.characterLife = 0;
         }
 
-        // Fortschrittsbalken nach jedem Treffer aktualisieren
         this.updateProgressBar();
         this.lastHitTime = currentTime;
     }
+
 
     updateProgressBar() {
         const progressBar = document.getElementById('progress-bar-health');
@@ -118,11 +120,15 @@ class MovableObject {
     }
 
     moveRight() {
-        this.X += this.speedX;
+        if (!this.world.isPaused) {
+            this.X += this.speedX;
+        }
     }
 
     moveLeft() {
-        this.X -= this.speedX;
+        if (!this.world.isPaused) {
+            this.X -= this.speedX;
+        }
     }
 
     isRunning() {
@@ -136,31 +142,35 @@ class MovableObject {
     }
 
     jump() {
-        if (!this.isAboveGround()) {
+        if (!this.world.isPaused && !this.isAboveGround()) {
             this.speedY = 25;
         }
     }
 
     down() {
-        if (this.world.keyboard.DOWN) {
-            return true;
-        } else {
-            return false;
-        }
+        return !this.world.isPaused && this.world.keyboard.DOWN;
     }
 
     punch() {
-        if (this.world.keyboard.ATTACK_ONE) {
-            return true;
-        } else {
-            return false;
-        }
+        return !this.world.isPaused && this.world.keyboard.ATTACK_ONE;
     }
 
+
     playAnimation(images) {
+        if (this.animationPaused) return;
         let imgIndex = this.currentImage % images.length;
         let path = images[imgIndex];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+    
+    pauseAnimation() {
+        this.animationPaused = true;
+    }
+
+    
+    resumeAnimation() {
+        this.animationPaused = false;
     }
 }

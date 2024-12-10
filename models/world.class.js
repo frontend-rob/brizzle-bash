@@ -8,8 +8,8 @@ class World {
     camFrameX = 0;
     collisionOffsetX = 10;
     collisionOffsetY = 10;
-    isPaused = false; // Flag für Pausenstatus
-    animationFrameId = null; // Speichert die AnimationFrame-ID
+    isPaused = false;
+    animationFrameId = null;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -25,27 +25,37 @@ class World {
         this.character.world = this;
     }
 
-    // Call this method to initialize the progress bar when the game starts
+    
     initializeProgressBar() {
         const progressBar = document.getElementById('progress-bar-health');
-        progressBar.style.width = `${this.characterLife}%`;  // Set initial life
+        progressBar.style.width = `${this.characterLife}%`;
     }
 
-    // Pause/Unpause das Spiel
+
     pauseGame() {
-        this.isPaused = !this.isPaused;
-        if (this.isPaused) {
-            console.log("Game Paused");
-            cancelAnimationFrame(this.animationFrameId); // Stoppe die Animation
-        } else {
-            console.log("Game Resumed");
-            this.animationFrameId = requestAnimationFrame(() => this.drawWorld()); // Fortsetzen der Animation
-        }
+        this.isPaused = true;
+        console.log("Game Paused");
+
+        cancelAnimationFrame(this.animationFrameId);
+
+        this.character.pauseAnimation();
+        this.level.enemies.forEach(enemy => enemy.pauseAnimation());
     }
+
+    resumeGame() {
+        this.isPaused = false;
+        console.log("Game Resumed");
+        
+        this.character.resumeAnimation();
+
+        this.level.enemies.forEach(enemy => enemy.resumeAnimation());
+        this.animationFrameId = requestAnimationFrame(() => this.drawWorld());
+    }
+
 
     checkCollisions() {
         setInterval(() => {
-            if (!this.isPaused) {  // Nur Kollisionsabfrage, wenn das Spiel nicht pausiert ist
+            if (!this.isPaused) {
                 this.level.enemies.forEach((enemy) => {
                     if (this.character.isColliding(enemy, this.collisionOffsetX, this.collisionOffsetY)) {
                         this.character.getHit();
@@ -57,19 +67,15 @@ class World {
     }
 
     drawWorld() {
-        if (this.isPaused) return;  // Stoppe das Zeichnen, wenn das Spiel pausiert
+        if (this.isPaused) return;
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camFrameX, 0);
-
         this.placeObjectsOnCanvas(this.level.backgroundObjects);
         this.placeObjectsOnCanvas(this.level.enemies);
         this.drawObject(this.character);
-
         this.ctx.translate(-this.camFrameX, 0);
 
-        // Fortsetzung der Animation nur, wenn das Spiel nicht pausiert ist
         if (!this.isPaused) {
             this.animationFrameId = requestAnimationFrame(() => this.drawWorld());
         }

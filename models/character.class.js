@@ -410,6 +410,14 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
+
+            if (this.world.isPaused) {
+                this.soundCharacterWalk.pause();
+                this.soundCharacterJump.pause();
+                this.soundCharacterPunch.pause();
+                return;
+            }
+
             this.soundCharacterWalk.pause();
 
             if (this.world.keyboard.RIGHT && this.X < this.world.level.levelEndX) {
@@ -434,7 +442,7 @@ class Character extends MovableObject {
                 this.soundCharacterPunch.play();
             }
 
-            this.world.camFrameX = -this.X + 80;
+            this.world.camFrameX = -this.X + 96;
 
             // this.drawLifeBar(ctx);
 

@@ -32,7 +32,7 @@
             <div class="main-logo">
                 <img class="logo" src="" alt="">
                 <span class="logo-text">
-                    Brizzly
+                    Brizzle Bash
                 </span>
             </div>
             <div class="setting-bar">
@@ -65,7 +65,7 @@
     </header>
 
     <main>
-        <div id="canvas-container">
+        <div id="canvas-container" class="canvas-container">
             <div class="progress-wrapper">
                 <div class="progress-bar-item">
                     <div class="progress-icon-health">
@@ -93,7 +93,16 @@
                 </div>
             </div>
             <canvas id="canvas" width="720" height="480"></canvas>
-            <button onclick="pauseGame()">Pause</button>
+            <div class="canvas-ctrl-container">
+                <button id="toggle-pause-btn" class="btn" onclick="toggleGamePause()">
+                    <svg id="pause-btn-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                        <path
+                            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM112,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z">
+                        </path>
+                    </svg>
+                    <span id="pause-btn-text">Break</span>
+                </button>
+            </div>
         </div>
     </main>
 
@@ -160,7 +169,7 @@
                                     <kbd>K</kbd> - <span>Press the K key to fire a precise, long-range gunshot.</span>
                                 </div>
                                 <div class="kbd-control-row">
-                                    <kbd>P</kbd> - <span>Press the P key to activate a special attack with devastating power.</span>
+                                    <kbd>L</kbd> - <span>Press the P key to activate a special attack with devastating power.</span>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +202,7 @@
                             <h3>Utility Keys</h3>
                             <div class="kbd-control">
                                 <div class="kbd-control-row">
-                                    <kbd>␛</kbd> - <span>Press Esc to pause the game and access the menu.</span>
+                                    <kbd>P</kbd> - <span>Press P to break or return to the game.</span>
                                 </div>
                             </div>
                         </div>

@@ -77,6 +77,8 @@ function handleModalEsc(event, modalId) {
  */
 function showInfoGuide() {
     showModal('info-guide-modal', 'modal-container');
+    toggleGamePause();
+
 }
 
 
@@ -93,6 +95,7 @@ function closeInfoGuide() {
  */
 function showGameSettings() {
     showModal('game-settings-modal', 'modal-container');
+    toggleGamePause();
 }
 
 
@@ -237,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event Listener hinzufügen
     const checkboxIds = ['chk-sound', 'chk-full-screen', 'chk-debug', 'chk-console'];
-    addCheckboxEventListeners(checkboxIds);  // Event-Listener für alle Checkboxen hinzufügen
+    addCheckboxEventListeners(checkboxIds);
 });
 
 /**
@@ -249,20 +252,67 @@ function addCheckboxEventListeners(checkboxIds) {
         const checkbox = document.getElementById(checkboxId);
         if (checkbox) {
             checkbox.addEventListener('click', () => {
-                toggleCheckbox(checkboxId);  // Event-Listener, der die Checkbox umschaltet
+                toggleCheckbox(checkboxId);
             });
         }
     });
 }
 
 
+// ! ### TOGGLE PAUSE / RESUME BUTTON TEXT & ICON ###
 
 
+// Play-Button-Zustand
+const PLAY_BUTTON = {
+    svg: `
+        <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z">
+        </path>
+    `,
+    text: 'Return',
+};
 
+// Pause-Button-Zustand
+const PAUSE_BUTTON = {
+    svg: `
+        <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM112,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z">
+        </path>
+    `,
+    text: 'Break',
+};
 
-function pauseGame() {
-    // Überprüfe, ob die Weltinstanz vorhanden ist
-    if (world) {
-        world.pauseGame();  // Pausiere oder setze das Spiel fort
+// Hilfsfunktion für das Aktualisieren des Buttons
+function updateButtonState(buttonState, isPaused) {
+    const iconSvg = document.getElementById('pause-btn-icon');
+    const buttonText = document.getElementById('pause-btn-text');
+    const btn = document.getElementById('toggle-pause-btn');
+
+    iconSvg.innerHTML = buttonState.svg;
+    buttonText.textContent = buttonState.text;
+
+    if (isPaused) {
+        btn.classList.add('btn-primary');
+    } else {
+        btn.classList.remove('btn-primary');
     }
 }
+
+// Toggle-Funktion
+function toggleGamePause() {
+    if (world.isPaused) {
+        world.resumeGame();
+        updateButtonState(PAUSE_BUTTON, false);
+    } else {
+        world.pauseGame();
+        updateButtonState(PLAY_BUTTON, true);
+    }
+}
+
+
+// Event Listener für das Drücken der P-Taste
+document.addEventListener('keydown', function (event) {
+    if (event.code === 'KeyP') {
+        toggleGamePause();
+    }
+});

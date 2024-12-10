@@ -31,9 +31,28 @@
 
 .btn:hover {
     background-color: var(--bg-neutral);
+    color: var(--primary-content);
 
     svg {
         fill: var(--primary-content);
+    }
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--bg-base-200);
+}
+
+.btn-primary svg {
+    fill: var(--bg-base-200);
+}
+
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--primary) 70%, #ff52d9 30%);
+    color: var(--bg-base-200);
+
+    svg {
+        fill: var(--bg-base-200);
     }
 }
 
@@ -61,6 +80,7 @@
 
 .tab-btn.active {
     color: var(--primary-content);
+
     svg {
         fill: var(--primary);
     }
