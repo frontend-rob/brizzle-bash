@@ -77,7 +77,8 @@ function handleModalEsc(event, modalId) {
  */
 function showInfoGuide() {
     showModal('info-guide-modal', 'modal-container');
-    toggleGamePause();
+    world.pauseGame();
+    updateButtonState(PLAY_BUTTON, true);
 
 }
 
@@ -95,7 +96,8 @@ function closeInfoGuide() {
  */
 function showGameSettings() {
     showModal('game-settings-modal', 'modal-container');
-    toggleGamePause();
+    world.pauseGame();
+    updateButtonState(PLAY_BUTTON, true);
 }
 
 

@@ -49,20 +49,13 @@ class MovableObject {
         ctx.drawImage(this.img, this.X, this.Y, this.width, this.height);
     }
 
-    // drawCollisionFrame(ctx) {
-    //     if (MovableObject.debugMode && (this instanceof Character || this instanceof Squid || this instanceof Plant || this instanceof Endboss)) {
-    //         ctx.beginPath();
-    //         ctx.lineWidth = '4';
-    //         ctx.strokeStyle = '#ff79c6';
-    //         ctx.rect(this.X, this.Y, this.width, this.height);
-    //         ctx.stroke();
-    //     }
-    // }
-
-    // ! temporary collision function without enemies
     drawCollisionFrame(ctx) {
-        if (MovableObject.debugMode && (this instanceof Character )) {
-            ctx.beginPath();
+        if (MovableObject.debugMode && (this instanceof Character || 
+            this instanceof Candle || this instanceof Plant || 
+            this instanceof Spider || this instanceof Spinner || 
+            this instanceof Spirit || this instanceof Squid || 
+            this instanceof Endboss)) {
+                ctx.beginPath();
             ctx.lineWidth = '4';
             ctx.strokeStyle = '#ff79c6';
             ctx.rect(this.X, this.Y, this.width, this.height);
@@ -70,6 +63,7 @@ class MovableObject {
         }
     }
 
+    
     isColliding(moveObj, offsetX = 0, offsetY = 0) {
         return (
             this.X + this.width - offsetX > moveObj.X + offsetX && // Rechte Kante überlappt linke Kante + Offset
