@@ -126,10 +126,11 @@ class MovableObject {
     }
 
     moveLeft() {
-        if (!this.world.isPaused) {
+        if (!this.world || !this.world.isPaused) {
             this.X -= this.speedX;
         }
     }
+
 
     isRunning() {
         if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && this.world.keyboard.SHIFT) {

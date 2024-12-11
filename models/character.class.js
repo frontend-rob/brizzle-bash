@@ -389,7 +389,7 @@ class Character extends MovableObject {
         jumping: { widthFactor: 1.0, heightFactor: 1.0 },
         down: { widthFactor: 1.25, heightFactor: 0.8 },
         punch: { widthFactor: 1.8, heightFactor: 1.0 },
-        hit: { widthFactor: 1.2, heightFactor: 1.0 },
+        hit: { widthFactor: 1.5, heightFactor: 1.1 },
         dead: { widthFactor: 2.2, heightFactor: 1.25 },
 
     };
@@ -497,6 +497,10 @@ class Character extends MovableObject {
         // ! adjust Y position because of different img sizes
         if (state === 'dead') {
             this.Y = 260;
+        };
+
+        if (state === 'hit') {
+            this.Y = 272;
         };
 
         if (state === 'down') {
