@@ -2,12 +2,13 @@ const level01 = new Level(
 
     [
         // ! INCLUDE ENEMIES
+        new Squid(),
         // new Plant(),
         // new Candle(),
         // new Spider(),
-        // new Spirit(),
-        // new Squid(),
-        // new Endboss()
+        new Spirit(),
+        // new Spinner(),
+        new Endboss()
     ],
 
     [
