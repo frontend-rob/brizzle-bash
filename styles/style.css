@@ -303,7 +303,7 @@ kbd svg {
 
 .carousel {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 300ms ease-in-out;
     height: 100%;
 }
 
@@ -314,7 +314,7 @@ kbd svg {
     align-items: center;
     min-width: 100%;
     padding: 1rem;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 300ms ease-in-out;
     overflow: visible;
 }
 
