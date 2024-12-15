@@ -30,7 +30,13 @@ document.addEventListener('keydown', (event) => {
         keyboard.SHIFT = true;
     }
     if (event.code == "KeyJ") {
-        keyboard.ATTACK_ONE = true;
+        keyboard.PUNCH = true;
+    }
+    if (event.code == "KeyK") {
+        keyboard.THROW_BALL = true;
+    }
+    if (event.code == "KeyL") {
+        keyboard.THROW_BOMB = true;
     }
 });
 
@@ -54,6 +60,12 @@ document.addEventListener('keyup', (event) => {
         keyboard.SHIFT = false;
     }
     if (event.code == "KeyJ") {
-        keyboard.ATTACK_ONE = false;
+        keyboard.PUNCH = false;
+    }
+    if (event.code == "KeyK") {
+        keyboard.THROW_BALL = false;
+    }
+    if (event.code == "KeyL") {
+        keyboard.THROW_BOMB = false;
     }
 });

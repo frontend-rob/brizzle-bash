@@ -51,6 +51,8 @@ function handleModalClick(event, modalId, contentClass) {
 
     if (modalId === 'info-guide-modal' && !modalContent.contains(event.target)) {
         closeModal(modalId);
+        currentSlide = 0;
+        updateCarousel();
     }
 
     if (modalId === 'game-settings-modal' && !modalContent.contains(event.target)) {
@@ -68,6 +70,8 @@ function handleModalClick(event, modalId, contentClass) {
 function handleModalEsc(event, modalId) {
     if (event.key === 'Escape') {
         closeModal(modalId);
+        currentSlide = 0;
+        updateCarousel();
     }
 }
 
@@ -79,6 +83,7 @@ function showInfoGuide() {
     showModal('info-guide-modal', 'modal-container');
     world.pauseGame();
     updateButtonState(PLAY_BUTTON, true);
+    createCarousel();
 
 }
 
@@ -88,6 +93,8 @@ function showInfoGuide() {
  */
 function closeInfoGuide() {
     closeModal('info-guide-modal');
+    currentSlide = 0;
+    updateCarousel();
 }
 
 
@@ -202,6 +209,7 @@ function unmuteSounds() {
  * @param {string} tabId - the id of the tab content to be displayed
  */
 function switchTab(event, tabId) {
+    document.getElementById('game-story').classList.add('hidden');
     document.getElementById('desktop-controls').classList.add('hidden');
     document.getElementById('mobile-controls').classList.add('hidden');
     document.getElementById(tabId).classList.remove('hidden');
@@ -318,3 +326,102 @@ document.addEventListener('keydown', function (event) {
         toggleGamePause();
     }
 });
+
+
+
+
+
+
+
+// ! CAROUSEL
+
+const carouselData = [
+    {
+        id: "carousel-brizzly",
+        image: "../assets/img/carousel/talku-00.png",
+        title: "Brizzly"
+    },
+    {
+        id: "carousel-candle",
+        image: "../assets/img/carousel/cm-00.png",
+        title: "Candle Bug"
+    },
+    {
+        id: "carousel-mushroom",
+        image: "../assets/img/carousel/mr-00.png",
+        title: "Fungal Colossus"
+    },
+    {
+        id: "carousel-plant",
+        image: "../assets/img/carousel/ep-00.png",
+        title: "Flesh Lotus"
+    },
+    {
+        id: "carousel-spider",
+        image: "../assets/img/carousel/sp-00.png",
+        title: "Toxic Widow"
+    },
+    {
+        id: "carousel-spinner",
+        image: "../assets/img/carousel/spi-00.png",
+        title: "Ocular Spinner"
+    },
+    {
+        id: "carousel-spirit",
+        image: "../assets/img/carousel/spr-00.png",
+        title: "Soul Phantom"
+    },
+    {
+        id: "carousel-squid",
+        image: "../assets/img/carousel/squ-00.png",
+        title: "Shadow Squid"
+    },
+];
+
+let currentSlide = 0;
+
+function createCarousel() {
+    const carousel = document.getElementById('carousel');
+
+    carousel.innerHTML = '';
+    let carouselHTML = '';
+
+    carouselData.forEach(data => {
+        carouselHTML += `
+            <div class="carousel-item">
+                <div class="image-container">
+                    <img src="${data.image}" alt="${data.title}" id="${data.id}">
+                </div>
+                <div class="carousel-caption">
+                    <h3>${data.title}</h3>
+                </div>
+            </div>
+        `;
+    });
+
+    carousel.innerHTML = carouselHTML;
+    updateCarousel();
+}
+
+function moveSlide(step) {
+    const items = document.querySelectorAll('.carousel-item');
+    const totalSlides = items.length;
+
+    currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const items = document.querySelectorAll('.carousel-item');
+    items.forEach((item, index) => {
+        if (index === currentSlide) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
+    const carousel = document.getElementById('carousel');
+    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+}

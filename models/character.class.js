@@ -372,6 +372,48 @@ class Character extends MovableObject {
         '../assets/img/character/dead/ko1u_061.png'
     ];
 
+    IMAGES_THROW = [
+        '../assets/img/character/throw/thu_000.png',
+        '../assets/img/character/throw/thu_001.png',
+        '../assets/img/character/throw/thu_002.png',
+        '../assets/img/character/throw/thu_003.png',
+        '../assets/img/character/throw/thu_004.png',
+        '../assets/img/character/throw/thu_005.png',
+        '../assets/img/character/throw/thu_006.png',
+        '../assets/img/character/throw/thu_007.png',
+        '../assets/img/character/throw/thu_008.png',
+        '../assets/img/character/throw/thu_009.png',
+        '../assets/img/character/throw/thu_010.png',
+        '../assets/img/character/throw/thu_011.png',
+        '../assets/img/character/throw/thu_012.png',
+        '../assets/img/character/throw/thu_013.png',
+        '../assets/img/character/throw/thu_014.png',
+        '../assets/img/character/throw/thu_015.png',
+        '../assets/img/character/throw/thu_016.png',
+        '../assets/img/character/throw/thu_017.png',
+        '../assets/img/character/throw/thu_018.png',
+        '../assets/img/character/throw/thu_019.png',
+        '../assets/img/character/throw/thu_019.png',
+        '../assets/img/character/throw/thu_020.png',
+        '../assets/img/character/throw/thu_021.png',
+        '../assets/img/character/throw/thu_022.png',
+        '../assets/img/character/throw/thu_023.png',
+        '../assets/img/character/throw/thu_024.png',
+        '../assets/img/character/throw/thu_025.png',
+        '../assets/img/character/throw/thu_026.png',
+        '../assets/img/character/throw/thu_027.png',
+        '../assets/img/character/throw/thu_028.png',
+        '../assets/img/character/throw/thu_029.png'
+    ];
+
+    IMAGES_SURPRISE = [
+        '../assets/img/character/surprise/surpu_000.png',
+        '../assets/img/character/surprise/surpu_001.png',
+        '../assets/img/character/surprise/surpu_002.png',
+        '../assets/img/character/surprise/surpu_003.png',
+        '../assets/img/character/surprise/surpu_004.png',
+        '../assets/img/character/surprise/surpu_005.png'
+    ];
 
 
     world;
@@ -389,6 +431,7 @@ class Character extends MovableObject {
         jumping: { widthFactor: 1.0, heightFactor: 1.0 },
         down: { widthFactor: 1.25, heightFactor: 0.8 },
         punch: { widthFactor: 1.8, heightFactor: 1.0 },
+        throw: { widthFactor: 2.0, heightFactor: 1.05 },
         hit: { widthFactor: 1.5, heightFactor: 1.1 },
         dead: { widthFactor: 2.2, heightFactor: 1.25 },
 
@@ -404,6 +447,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_PUNCH);
         this.loadImages(this.IMAGES_HIT);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_THROW);
+        this.loadImages(this.IMAGES_SURPRISE);
         this.applyGravity();
         this.animate();
     };
@@ -437,7 +482,7 @@ class Character extends MovableObject {
                 this.soundCharacterJump.play();
             }
 
-            if (this.world.keyboard.ATTACK_ONE) {
+            if (this.world.keyboard.PUNCH) {
                 this.punch();
                 this.soundCharacterPunch.play();
             }
@@ -466,6 +511,12 @@ class Character extends MovableObject {
         if (this.punch()) {
             return 'punch';
         }
+        if (this.throwBall()) {
+            return 'throw';
+        }
+        if (this.throwBomb()) {
+            return 'throw';
+        }
         if (this.down()) {
             return 'down';
         }
@@ -490,6 +541,7 @@ class Character extends MovableObject {
             jumping: this.IMAGES_JUMP,
             down: this.IMAGES_DOWN,
             punch: this.IMAGES_PUNCH,
+            throw: this.IMAGES_THROW,
             hit: this.IMAGES_HIT,
             dead: this.IMAGES_DEAD,
         };
@@ -505,6 +557,10 @@ class Character extends MovableObject {
 
         if (state === 'down') {
             this.Y = 320;
+        };
+
+        if (state === 'throw') {
+            this.Y = 280;
         };
 
         const scale = this.animationScales[state];

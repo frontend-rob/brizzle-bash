@@ -147,7 +147,15 @@ class MovableObject {
     }
 
     punch() {
-        return !this.world.isPaused && this.world.keyboard.ATTACK_ONE;
+        return !this.world.isPaused && this.world.keyboard.PUNCH;
+    }
+
+    throwBall() {
+        return !this.world.isPaused && this.world.keyboard.THROW_BALL;
+    }
+    
+    throwBomb() {
+        return !this.world.isPaused && this.world.keyboard.THROW_BOMB;
     }
 
 

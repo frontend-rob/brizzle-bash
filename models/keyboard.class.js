@@ -5,5 +5,7 @@ class Keyboard {
     DOWN = false;
     SPACE = false;
     SHIFT = false;
-    ATTACK_ONE = false;
+    PUNCH = false;
+    THROW_BALL = false;
+    THROW_BOMB = false;
 }
