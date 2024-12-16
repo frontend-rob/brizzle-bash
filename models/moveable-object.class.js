@@ -13,16 +13,21 @@ class MovableObject {
     characterLife = 100;
     lastHitTime = 0;
     hitCooldown = 1000;
-    static debugMode = false;
+    amplitude = 0;
+    frequency = 0;
+    time = 0;
+    oscillateY = 0;
 
+    static debugMode = false;
     static setDebugMode(isEnabled) {
         MovableObject.debugMode = isEnabled;
         console.log("Debug Mode: ", MovableObject.debugMode ? "enabled" : "disabled");
     }
 
+
     applyGravity() {
         setInterval(() => {
-            if (this.world.isPaused) return;
+            if (this.world && this.world.isPaused) return;
 
             if (this.isAboveGround() || this.speedY > 0) {
                 this.Y -= this.speedY;
@@ -37,25 +42,32 @@ class MovableObject {
 
 
     isAboveGround() {
-        return this.Y < 288;
+        if (this instanceof ThrowableObject) {
+            return true
+        } else {
+            return this.Y < 288;
+        }
     }
+
 
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
+
     draw(ctx) {
         ctx.drawImage(this.img, this.X, this.Y, this.width, this.height);
     }
 
+
     drawCollisionFrame(ctx) {
-        if (MovableObject.debugMode && (this instanceof Character || 
-            this instanceof Candle || this instanceof Plant || 
-            this instanceof Spider || this instanceof Spinner || 
-            this instanceof Spirit || this instanceof Squid || 
+        if (MovableObject.debugMode && (this instanceof Character ||
+            this instanceof Candle || this instanceof Plant ||
+            this instanceof Spider || this instanceof Spinner ||
+            this instanceof Spirit || this instanceof Squid ||
             this instanceof Endboss)) {
-                ctx.beginPath();
+            ctx.beginPath();
             ctx.lineWidth = '4';
             ctx.strokeStyle = '#ff79c6';
             ctx.rect(this.X, this.Y, this.width, this.height);
@@ -63,7 +75,7 @@ class MovableObject {
         }
     }
 
-    
+
     isColliding(moveObj, offsetX = 0, offsetY = 0) {
         return (
             this.X + this.width - offsetX > moveObj.X + offsetX && // Rechte Kante überlappt linke Kante + Offset
@@ -72,6 +84,7 @@ class MovableObject {
             this.Y + offsetY < moveObj.Y + moveObj.height - offsetY // Obere Kante überlappt untere Kante - Offset
         );
     }
+
 
     getHit() {
         if (this.world.isPaused) return;
@@ -96,14 +109,17 @@ class MovableObject {
         progressBar.style.width = `${this.characterLife}%`;
     }
 
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHitTime;
         return timePassed < this.hitCooldown;
     }
 
+
     isDead() {
         return this.characterLife == 0;
     }
+
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -113,15 +129,19 @@ class MovableObject {
         });
     }
 
+
     moveRight() {
-        if (!this.world.isPaused) {
+        if (!this.world || !this.world.isPaused) {
             this.X += this.speedX;
+            this.direction = 1;
         }
     }
+
 
     moveLeft() {
         if (!this.world || !this.world.isPaused) {
             this.X -= this.speedX;
+            this.direction = -1;
         }
     }
 
@@ -131,10 +151,11 @@ class MovableObject {
             this.speedX = this.speedRun;
             return true;
         } else {
-            this.speedX = 2;
+            this.speedX = this.speedX;
             return false;
         }
     }
+
 
     jump() {
         if (!this.world.isPaused && !this.isAboveGround()) {
@@ -142,20 +163,33 @@ class MovableObject {
         }
     }
 
+
     down() {
         return !this.world.isPaused && this.world.keyboard.DOWN;
     }
+
 
     punch() {
         return !this.world.isPaused && this.world.keyboard.PUNCH;
     }
 
+
     throwBall() {
         return !this.world.isPaused && this.world.keyboard.THROW_BALL;
     }
-    
+
+
     throwBomb() {
         return !this.world.isPaused && this.world.keyboard.THROW_BOMB;
+    }
+
+
+    moveLeftOscillate() {
+        if (!this.world || !this.world.isPaused) {
+            this.moveLeft();
+            this.Y = this.oscillateY + Math.sin(this.time * this.frequency) * this.amplitude;
+            this.time += 1;
+        }
     }
 
 
@@ -167,13 +201,14 @@ class MovableObject {
         this.currentImage++;
     }
 
-    
+
     pauseAnimation() {
         this.animationPaused = true;
     }
 
-    
+
     resumeAnimation() {
         this.animationPaused = false;
     }
+
 }

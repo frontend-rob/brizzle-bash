@@ -1,5 +1,5 @@
 class Spinner extends MovableObject {
-    
+
     Y = 180;
     width = 114;
     height = 100;
@@ -7,6 +7,7 @@ class Spinner extends MovableObject {
     frequency = 0.005;
     direction = 1;
     rangeX = 300;
+
 
     IMAGES_WALK = [
         '../assets/img/monsters/spinner/spi-00.png',
@@ -31,6 +32,7 @@ class Spinner extends MovableObject {
         '../assets/img/monsters/spinner/spi-19.png'
     ];
 
+
     constructor() {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
@@ -39,22 +41,24 @@ class Spinner extends MovableObject {
         this.animate();
     };
 
+
     animate() {
         setInterval(() => {
             this.moveSinus();
-        }, 1000 / 60);
-
-        setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
         }, 1000 / 60);
+
     }
 
-    moveSinus() {
-        this.Y += Math.sin(this.frequency * Date.now()) * this.amplitude;
-        this.X += this.speedX * this.direction;
 
-        if (this.X > 420 + this.rangeX || this.X < 420) {
-            this.direction *= -1;
+    moveSinus() {
+        if (!this.world || !this.world.isPaused) {
+            this.Y += Math.sin(this.frequency * Date.now()) * this.amplitude;
+            this.X += this.speedX * this.direction;
+
+            if (this.X > 420 + this.rangeX || this.X < 420) {
+                this.direction *= -1;
+            }
         }
     }
 

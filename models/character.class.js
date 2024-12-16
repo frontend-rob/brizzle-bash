@@ -2,7 +2,7 @@ class Character extends MovableObject {
 
     width = 80;
     height = 160;
-    speedX = 2;
+    speedX = 3;
     speedRun = 6;
 
     IMAGES_IDLE = [
@@ -403,7 +403,28 @@ class Character extends MovableObject {
         '../assets/img/character/throw/thu_026.png',
         '../assets/img/character/throw/thu_027.png',
         '../assets/img/character/throw/thu_028.png',
-        '../assets/img/character/throw/thu_029.png'
+        '../assets/img/character/throw/thu_029.png',
+        '../assets/img/character/throw/thu_030.png',
+        '../assets/img/character/throw/thu_031.png',
+        '../assets/img/character/throw/thu_032.png',
+        '../assets/img/character/throw/thu_033.png',
+        '../assets/img/character/throw/thu_034.png',
+        '../assets/img/character/throw/thu_035.png',
+        '../assets/img/character/throw/thu_036.png',
+        '../assets/img/character/throw/thu_037.png',
+        '../assets/img/character/throw/thu_038.png',
+        '../assets/img/character/throw/thu_039.png',
+        '../assets/img/character/throw/thu_040.png',
+        '../assets/img/character/throw/thu_041.png',
+        '../assets/img/character/throw/thu_042.png',
+        '../assets/img/character/throw/thu_043.png',
+        '../assets/img/character/throw/thu_044.png',
+        '../assets/img/character/throw/thu_045.png',
+        '../assets/img/character/throw/thu_046.png',
+        '../assets/img/character/throw/thu_047.png',
+        '../assets/img/character/throw/thu_048.png',
+        '../assets/img/character/throw/thu_049.png'
+        
     ];
 
     IMAGES_SURPRISE = [
@@ -431,7 +452,7 @@ class Character extends MovableObject {
         jumping: { widthFactor: 1.0, heightFactor: 1.0 },
         down: { widthFactor: 1.25, heightFactor: 0.8 },
         punch: { widthFactor: 1.8, heightFactor: 1.0 },
-        throw: { widthFactor: 2.0, heightFactor: 1.05 },
+        throw: { widthFactor: 2.2, heightFactor: 1.05 },
         hit: { widthFactor: 1.5, heightFactor: 1.1 },
         dead: { widthFactor: 2.2, heightFactor: 1.25 },
 
@@ -449,6 +470,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_THROW);
         this.loadImages(this.IMAGES_SURPRISE);
+        this.direction = 1;
         this.applyGravity();
         this.animate();
     };

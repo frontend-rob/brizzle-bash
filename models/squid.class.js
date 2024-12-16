@@ -4,9 +4,6 @@ class Squid extends MovableObject {
     width = 136;
     height = 120;
 
-    amplitude = 10;
-    frequency = 0.1;
-    time = 0;
 
     IMAGES_WALK = [
         '../assets/img/monsters/squid/squ-00.png',
@@ -31,27 +28,26 @@ class Squid extends MovableObject {
         '../assets/img/monsters/squid/squ-19.png'
     ];
 
+
     constructor() {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.X = 420 + Math.random() * 500;
-        this.speedX = 1 + Math.random() * 0.5;
+        this.speedX = 2 + Math.random() * 1.5;
+        this.oscillateY = 304;
+        this.amplitude = 10;
+        this.frequency = 0.1;
+        this.time = 0;
         this.animate();
     }
+
 
     animate() {
         setInterval(() => {
             this.moveLeftOscillate();
-        }, 1000 / 60);
-
-        setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
-        }, 1000 / 35);
+        }, 1000 / 30);
     }
 
-    moveLeftOscillate() {
-        this.moveLeft();
-        this.Y = 304 + Math.sin(this.time * this.frequency) * this.amplitude;
-        this.time += 1;
-    }
+    
 }

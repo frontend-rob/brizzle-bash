@@ -4,9 +4,6 @@ class Spirit extends MovableObject {
     width = 171;
     height = 150;
 
-    amplitude = 10;
-    frequency = 0.075;
-    time = 0;
 
     IMAGES_WALK = [
         '../assets/img/monsters/spirit/spr-00.png',
@@ -31,28 +28,25 @@ class Spirit extends MovableObject {
         '../assets/img/monsters/spirit/spr-19.png'
     ];
 
+
     constructor() {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.X = 420 + Math.random() * 500;
-        this.speedX = 0.75 + Math.random() * 0.5;
+        this.speedX = 1 + Math.random() * 0.5;
+        this.oscillateY = 190;
+        this.amplitude = 10;
+        this.frequency = 0.075;
+        this.time = 0;
         this.animate();
     };
+
 
     animate() {
         setInterval(() => {
             this.moveLeftOscillate();
-        }, 1000 / 60);
-
-        setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
-        }, 1000 / 35);
-    }
-
-    moveLeftOscillate() {
-        this.moveLeft();
-        this.Y = 190 + Math.sin(this.time * this.frequency) * this.amplitude;
-        this.time += 1;
+        }, 1000 / 45);
     }
 
 
