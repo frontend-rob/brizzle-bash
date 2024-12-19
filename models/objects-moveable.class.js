@@ -10,7 +10,9 @@ class MovableObject {
     speedX = 0.5;
     speedY = 0;
     acceleration = 1.5;
+
     characterLife = 100;
+
     lastHitTime = 0;
     hitCooldown = 1000;
     amplitude = 0;
@@ -99,12 +101,22 @@ class MovableObject {
             this.characterLife = 0;
         }
 
-        this.updateProgressBar();
+        this.updateCharacterHealthBar();
         this.lastHitTime = currentTime;
     }
 
+    heal() {
+        if (this.world.isPaused) return;
 
-    updateProgressBar() {
+        this.characterLife += 20;
+        if (this.characterLife > 100) {
+            this.characterLife = 100;
+        }
+
+        this.updateCharacterHealthBar();
+    }
+
+    updateCharacterHealthBar() {
         const progressBar = document.getElementById('progress-bar-health');
         progressBar.style.width = `${this.characterLife}%`;
     }

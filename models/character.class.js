@@ -511,7 +511,6 @@ class Character extends MovableObject {
 
             this.world.camFrameX = -this.X + 96;
 
-            // this.drawLifeBar(ctx);
 
         }, 1000 / 60);
 

@@ -463,7 +463,7 @@ kbd svg {
 
 #progress-bar-bomb {
     height: 100%;
-    width: 10%;
+    width: 100%;
     background-color: hsla(45, 29%, 97%, 0.7);
     border-radius: 0.5rem;
     transition: width 0.2s ease;
