@@ -1,5 +1,5 @@
 class Candle extends MovableObject {
-    
+
     Y = 296;
     width = 171;
     height = 150;
@@ -51,7 +51,7 @@ class Candle extends MovableObject {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.X = 420 + Math.random() * 500;
-        this.speedX = 1 + Math.random() * 0.5;
+        this.speedX = 0.5 + Math.random() * 0.5;
         this.animate();
     };
 
@@ -62,7 +62,7 @@ class Candle extends MovableObject {
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
-        }, 1000 / 60);
+        }, 1000 / 35);
     };
 
 

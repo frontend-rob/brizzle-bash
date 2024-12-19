@@ -3,7 +3,7 @@ class Character extends MovableObject {
     width = 80;
     height = 160;
     speedX = 3;
-    speedRun = 6;
+    speedRun = 8;
 
     IMAGES_IDLE = [
         '../assets/img/character/idle/idleu_000.png',

@@ -1,7 +1,7 @@
 class Level {
     enemies;
     backgroundObjects;
-    levelEndX = 4200;
+    levelEndX = 7600;
 
     constructor(enemies, backgroundObjects) {
         this.enemies = enemies;

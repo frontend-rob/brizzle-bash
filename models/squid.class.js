@@ -29,10 +29,10 @@ class Squid extends MovableObject {
     ];
 
 
-    constructor() {
+    constructor(posX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
-        this.X = 420 + Math.random() * 500;
+        this.X = posX;
         this.speedX = 2 + Math.random() * 1.5;
         this.oscillateY = 304;
         this.amplitude = 10;

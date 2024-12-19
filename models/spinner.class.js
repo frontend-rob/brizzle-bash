@@ -37,7 +37,7 @@ class Spinner extends MovableObject {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
         this.X = 420 + Math.random() * 500;
-        this.speedX = 1.5 + Math.random() * 0.5;
+        this.speedX = 2.5 + Math.random() * 1.5;
         this.animate();
     };
 

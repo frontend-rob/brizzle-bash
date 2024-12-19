@@ -66,7 +66,7 @@ class MovableObject {
             this instanceof Candle || this instanceof Plant ||
             this instanceof Spider || this instanceof Spinner ||
             this instanceof Spirit || this instanceof Squid ||
-            this instanceof Endboss)) {
+            this instanceof Endboss || this instanceof ThrowableObject)) {
             ctx.beginPath();
             ctx.lineWidth = '4';
             ctx.strokeStyle = '#ff79c6';
@@ -151,7 +151,7 @@ class MovableObject {
             this.speedX = this.speedRun;
             return true;
         } else {
-            this.speedX = this.speedX;
+            this.speedX = 3;
             return false;
         }
     }

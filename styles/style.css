@@ -14,8 +14,7 @@
     --accent: #ffb86c;
     --warning: #f1fa8c;
     --success: #2da179;
-    --health-icon: #e91e63;
-    --bomb-icon: #ffc107;
+    --error: #e91e63;
     --base-content: #abacad;
     --primary-content: #faf9f6;
     --track-color: #121314;
@@ -273,11 +272,11 @@ kbd svg {
 }
 
 .health-icon {
-    fill: var(--health-icon);
+    fill: var(--error);
 }
 
 .bomb-icon {
-    fill: var(--bomb-icon);
+    fill: var(--base-content);
 }
 
 .article {
@@ -465,7 +464,7 @@ kbd svg {
 #progress-bar-bomb {
     height: 100%;
     width: 10%;
-    background-color: hsla(45, 100%, 51%, 0.70);
+    background-color: hsla(45, 29%, 97%, 0.7);
     border-radius: 0.5rem;
     transition: width 0.2s ease;
 }
@@ -489,9 +488,9 @@ kbd svg {
 }
 
 .progress-icon-health svg {
-    fill: var(--health-icon);
+    fill: var(--error);
 }
 
 .progress-icon-bomb svg {
-    fill: var(--bomb-icon);
+    fill: hsla(45, 29%, 97%, 0.7);
 }
