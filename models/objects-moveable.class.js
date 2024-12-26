@@ -81,10 +81,10 @@ class MovableObject {
 
     isColliding(moveObj, offsetX = 0, offsetY = 0) {
         return (
-            this.X + this.width - offsetX > moveObj.X + offsetX && // Rechte Kante überlappt linke Kante + Offset
-            this.X + offsetX < moveObj.X + moveObj.width - offsetX && // Linke Kante überlappt rechte Kante - Offset
-            this.Y + this.height - offsetY > moveObj.Y + offsetY && // Untere Kante überlappt obere Kante + Offset
-            this.Y + offsetY < moveObj.Y + moveObj.height - offsetY // Obere Kante überlappt untere Kante - Offset
+            this.X + this.width - offsetX > moveObj.X + offsetX &&
+            this.X + offsetX < moveObj.X + moveObj.width - offsetX &&
+            this.Y + this.height - offsetY > moveObj.Y + offsetY &&
+            this.Y + offsetY < moveObj.Y + moveObj.height - offsetY
         );
     }
 

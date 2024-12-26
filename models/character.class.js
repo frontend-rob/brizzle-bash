@@ -4,7 +4,7 @@ class Character extends MovableObject {
     height = 160;
     speedX = 3;
     speedRun = 8;
-    
+
 
     IMAGES_IDLE = [
         '../assets/img/character/idle/idleu_000.png',
@@ -425,7 +425,7 @@ class Character extends MovableObject {
         '../assets/img/character/throw/thu_047.png',
         '../assets/img/character/throw/thu_048.png',
         '../assets/img/character/throw/thu_049.png'
-        
+
     ];
 
     IMAGES_SURPRISE = [
@@ -475,12 +475,15 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-
             if (this.world.isPaused) {
                 soundManager.pauseSound('characterWalk');
                 soundManager.pauseSound('characterJump');
                 soundManager.pauseSound('characterPunch');
                 soundManager.pauseSound('characterHurt');
+                soundManager.pauseSound('collectHealth');
+                soundManager.pauseSound('collectItem');
+                soundManager.pauseSound('characterThrowError');
+                soundManager.throwItem('characterHurt');
                 return;
             }
 
@@ -489,21 +492,25 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.X < this.world.level.levelEndX) {
                 this.moveRight();
                 this.flipImage = false;
-                soundManager.playSound('characterWalk');
+                if (!this.isHurt()) {
+                    soundManager.playSound('characterWalk');
+                }
             }
 
             if (this.world.keyboard.LEFT && this.X > -480) {
                 this.moveLeft();
                 this.flipImage = true;
-                soundManager.playSound('characterWalk');
+                if (!this.isHurt()) {
+                    soundManager.playSound('characterWalk');
+                }
             }
 
-            if (this.world.keyboard.UP || this.world.keyboard.SPACE) {
+            if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isHurt()) {
                 this.jump();
                 soundManager.playSound('characterJump');
             }
 
-            if (this.world.keyboard.PUNCH) {
+            if (this.world.keyboard.PUNCH && !this.isHurt()) {
                 this.punch();
                 soundManager.playSound('characterPunch');
             }
@@ -516,6 +523,7 @@ class Character extends MovableObject {
             this.updateCharacterAnimation(state);
         }, 1000 / 60);
     }
+
 
     // ! prioization from top to down
     getCharacterState() {

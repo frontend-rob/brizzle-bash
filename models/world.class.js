@@ -109,21 +109,41 @@ class World {
     handleEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy, this.collisionOffsetX, this.collisionOffsetY)) {
-                if (this.character.punch()) {
-                    enemy.getHit();
-                    console.log(`Enemy ${enemy.name} was punched! Current Life: ${enemy.enemyLife}`);
-                } else {
-                    this.character.getHit();
-                    if (!hasPlayedHurtSound) {
-                        soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
-                        soundManager.playSound('characterHurt');
-                        hasPlayedHurtSound = true;
-                    }
-                    console.log(`Character collided with enemy: ${enemy.name}, Current Life: ${this.character.characterLife}`);
-                }
+                this.handleCollisionWithEnemy(enemy);
             }
         });
     }
+
+    handleCollisionWithEnemy(enemy) {
+        if (this.character.isHurt()) {
+            console.log("Character is hurt and cannot punch.");
+            return;
+        }
+
+        if (this.character.punch()) {
+            this.processPunch(enemy);
+        } else {
+            this.processCollision(enemy);
+        }
+    }
+
+
+    processPunch(enemy) {
+        enemy.getHit();
+        console.log(`Enemy ${enemy.name} was punched! Current Life: ${enemy.enemyLife}`);
+    }
+
+    
+    processCollision(enemy) {
+        this.character.getHit();
+        if (!hasPlayedHurtSound) {
+            soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
+            soundManager.playSound('characterHurt');
+            hasPlayedHurtSound = true;
+        }
+        console.log(`Character collided with enemy: ${enemy.name}, Current Life: ${this.character.characterLife}`);
+    }
+
 
 
 
