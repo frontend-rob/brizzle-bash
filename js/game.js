@@ -3,12 +3,30 @@ let world;
 let keyboard = new Keyboard();
 
 
+/**
+ * initializes the game by setting up the canvas and world objects.
+ * this function is called to start the game and establish the game environment.
+ */
 function initGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
 
+/**
+ * event listener for keydown events. sets the respective keys as 'pressed' in the keyboard object.
+ * it listens for the following keys:
+ * - 'A' for moving left
+ * - 'D' for moving right
+ * - 'W' for moving up
+ * - 'S' for moving down
+ * - 'Space' for jumping or other actions
+ * - 'ShiftLeft' for sprinting
+ * - 'J' for punching
+ * - 'K' for throwing a ball
+ * 
+ * @param {KeyboardEvent} event - the event object containing details about the pressed key.
+ */
 document.addEventListener('keydown', (event) => {
     if (event.code == "KeyA") {
         keyboard.LEFT = true;
@@ -36,6 +54,21 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+
+/**
+ * event listener for keyup events. sets the respective keys as 'released' in the keyboard object.
+ * it listens for the following keys:
+ * - 'A' for moving left
+ * - 'D' for moving right
+ * - 'W' for moving up
+ * - 'S' for moving down
+ * - 'Space' for jumping or other actions
+ * - 'ShiftLeft' for sprinting
+ * - 'J' for punching
+ * - 'K' for throwing a ball
+ * 
+ * @param {KeyboardEvent} event - the event object containing details about the released key.
+ */
 document.addEventListener('keyup', (event) => {
     if (event.code == "KeyA") {
         keyboard.LEFT = false;

@@ -1,4 +1,4 @@
-// ! ### MODAL CONTROL ###
+// ! ### modal control ###
 
 /**
  * displays a modal by removing the 'hidden' class and adding 'no-scroll' to the body.
@@ -77,19 +77,18 @@ function handleModalEsc(event, modalId) {
 
 
 /**
- * displays the "Info Guide" modal.
+ * displays the "info guide" modal.
  */
 function showInfoGuide() {
     showModal('info-guide-modal', 'modal-container');
     world.pauseGame();
     updateButtonState(PLAY_BUTTON, true);
     createCarousel();
-
 }
 
 
 /**
- * closes the "Info Guide" modal.
+ * closes the "info guide" modal.
  */
 function closeInfoGuide() {
     closeModal('info-guide-modal');
@@ -99,7 +98,7 @@ function closeInfoGuide() {
 
 
 /**
- * displays the "Game Settings" modal.
+ * displays the "game settings" modal.
  */
 function showGameSettings() {
     showModal('game-settings-modal', 'modal-container');
@@ -109,15 +108,14 @@ function showGameSettings() {
 
 
 /**
- * closes the "Game Settings" modal.
+ * closes the "game settings" modal.
  */
 function closeGameSettings() {
     closeModal('game-settings-modal');
 }
 
 
-
-// ! ### SWITCH TAB ON GUIDE MODAL ###
+// ! ### switch tab on guide modal ###
 
 /**
  * switches between different tab contents based on the clicked tab button.
@@ -140,40 +138,46 @@ function switchTab(event, tabId) {
 }
 
 
-// ! ### TOGGLE CHECKBOXES ON SETTINGS MODAL ###
+// ! ### toggle checkboxes on settings modal ###
 
 /**
- * Schaltet den Zustand der Checkbox und aktualisiert ggf. den Debug-Modus
- * @param {string} checkboxId - Die ID der Checkbox, die umgeschaltet werden soll
+ * toggles the state of the checkbox and updates the debug mode if necessary.
+ * 
+ * @param {string} checkboxId - the id of the checkbox to toggle
  */
 function toggleCheckbox(checkboxId) {
     const checkbox = document.getElementById(checkboxId);
     if (checkbox) {
-        // Toggle the checked state
+        // toggle the checked state
         checkbox.checked = !checkbox.checked;
 
-        // Wenn es die Debug-Checkbox ist, den Debug-Modus aktualisieren
+        // if it's the debug checkbox, update the debug mode
         if (checkboxId === 'chk-debug') {
-            MovableObject.setDebugMode(checkbox.checked);  // Setzt den Debug-Modus direkt
+            MovableObject.setDebugMode(checkbox.checked);  // sets the debug mode directly
         }
     }
 }
 
-// Sicherstellen, dass der Debug-Modus beim Laden der Seite korrekt gesetzt ist
+
+/**
+ * ensures that the debug mode is correctly set when the page loads.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const checkbox = document.getElementById('chk-debug');
     if (checkbox) {
-        checkbox.checked = MovableObject.debugMode; // Setzt den Zustand der Checkbox basierend auf der statischen Variable debugMode
+        checkbox.checked = MovableObject.debugMode; // set the checkbox state based on the static debugMode variable
     }
 
-    // Event Listener hinzufügen
+    // add event listeners to the checkboxes
     const checkboxIds = ['chk-sound', 'chk-full-screen', 'chk-debug', 'chk-console'];
     addCheckboxEventListeners(checkboxIds);
 });
 
+
 /**
- * Fügt Event-Listener zu den Checkboxen hinzu
- * @param {Array} checkboxIds - Eine Liste von Checkbox-IDs
+ * adds event listeners to the checkboxes.
+ * 
+ * @param {Array} checkboxIds - an array of checkbox ids
  */
 function addCheckboxEventListeners(checkboxIds) {
     checkboxIds.forEach(checkboxId => {
@@ -187,10 +191,9 @@ function addCheckboxEventListeners(checkboxIds) {
 }
 
 
-// ! ### TOGGLE PAUSE / RESUME BUTTON TEXT & ICON ###
+// ! ### toggle pause / resume button text & icon ###
 
-
-// Play-Button-Zustand
+// play button state
 const PLAY_BUTTON = {
     svg: `
         <path
@@ -200,7 +203,8 @@ const PLAY_BUTTON = {
     text: 'Return',
 };
 
-// Pause-Button-Zustand
+
+// pause button state
 const PAUSE_BUTTON = {
     svg: `
         <path
@@ -210,7 +214,8 @@ const PAUSE_BUTTON = {
     text: 'Break',
 };
 
-// Hilfsfunktion für das Aktualisieren des Buttons
+
+// helper function to update the button
 function updateButtonState(buttonState, isPaused) {
     const iconSvg = document.getElementById('pause-btn-icon');
     const buttonText = document.getElementById('pause-btn-text');
@@ -226,7 +231,10 @@ function updateButtonState(buttonState, isPaused) {
     }
 }
 
-// Toggle-Funktion
+
+/**
+ * toggles the game pause and updates the button state accordingly.
+ */
 function toggleGamePause() {
     if (world.isPaused) {
         world.resumeGame();
@@ -238,7 +246,7 @@ function toggleGamePause() {
 }
 
 
-// Event Listener für das Drücken der P-Taste
+// event listener for the 'P' key press to toggle pause
 document.addEventListener('keydown', function (event) {
     if (event.code === 'KeyP') {
         toggleGamePause();

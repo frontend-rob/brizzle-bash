@@ -36,6 +36,7 @@ class Spinner extends MovableObject {
     constructor(posX, posY, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.name = "Ocular Spinner";
         this.X = posX;
         this.Y = posY;
         this.speedX = varSpeedX;

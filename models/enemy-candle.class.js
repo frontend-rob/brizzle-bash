@@ -50,6 +50,7 @@ class Candle extends MovableObject {
     constructor(posX, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.name = "Candle Bug";
         this.X = posX;
         this.speedX = varSpeedX;
         this.animate();

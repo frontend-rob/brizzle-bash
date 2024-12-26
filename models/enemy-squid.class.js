@@ -32,6 +32,7 @@ class Squid extends MovableObject {
     constructor(posX, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.name = "Shadow Squid";
         this.X = posX;
         this.speedX = varSpeedX;
         this.oscillateY = 304;

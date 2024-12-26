@@ -31,6 +31,7 @@ class Spirit extends MovableObject {
     constructor(posX, posY, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.name = "Soul Phantom";
         this.X = posX;
         this.speedX = varSpeedX;
         this.oscillateY = posY;

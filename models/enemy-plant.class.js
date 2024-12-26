@@ -30,6 +30,7 @@ class Plant extends MovableObject {
     constructor(posX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.name = "Flesh Lotus";
         this.X = posX;
         this.animate();
     };

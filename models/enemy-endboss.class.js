@@ -41,6 +41,7 @@ class Endboss extends MovableObject {
     constructor(posX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
+        this.name = "Fungal Colossus";
         this.X = posX;
         this.animate();
     };

@@ -117,7 +117,7 @@ class World {
                     hasPlayedHurtSound = true;
                 }
 
-                console.log('Collision with enemy!', this.character.characterLife);
+                console.log(`Collision with enemy: ${enemy.name}, Current Life: ${this.character.characterLife}`);
             }
         });
     }
