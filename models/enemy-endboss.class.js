@@ -38,10 +38,10 @@ class Endboss extends MovableObject {
         '../assets/img/monsters/mushroom/mr-29.png'
     ];
 
-    constructor() {
+    constructor(posX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
-        this.X = 7200;
+        this.X = posX;
         this.animate();
     };
 

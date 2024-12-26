@@ -27,10 +27,10 @@ class Plant extends MovableObject {
         '../assets/img/monsters/plant/ep-19.png'
     ];
 
-    constructor() {
+    constructor(posX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
-        this.X = 660 + Math.random() * 700;
+        this.X = posX;
         this.animate();
     };
 

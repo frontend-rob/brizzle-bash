@@ -123,7 +123,6 @@ class World {
     }
 
 
-
     handleHealing() {
         this.level.healthObjects.forEach((healthObject, index) => {
             if (this.character.characterLife === 100) {
@@ -139,7 +138,12 @@ class World {
         });
     }
 
+
     handleBombCollection() {
+        if (this.bombAmount === 100) {
+            return;
+        }
+
         this.level.bombObjects.forEach((bombObject, index) => {
             if (this.character.isColliding(bombObject)) {
                 this.collectBomb();
@@ -149,9 +153,10 @@ class World {
         });
     }
 
+
     collectBomb() {
         if (this.bombAmount < 100) {
-            this.bombAmount += 10;
+            this.bombAmount += 20;
             if (this.bombAmount > 100) {
                 this.bombAmount = 100;
             }
@@ -161,10 +166,12 @@ class World {
         }
     }
 
+
     updateBombBar() {
         const progressBar = document.getElementById('progress-bar-bomb');
         progressBar.style.width = `${this.bombAmount}%`;
     }
+
 
 
     checkThrowObjects() {
@@ -181,7 +188,7 @@ class World {
 
         let spikyBall = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
         this.throwableObjects.push(spikyBall);
-        this.bombAmount -= 10;
+        this.bombAmount -= 20;
         this.updateBombBar();
     }
 

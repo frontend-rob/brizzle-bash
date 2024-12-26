@@ -1,6 +1,5 @@
 class Spirit extends MovableObject {
     
-    Y = 190;
     width = 171;
     height = 150;
 
@@ -29,12 +28,12 @@ class Spirit extends MovableObject {
     ];
 
 
-    constructor() {
+    constructor(posX, posY, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
-        this.X = 420 + Math.random() * 500;
-        this.speedX = 1 + Math.random() * 0.5;
-        this.oscillateY = 190;
+        this.X = posX;
+        this.speedX = varSpeedX;
+        this.oscillateY = posY;
         this.amplitude = 10;
         this.frequency = 0.075;
         this.time = 0;

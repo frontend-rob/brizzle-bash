@@ -1,12 +1,12 @@
 class Spinner extends MovableObject {
 
-    Y = 180;
     width = 114;
     height = 100;
     amplitude = 4;
     frequency = 0.005;
     direction = 1;
     rangeX = 300;
+    startX;
 
 
     IMAGES_WALK = [
@@ -33,11 +33,13 @@ class Spinner extends MovableObject {
     ];
 
 
-    constructor() {
+    constructor(posX, posY, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
-        this.X = 420 + Math.random() * 500;
-        this.speedX = 2.5 + Math.random() * 1.5;
+        this.X = posX;
+        this.Y = posY;
+        this.speedX = varSpeedX;
+        this.startX = posX;
         this.animate();
     };
 
@@ -56,11 +58,10 @@ class Spinner extends MovableObject {
             this.Y += Math.sin(this.frequency * Date.now()) * this.amplitude;
             this.X += this.speedX * this.direction;
 
-            if (this.X > 420 + this.rangeX || this.X < 420) {
+            if (this.X > this.startX + this.rangeX || this.X < this.startX) {
                 this.direction *= -1;
             }
         }
     }
-
 
 }
