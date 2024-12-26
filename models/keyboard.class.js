@@ -7,5 +7,4 @@ class Keyboard {
     SHIFT = false;
     PUNCH = false;
     THROW_BALL = false;
-    THROW_BOMB = false;
 }

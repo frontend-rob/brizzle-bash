@@ -17,7 +17,7 @@ const level01 = new Level(
         // new Spider(),
         // new Spirit(),
         // new Spinner(),
-        // new Endboss()
+        new Endboss()
     ],
 
 

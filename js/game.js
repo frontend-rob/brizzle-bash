@@ -6,7 +6,6 @@ let keyboard = new Keyboard();
 function initGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
 }
 
 
@@ -35,9 +34,6 @@ document.addEventListener('keydown', (event) => {
     if (event.code == "KeyK") {
         keyboard.THROW_BALL = true;
     }
-    if (event.code == "KeyL") {
-        keyboard.THROW_BOMB = true;
-    }
 });
 
 document.addEventListener('keyup', (event) => {
@@ -64,8 +60,5 @@ document.addEventListener('keyup', (event) => {
     }
     if (event.code == "KeyK") {
         keyboard.THROW_BALL = false;
-    }
-    if (event.code == "KeyL") {
-        keyboard.THROW_BOMB = false;
     }
 });

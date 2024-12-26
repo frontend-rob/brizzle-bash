@@ -12,11 +12,8 @@ class World {
     animationFrameId = null;
 
     throwableObjects = [];
-
     healthObjects = [];
-
     bombObjects = [];
-
     bombAmount = 0;
 
     constructor(canvas, keyboard) {
@@ -108,21 +105,33 @@ class World {
         this.handleBombCollection();
     }
 
+
     handleEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy, this.collisionOffsetX, this.collisionOffsetY)) {
                 this.character.getHit();
+
+                if (!hasPlayedHurtSound) {
+                    soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
+                    soundManager.playSound('characterHurt');
+                    hasPlayedHurtSound = true;
+                }
+
                 console.log('Collision with enemy!', this.character.characterLife);
             }
         });
     }
+
+
 
     handleHealing() {
         this.level.healthObjects.forEach((healthObject, index) => {
             if (this.character.characterLife === 100) {
                 return;
             }
-            if (this.character.isColliding(healthObject, this.collisionOffsetX, this.collisionOffsetY)) {
+            if (this.character.isColliding(healthObject)) {
+                soundManager.addSound('collectHealth', '../assets/audio/collect-health.mp3');
+                soundManager.playSound('collectHealth');
                 this.character.heal();
                 this.level.healthObjects.splice(index, 1);
                 console.log('Healed! Current Life:', this.character.characterLife);
@@ -132,27 +141,22 @@ class World {
 
     handleBombCollection() {
         this.level.bombObjects.forEach((bombObject, index) => {
-            if (this.character.isColliding(bombObject, this.collisionOffsetX, this.collisionOffsetY)) {
-                // Wenn Bomben eingesammelt werden
+            if (this.character.isColliding(bombObject)) {
                 this.collectBomb();
-
-                // Entferne die Bombe nach dem Einsammeln
                 this.level.bombObjects.splice(index, 1);
-
                 console.log('Bomb collected! Current Bomb progress:', this.bombAmount);
             }
         });
     }
 
     collectBomb() {
-        // Hier wird die Bombenanzahl um 10 erhöht (maximal 100)
         if (this.bombAmount < 100) {
             this.bombAmount += 10;
             if (this.bombAmount > 100) {
                 this.bombAmount = 100;
             }
-
-            // Fortschrittsanzeige aktualisieren
+            soundManager.addSound('collectItem', '../assets/audio/collect-item.mp3');
+            soundManager.playSound('collectItem');
             this.updateBombBar();
         }
     }
@@ -165,18 +169,33 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.THROW_BALL && this.bombAmount > 0) {
-            // Wenn Bomben zum Werfen vorhanden sind, werfe ein neues "ThrowableObject"
-            let spikyBall = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
-            this.throwableObjects.push(spikyBall);  // Speichern des geworfenen Objekts
-
-            // Reduziere die Anzahl der Bomben um 1
-            this.bombAmount -= 10;  // jede Bombe kostet 10%
-
-            // Fortschrittsanzeige für die Bomben aktualisieren
-            this.updateBombBar();
+            this.throwSpikyBall();
+        } else if (this.keyboard.THROW_BALL && this.bombAmount <= 0) {
+            this.showThrowError();
         }
-    }d
+    }
 
+    throwSpikyBall() {
+        soundManager.addSound('throwItem', '../assets/audio/throw.mp3');
+        soundManager.playSound('throwItem');
+
+        let spikyBall = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
+        this.throwableObjects.push(spikyBall);
+        this.bombAmount -= 10;
+        this.updateBombBar();
+    }
+
+    showThrowError() {
+        soundManager.addSound('characterThrowError', '../assets/audio/error.mp3');
+        soundManager.playSound('characterThrowError');
+
+        let errorImage = new ErrorImageObject(this.character.X, this.character.Y);
+        this.throwableObjects.push(errorImage);
+
+        setTimeout(() => {
+            this.throwableObjects = this.throwableObjects.filter(obj => obj !== errorImage);
+        }, 1000);
+    }
 
 
     drawWorld() {

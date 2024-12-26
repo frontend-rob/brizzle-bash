@@ -1,0 +1,53 @@
+
+.landscape-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.landscape-modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: var(--bg-base-100);
+    color: var(--base-content);
+    text-align: center;
+}
+
+.landscape-modal-content svg {
+    align-self: center;
+    width: 5rem;
+    height: 5rem;
+    fill: var(--base-content);
+    animation: rotate-device 2500ms ease-in-out infinite;
+}
+
+@keyframes rotate-device {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@media (pointer: coarse) and (orientation: portrait) {
+    .landscape-modal {
+        display: flex !important;
+    }
+}

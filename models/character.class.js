@@ -438,9 +438,6 @@ class Character extends MovableObject {
 
 
     world;
-    soundCharacterWalk = new Audio('../assets/audio/walking.mp3');
-    soundCharacterJump = new Audio('../assets/audio/jump.mp3');
-    soundCharacterPunch = new Audio('../assets/audio/punch.mp3');
 
     referenceWidth = 80;
     referenceHeight = 160;
@@ -479,45 +476,43 @@ class Character extends MovableObject {
         setInterval(() => {
 
             if (this.world.isPaused) {
-                this.soundCharacterWalk.pause();
-                this.soundCharacterJump.pause();
-                this.soundCharacterPunch.pause();
+                soundManager.pauseSound('characterWalk');
+                soundManager.pauseSound('characterJump');
+                soundManager.pauseSound('characterPunch');
+                soundManager.pauseSound('characterHurt');
                 return;
             }
 
-            this.soundCharacterWalk.pause();
+            soundManager.pauseSound('characterWalk');
 
             if (this.world.keyboard.RIGHT && this.X < this.world.level.levelEndX) {
                 this.moveRight();
                 this.flipImage = false;
-                this.soundCharacterWalk.play();
+                soundManager.playSound('characterWalk');
             }
 
             if (this.world.keyboard.LEFT && this.X > -480) {
                 this.moveLeft();
                 this.flipImage = true;
-                this.soundCharacterWalk.play();
+                soundManager.playSound('characterWalk');
             }
 
             if (this.world.keyboard.UP || this.world.keyboard.SPACE) {
                 this.jump();
-                this.soundCharacterJump.play();
+                soundManager.playSound('characterJump');
             }
 
             if (this.world.keyboard.PUNCH) {
                 this.punch();
-                this.soundCharacterPunch.play();
+                soundManager.playSound('characterPunch');
             }
 
             this.world.camFrameX = -this.X + 96;
-
-
         }, 1000 / 60);
 
         setInterval(() => {
             const state = this.getCharacterState();
             this.updateCharacterAnimation(state);
-
         }, 1000 / 60);
     }
 
@@ -532,10 +527,7 @@ class Character extends MovableObject {
         if (this.punch()) {
             return 'punch';
         }
-        if (this.throwBall()) {
-            return 'throw';
-        }
-        if (this.throwBomb()) {
+        if (this.throwBall() && this.world.bombAmount > 0) {
             return 'throw';
         }
         if (this.down()) {

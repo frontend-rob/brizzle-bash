@@ -103,7 +103,10 @@ class MovableObject {
 
         this.updateCharacterHealthBar();
         this.lastHitTime = currentTime;
+
+        hasPlayedHurtSound = false;
     }
+
 
     heal() {
         if (this.world.isPaused) return;
@@ -188,11 +191,6 @@ class MovableObject {
 
     throwBall() {
         return !this.world.isPaused && this.world.keyboard.THROW_BALL;
-    }
-
-
-    throwBomb() {
-        return !this.world.isPaused && this.world.keyboard.THROW_BOMB;
     }
 
 
