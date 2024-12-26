@@ -2,6 +2,7 @@ class Spirit extends MovableObject {
     
     width = 171;
     height = 150;
+    damage = 100;
 
 
     IMAGES_WALK = [
@@ -47,6 +48,25 @@ class Spirit extends MovableObject {
             this.moveLeftOscillate();
             this.playAnimation(this.IMAGES_WALK);
         }, 1000 / 45);
+    }
+
+
+    getHit() {
+        this.enemyLife -= this.damage;
+        if (this.enemyLife <= 0) {
+            this.isDead();
+        }
+    }
+
+    isDead() {
+        console.log(`${this.name} has died!`);
+
+        const index = this.world.level.enemies.indexOf(this);
+        if (index > -1) {
+            this.world.level.enemies.splice(index, 1);
+        }
+
+        console.log(`Enemies alive:`, this.world.level.enemies);
     }
 
 

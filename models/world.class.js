@@ -109,18 +109,22 @@ class World {
     handleEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy, this.collisionOffsetX, this.collisionOffsetY)) {
-                this.character.getHit();
-
-                if (!hasPlayedHurtSound) {
-                    soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
-                    soundManager.playSound('characterHurt');
-                    hasPlayedHurtSound = true;
+                if (this.character.punch()) {
+                    enemy.getHit();
+                    console.log(`Enemy ${enemy.name} was punched! Current Life: ${enemy.enemyLife}`);
+                } else {
+                    this.character.getHit();
+                    if (!hasPlayedHurtSound) {
+                        soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
+                        soundManager.playSound('characterHurt');
+                        hasPlayedHurtSound = true;
+                    }
+                    console.log(`Character collided with enemy: ${enemy.name}, Current Life: ${this.character.characterLife}`);
                 }
-
-                console.log(`Collision with enemy: ${enemy.name}, Current Life: ${this.character.characterLife}`);
             }
         });
     }
+
 
 
     handleHealing() {

@@ -7,6 +7,7 @@ class Spinner extends MovableObject {
     direction = 1;
     rangeX = 300;
     startX;
+    damage = 100;
 
 
     IMAGES_WALK = [
@@ -63,6 +64,25 @@ class Spinner extends MovableObject {
                 this.direction *= -1;
             }
         }
+    }
+
+
+    getHit() {
+        this.enemyLife -= this.damage;
+        if (this.enemyLife <= 0) {
+            this.isDead();
+        }
+    }
+
+    isDead() {
+        console.log(`${this.name} has died!`);
+
+        const index = this.world.level.enemies.indexOf(this);
+        if (index > -1) {
+            this.world.level.enemies.splice(index, 1);
+        }
+
+        console.log(`Enemies alive:`, this.world.level.enemies);
     }
 
 }

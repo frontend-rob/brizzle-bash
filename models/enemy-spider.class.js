@@ -3,6 +3,7 @@ class Spider extends MovableObject {
     Y = 320;
     width = 142;
     height = 125;
+    damage = 100;
 
     IMAGES_WALK = [
         '../assets/img/monsters/spider/sp-00.png',
@@ -42,6 +43,24 @@ class Spider extends MovableObject {
             this.playAnimation(this.IMAGES_WALK);
         }, 1000 / 60);
     };
+
+    getHit() {
+        this.enemyLife -= this.damage;
+        if (this.enemyLife <= 0) {
+            this.isDead();
+        }
+    }
+
+    isDead() {
+        console.log(`${this.name} has died!`);
+
+        const index = this.world.level.enemies.indexOf(this);
+        if (index > -1) {
+            this.world.level.enemies.splice(index, 1);
+        }
+
+        console.log(`Enemies alive:`, this.world.level.enemies);
+    }
 
 
 }

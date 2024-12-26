@@ -4,6 +4,7 @@ class Character extends MovableObject {
     height = 160;
     speedX = 3;
     speedRun = 8;
+    
 
     IMAGES_IDLE = [
         '../assets/img/character/idle/idleu_000.png',
@@ -587,4 +588,32 @@ class Character extends MovableObject {
 
         this.playAnimation(animations[state]);
     }
+
+    punch() {
+        if (this.world.isPaused) return false;
+
+        if (this.world.keyboard.PUNCH) {
+            this.checkPunchCollision();
+            return true;
+        }
+        return false;
+    }
+
+    checkPunchCollision() {
+        const punchRange = {
+            x: this.X + (this.flipImage ? +10 : this.width),
+            y: this.Y,
+            width: 10,
+            height: this.height
+        };
+
+        this.world.level.enemies.forEach((enemy) => {
+            if (this.isColliding(enemy, punchRange.x, punchRange.y, punchRange.width, punchRange.height)) {
+                enemy.getHit();
+                console.log(`Enemy ${enemy.name} was hit!`);
+            }
+        });
+    }
+
+
 }

@@ -3,6 +3,7 @@ class Squid extends MovableObject {
     Y = 304;
     width = 136;
     height = 120;
+    damage = 100;
 
 
     IMAGES_WALK = [
@@ -48,6 +49,24 @@ class Squid extends MovableObject {
             this.moveLeftOscillate();
             this.playAnimation(this.IMAGES_WALK);
         }, 1000 / 30);
+    }
+
+    getHit() {
+        this.enemyLife -= this.damage;
+        if (this.enemyLife <= 0) {
+            this.isDead();
+        }
+    }
+
+    isDead() {
+        console.log(`${this.name} has died!`);
+
+        const index = this.world.level.enemies.indexOf(this);
+        if (index > -1) {
+            this.world.level.enemies.splice(index, 1);
+        }
+
+        console.log(`Enemies alive:`, this.world.level.enemies);
     }
 
     

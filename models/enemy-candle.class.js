@@ -3,6 +3,9 @@ class Candle extends MovableObject {
     Y = 296;
     width = 171;
     height = 150;
+    enemyLife = 100;
+    damage = 100;
+
 
     IMAGES_WALK = [
         '../assets/img/monsters/candle/cm-00.png',
@@ -54,7 +57,8 @@ class Candle extends MovableObject {
         this.X = posX;
         this.speedX = varSpeedX;
         this.animate();
-    };
+    }
+
 
     animate() {
         setInterval(() => {
@@ -64,7 +68,25 @@ class Candle extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
         }, 1000 / 60);
-    };
+    }
 
 
+    getHit() {
+        this.enemyLife -= this.damage;
+        if (this.enemyLife <= 0) {
+            this.isDead();
+        }
+    }
+
+
+    isDead() {
+        console.log(`${this.name} has died!`);
+
+        const index = this.world.level.enemies.indexOf(this);
+        if (index > -1) {
+            this.world.level.enemies.splice(index, 1);
+        }
+
+        console.log(`Enemies alive:`, this.world.level.enemies);
+    }
 }

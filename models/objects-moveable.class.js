@@ -12,6 +12,7 @@ class MovableObject {
     acceleration = 1.5;
 
     characterLife = 100;
+    enemyLife = 100
 
     lastHitTime = 0;
     hitCooldown = 1000;
