@@ -1,3 +1,7 @@
+/**
+ * represents the main character object.
+ * @extends MovableObject
+ */
 class Character extends MovableObject {
 
     width = 80;
@@ -638,6 +642,7 @@ class Character extends MovableObject {
         await new Promise(resolve => setTimeout(resolve, 250));
         this.currentImage = 0;
         this.updateCharacterAnimation('dead');
+        soundManager.playSound('gameover');
     }
 
     punch() {

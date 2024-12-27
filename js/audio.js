@@ -102,6 +102,8 @@ soundManager.addSound('characterThrowError', '../assets/audio/error.mp3');
 soundManager.addSound('characterSurprised', '../assets/audio/surprise.mp3');
 soundManager.addSound('throwItem', '../assets/audio/throw.mp3');
 soundManager.addSound('deadEnemy', '../assets/audio/dead-enemy.mp3');
+soundManager.addSound('deadEndboss', '../assets/audio/dead-endboss.mp3');
+soundManager.addSound('gameover', '../assets/audio/gameover.mp3');
 
 
 let isSoundOn = true;

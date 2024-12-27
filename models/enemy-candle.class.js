@@ -1,3 +1,7 @@
+/**
+ * represents an enemy object.
+ * @extends MovableObject
+ */
 class Candle extends MovableObject {
 
     Y = 296;

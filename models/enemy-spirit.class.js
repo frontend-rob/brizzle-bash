@@ -1,3 +1,7 @@
+/**
+ * represents an enemy object.
+ * @extends MovableObject
+ */
 class Spirit extends MovableObject {
     
     width = 171;

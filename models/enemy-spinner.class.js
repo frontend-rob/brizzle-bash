@@ -1,3 +1,7 @@
+/**
+ * represents an enemy object.
+ * @extends MovableObject
+ */
 class Spinner extends MovableObject {
 
     width = 114;
@@ -8,7 +12,6 @@ class Spinner extends MovableObject {
     rangeX = 300;
     startX;
     enemyLife = 10;
-
 
     IMAGES_WALK = [
         '../assets/img/monsters/spinner/spi-00.png',

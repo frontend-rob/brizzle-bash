@@ -1,3 +1,7 @@
+/**
+ * represents an object of the endboss.
+ * @extends MovableObject
+ */
 class Endboss extends MovableObject {
 
     Y = 100;
@@ -94,6 +98,8 @@ class Endboss extends MovableObject {
      */
     isDead() {
         console.log(`Enemy ${this.name} has died!`);
+        soundManager.playSound('deadEnemy');
+        soundManager.playSound('gameover');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);

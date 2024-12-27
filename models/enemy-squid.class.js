@@ -1,10 +1,13 @@
+/**
+ * represents an enemy object.
+ * @extends MovableObject
+ */
 class Squid extends MovableObject {
 
     Y = 304;
     width = 136;
     height = 120;
     enemyLife = 20;
-
 
     IMAGES_WALK = [
         '../assets/img/monsters/squid/squ-00.png',

@@ -1,3 +1,7 @@
+/**
+ * represents an enemy object.
+ * @extends MovableObject
+ */
 class Spider extends MovableObject {
     
     Y = 320;

@@ -1,3 +1,7 @@
+/**
+ * represents an enemy object.
+ * @extends MovableObject
+ */
 class Plant extends MovableObject {
 
     Y = 304;
