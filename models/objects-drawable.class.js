@@ -31,11 +31,13 @@ class DrawableObject {
 
 
     /**
-     * draws the object on the canvas.
-     * @param {CanvasRenderingContext2D} ctx - the canvas rendering context.
+     * draws the end boss on the canvas.
+     * @param {CanvasRenderingContext2D} ctx - the drawing context of the canvas.
      */
     draw(ctx) {
-        ctx.drawImage(this.img, this.X, this.Y, this.width, this.height);
+        if (this.img && this.img instanceof HTMLImageElement) {
+            ctx.drawImage(this.img, this.X, this.Y, this.width, this.height);
+        }
         this.drawCollisionFrame(ctx);
     }
 

@@ -491,6 +491,9 @@ class Character extends MovableObject {
                 soundManager.pauseSound('collectItem');
                 soundManager.pauseSound('characterThrowError');
                 soundManager.pauseSound('throwItem');
+                soundManager.pauseSound('deadEnemy');
+                soundManager.pauseSound('deadEndboss');
+                soundManager.pauseSound('gameover');
                 return;
             }
 
