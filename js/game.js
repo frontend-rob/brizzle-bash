@@ -28,7 +28,7 @@ function initGame() {
  * @param {KeyboardEvent} event - the event object containing details about the pressed key.
  */
 document.addEventListener('keydown', (event) => {
-    if (world.character.isDead()) return;
+    if (!world || !world.character || world.character.isDead()) return;
 
     if (event.code == "KeyA") {
         keyboard.LEFT = true;
@@ -72,7 +72,7 @@ document.addEventListener('keydown', (event) => {
  * @param {KeyboardEvent} event - the event object containing details about the released key.
  */
 document.addEventListener('keyup', (event) => {
-    if (world.character.isDead()) return;
+    if (!world || !world.character || world.character.isDead()) return;
 
     if (event.code == "KeyA") {
         keyboard.LEFT = false;

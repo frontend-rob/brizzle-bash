@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     width = 400;
     height = 350;
     speedX = 0.125;
-    damage = 20;
+    enemyLife = 100;
 
     IMAGES_WALK = [
         '../assets/img/monsters/mushroom/mr-00.png',
@@ -39,6 +39,11 @@ class Endboss extends MovableObject {
         '../assets/img/monsters/mushroom/mr-29.png'
     ];
 
+
+    /**
+     * creates an instance of Endboss.
+     * @param {number} posX - the initial x position of the endboss.
+     */
     constructor(posX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
@@ -47,6 +52,10 @@ class Endboss extends MovableObject {
         this.animate();
     };
 
+
+    /**
+     * animates the endboss by moving it left and playing the walk animation.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();
@@ -54,24 +63,33 @@ class Endboss extends MovableObject {
         }, 1000 / 60);
     };
 
-    getHit() {
-        this.enemyLife -= this.damage;
+
+    /**
+     * reduces the enemy's life by the given damage amount.
+     * @param {number} damage - the amount of damage to inflict.
+     */
+    getHit(damage) {
+        this.enemyLife -= damage;
+        if (this.enemyLife < 0) {
+            this.enemyLife = 0;
+        }
+        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
         if (this.enemyLife <= 0) {
             this.isDead();
         }
     }
 
-    isDead() {
-        console.log(`${this.name} has died!`);
 
+    /**
+     * handles the logic when the enemy's life reaches zero.
+     */
+    isDead() {
+        console.log(`Enemy ${this.name} has died!`);
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }
-
         console.log(`Enemies alive:`, this.world.level.enemies);
     }
-
-    
 
 }

@@ -3,9 +3,7 @@ class Candle extends MovableObject {
     Y = 296;
     width = 171;
     height = 150;
-    enemyLife = 100;
-    damage = 100;
-
+    enemyLife = 10;
 
     IMAGES_WALK = [
         '../assets/img/monsters/candle/cm-00.png',
@@ -50,6 +48,12 @@ class Candle extends MovableObject {
         '../assets/img/monsters/candle/cm-39.png'
     ];
 
+
+    /**
+     * creates an instance of Candle.
+     * @param {number} posX - the initial x position of the candle.
+     * @param {number} varSpeedX - the speed of the candle along the x-axis.
+     */
     constructor(posX, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
@@ -60,6 +64,9 @@ class Candle extends MovableObject {
     }
 
 
+    /**
+     * animates the candle by moving it left and playing the walk animation.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();
@@ -71,22 +78,33 @@ class Candle extends MovableObject {
     }
 
 
-    getHit() {
-        this.enemyLife -= this.damage;
+    /**
+     * reduces the enemy's life by the given damage amount.
+     * @param {number} damage - the amount of damage to inflict.
+     */
+    getHit(damage) {
+        this.enemyLife -= damage;
+        if (this.enemyLife < 0) {
+            this.enemyLife = 0;
+        }
+        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
         if (this.enemyLife <= 0) {
             this.isDead();
         }
     }
 
 
+    /**
+     * handles the logic when the enemy's life reaches zero.
+     */
     isDead() {
-        console.log(`${this.name} has died!`);
+        console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('deadEnemy');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }
-
         console.log(`Enemies alive:`, this.world.level.enemies);
     }
+
 }

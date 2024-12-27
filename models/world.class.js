@@ -87,6 +87,7 @@ class World {
             if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
                 this.checkCollisions();
                 this.checkThrowObjects();
+                this.checkThrowableObjectCollision();
             }
         }, 250);
     }
@@ -149,8 +150,7 @@ class World {
 
 
     processPunch(enemy) {
-        enemy.getHit();
-        console.log(`Enemy ${enemy.name} was punched! Current Life: ${enemy.enemyLife}`);
+        enemy.getHit(10);
     }
 
     
@@ -302,5 +302,15 @@ class World {
         this.ctx.restore();
     }
 
+    checkThrowableObjectCollision() {
+        this.throwableObjects.forEach((throwableObject) => {
+            this.level.enemies.forEach((enemy) => {
+                if (throwableObject.isColliding(enemy, throwableObject.X, throwableObject.Y, throwableObject.width, throwableObject.height)) {
+                    enemy.getHit(20);
+                    console.log(`Enemy ${enemy.name} was hit by a throwable object! Current Life: ${enemy.enemyLife}`);
+                }
+            });
+        });
+    }
 
 }

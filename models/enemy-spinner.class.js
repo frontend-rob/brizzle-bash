@@ -7,7 +7,7 @@ class Spinner extends MovableObject {
     direction = 1;
     rangeX = 300;
     startX;
-    damage = 100;
+    enemyLife = 10;
 
 
     IMAGES_WALK = [
@@ -34,6 +34,12 @@ class Spinner extends MovableObject {
     ];
 
 
+    /**
+     * creates an instance of Spinner.
+     * @param {number} posX - the initial x position of the spinner.
+     * @param {number} posY - the initial y position of the spinner.
+     * @param {number} varSpeedX - the speed of the spinner along the x-axis.
+     */
     constructor(posX, posY, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
@@ -46,6 +52,9 @@ class Spinner extends MovableObject {
     };
 
 
+    /**
+     * animates the spinner by moving it in a sinusoidal pattern and playing the walk animation.
+     */
     animate() {
         setInterval(() => {
             this.moveSinus();
@@ -55,6 +64,9 @@ class Spinner extends MovableObject {
     }
 
 
+    /**
+     * moves the spinner in a sinusoidal pattern.
+     */
     moveSinus() {
         if (!this.world || !this.world.isPaused) {
             this.Y += Math.sin(this.frequency * Date.now()) * this.amplitude;
@@ -67,21 +79,32 @@ class Spinner extends MovableObject {
     }
 
 
-    getHit() {
-        this.enemyLife -= this.damage;
+    /**
+     * reduces the enemy's life by the given damage amount.
+     * @param {number} damage - the amount of damage to inflict.
+     */
+    getHit(damage) {
+        this.enemyLife -= damage;
+        if (this.enemyLife < 0) {
+            this.enemyLife = 0;
+        }
+        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
         if (this.enemyLife <= 0) {
             this.isDead();
         }
     }
 
+
+    /**
+     * handles the logic when the enemy's life reaches zero.
+     */
     isDead() {
-        console.log(`${this.name} has died!`);
+        console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('deadEnemy');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }
-
         console.log(`Enemies alive:`, this.world.level.enemies);
     }
 

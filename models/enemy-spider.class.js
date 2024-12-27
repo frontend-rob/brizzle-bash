@@ -3,7 +3,7 @@ class Spider extends MovableObject {
     Y = 320;
     width = 142;
     height = 125;
-    damage = 100;
+    enemyLife = 20;
 
     IMAGES_WALK = [
         '../assets/img/monsters/spider/sp-00.png',
@@ -28,6 +28,12 @@ class Spider extends MovableObject {
         '../assets/img/monsters/spider/sp-19.png'
     ];
 
+
+    /**
+     * creates an instance of Spider.
+     * @param {number} posX - the initial x position of the spider.
+     * @param {number} varSpeedX - the speed of the spider along the x-axis.
+     */
     constructor(posX, varSpeedX) {
         super().loadImage(this.IMAGES_WALK[0]);
         this.loadImages(this.IMAGES_WALK);
@@ -37,6 +43,10 @@ class Spider extends MovableObject {
         this.animate();
     };
 
+
+    /**
+     * animates the spider by moving it left and playing the walk animation.
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();
@@ -44,23 +54,34 @@ class Spider extends MovableObject {
         }, 1000 / 60);
     };
 
-    getHit() {
-        this.enemyLife -= this.damage;
+
+    /**
+     * reduces the enemy's life by the given damage amount.
+     * @param {number} damage - the amount of damage to inflict.
+     */
+    getHit(damage) {
+        this.enemyLife -= damage;
+        if (this.enemyLife < 0) {
+            this.enemyLife = 0;
+        }
+        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
         if (this.enemyLife <= 0) {
             this.isDead();
         }
     }
 
+
+    /**
+     * handles the logic when the enemy's life reaches zero.
+     */
     isDead() {
-        console.log(`${this.name} has died!`);
+        console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('deadEnemy');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }
-
         console.log(`Enemies alive:`, this.world.level.enemies);
     }
-
 
 }

@@ -4,6 +4,7 @@ class Character extends MovableObject {
     height = 160;
     speedX = 3;
     speedRun = 8;
+    characterLife = 100;
 
 
     IMAGES_IDLE = [
@@ -659,11 +660,36 @@ class Character extends MovableObject {
 
         this.world.level.enemies.forEach((enemy) => {
             if (this.isColliding(enemy, punchRange.x, punchRange.y, punchRange.width, punchRange.height)) {
-                enemy.getHit();
-                console.log(`Enemy ${enemy.name} was hit!`);
+                enemy.getHit(10);
+                console.log(`Enemy ${enemy.name} was hit! Current Life: ${enemy.enemyLife}`);
             }
         });
     }
 
+    throw() {
+        if (this.world.isPaused) return false;
+
+        if (this.world.keyboard.THROW_BALL && this.world.bombAmount > 0) {
+            this.checkThrowCollision();
+            return true;
+        }
+        return false;
+    }
+
+    checkThrowCollision() {
+        const throwRange = {
+            x: this.X + (this.flipImage ? +10 : this.width + 10),
+            y: this.Y,
+            width: 5,
+            height: this.height
+        };
+
+        this.world.level.enemies.forEach((enemy) => {
+            if (this.isColliding(enemy, throwRange.x, throwRange.y, throwRange.width, throwRange.height)) {
+                enemy.getHit(20);
+                console.log(`Enemy ${enemy.name} was hit by a throw! Current Life: ${enemy.enemyLife}`);
+            }
+        });
+    }
 
 }

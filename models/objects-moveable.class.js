@@ -7,8 +7,6 @@ class MovableObject extends DrawableObject{
     speedX = 0.5;
     speedY = 0;
     acceleration = 1.5;
-    characterLife = 100;
-    enemyLife = 100
     lastHitTime = 0;
     hitCooldown = 1000;
     amplitude = 0;
