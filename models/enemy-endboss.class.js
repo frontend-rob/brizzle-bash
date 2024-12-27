@@ -5,6 +5,8 @@ class Endboss extends MovableObject {
     height = 350;
     speedX = 0.125;
     enemyLife = 100;
+    lastHitTime = 0;
+    hitCooldown = 1000;
 
     IMAGES_WALK = [
         '../assets/img/monsters/mushroom/mr-00.png',
@@ -69,6 +71,11 @@ class Endboss extends MovableObject {
      * @param {number} damage - the amount of damage to inflict.
      */
     getHit(damage) {
+        const currentTime = new Date().getTime();
+        if (currentTime - this.lastHitTime < this.hitCooldown) {
+            return;
+        }
+
         this.enemyLife -= damage;
         if (this.enemyLife < 0) {
             this.enemyLife = 0;
@@ -77,6 +84,8 @@ class Endboss extends MovableObject {
         if (this.enemyLife <= 0) {
             this.isDead();
         }
+
+        this.lastHitTime = currentTime;
     }
 
 
