@@ -46,19 +46,31 @@ function getRandomSpeed(baseSpeed, range) {
 const level01 = new Level(
     [
         // enemies
-        new Plant(getRandomX(600, 200)),
+        new Plant(getRandomX(500, 200)),
         new Plant(getRandomX(2800, 200)),
-        new Squid(getRandomX(1400, 200), getRandomSpeed(0.5, 0.25)),
-        new Squid(getRandomX(3200, 200), getRandomSpeed(1.5, 0.25)),
-        new Squid(getRandomX(4200, 200), getRandomSpeed(2, 0.25)),
-        new Candle(getRandomX(1800, 200), getRandomSpeed(0.5, 0.25)),
+        new Plant(getRandomX(4200, 200)),
+
+        new Squid(getRandomX(800, 200), getRandomSpeed(0.5, 0.25)),
+        new Squid(getRandomX(3200, 200), getRandomSpeed(1, 0.25)),
+        new Squid(getRandomX(4200, 200), getRandomSpeed(1, 0.25)),
+
+        new Candle(getRandomX(1200, 200), getRandomSpeed(0.5, 0.25)),
         new Candle(getRandomX(3600, 200), getRandomSpeed(1, 0.25)),
-        new Spider(getRandomX(2400, 200), getRandomSpeed(1, 0.25)),
-        new Spider(getRandomX(4800, 200), getRandomSpeed(1.5, 0.25)),
-        new Spirit(getRandomX(3500, 200), getRandomY(150, 150), getRandomSpeed(1, 0.25)),
-        new Spirit(getRandomX(5000, 200), getRandomY(150, 150), getRandomSpeed(1.5, 0.25)),
-        new Spinner(getRandomX(4000, 200), getRandomY(100, 150), getRandomSpeed(1.5, 0.25)),
-        new Spinner(getRandomX(5600, 200), getRandomY(100, 150), getRandomSpeed(2, 0.25)),
+        new Candle(getRandomX(6000, 200), getRandomSpeed(1, 0.25)),
+
+        new Spider(getRandomX(1800, 200), getRandomSpeed(1, 0.25)),
+        new Spider(getRandomX(4800, 200), getRandomSpeed(1, 0.25)),
+        new Spider(getRandomX(6500, 200), getRandomSpeed(1, 0.25)),
+
+        new Spirit(getRandomX(3500, 200), getRandomY(150, 150), getRandomSpeed(2, 0.25)),
+        new Spirit(getRandomX(5000, 200), getRandomY(150, 150), getRandomSpeed(3, 0.25)),
+        new Spirit(getRandomX(6500, 200), getRandomY(150, 150), getRandomSpeed(4, 0.25)),
+
+        new Spinner(getRandomX(2000, 200), getRandomY(100, 150), getRandomSpeed(2, 0.25)),
+        new Spinner(getRandomX(4000, 200), getRandomY(100, 150), getRandomSpeed(2, 0.25)),
+        new Spinner(getRandomX(5600, 200), getRandomY(100, 150), getRandomSpeed(4, 0.25)),
+        new Spinner(getRandomX(6200, 200), getRandomY(100, 150), getRandomSpeed(4, 0.25)),
+        
         new Endboss(getRandomX(7000, 200))
     ],
 

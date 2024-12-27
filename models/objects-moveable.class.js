@@ -1,19 +1,14 @@
-class MovableObject {
+class MovableObject extends DrawableObject{
     X = 96;
     Y = 288;
-    img;
     width = 64;
     height = 128;
-    currentImage = 0;
-    imageCache = {};
     flipImage = false;
     speedX = 0.5;
     speedY = 0;
     acceleration = 1.5;
-
     characterLife = 100;
     enemyLife = 100
-
     lastHitTime = 0;
     hitCooldown = 1000;
     amplitude = 0;
@@ -45,47 +40,7 @@ class MovableObject {
 
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
-            return true
-        } else {
-            return this.Y < 288;
-        }
-    }
-
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.X, this.Y, this.width, this.height);
-    }
-
-
-    drawCollisionFrame(ctx) {
-        if (MovableObject.debugMode && (this instanceof Character ||
-            this instanceof Candle || this instanceof Plant ||
-            this instanceof Spider || this instanceof Spinner ||
-            this instanceof Spirit || this instanceof Squid ||
-            this instanceof Endboss || this instanceof ThrowableObject)) {
-            ctx.beginPath();
-            ctx.lineWidth = '4';
-            ctx.strokeStyle = '#ff79c6';
-            ctx.rect(this.X, this.Y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
-    isColliding(moveObj, offsetX = 0, offsetY = 0) {
-        return (
-            this.X + this.width - offsetX > moveObj.X + offsetX &&
-            this.X + offsetX < moveObj.X + moveObj.width - offsetX &&
-            this.Y + this.height - offsetY > moveObj.Y + offsetY &&
-            this.Y + offsetY < moveObj.Y + moveObj.height - offsetY
-        );
+        return this instanceof ThrowableObject || this.Y < 288;
     }
 
 
@@ -127,22 +82,12 @@ class MovableObject {
 
 
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHitTime;
-        return timePassed < this.hitCooldown;
+        return new Date().getTime() - this.lastHitTime < this.hitCooldown;
     }
 
 
     isDead() {
         return this.characterLife == 0;
-    }
-
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
 

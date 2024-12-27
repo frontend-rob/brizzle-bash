@@ -99,7 +99,9 @@ soundManager.addSound('characterWalk', '../assets/audio/walking.mp3');
 soundManager.addSound('characterPunch', '../assets/audio/punch.mp3');
 soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
 soundManager.addSound('characterThrowError', '../assets/audio/error.mp3');
+soundManager.addSound('characterSurprised', '../assets/audio/surprise.mp3');
 soundManager.addSound('throwItem', '../assets/audio/throw.mp3');
+soundManager.addSound('deadEnemy', '../assets/audio/dead-enemy.mp3');
 
 
 let isSoundOn = true;

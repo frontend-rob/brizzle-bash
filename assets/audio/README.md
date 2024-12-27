@@ -34,6 +34,10 @@ Below is the list of sound assets and their respective authors:
   - **Source:** [freesound.org](https://freesound.org/s/711128/)
   - **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
+- **dead-enemy.mp3** by *Xiko__*  
+  - **Source:** [freesound.org](https://freesound.org/s/711120/)
+  - **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
 - **error.mp3** by *plasterbrain*  
   - **Source:** [freesound.org](https://freesound.org/s/423169/)
   - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
@@ -48,6 +52,10 @@ Below is the list of sound assets and their respective authors:
 
 - **punch.mp3** by *rcroller*  
   - **Source:** [freesound.org](https://freesound.org/s/424144/)
+  - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
+
+- **surprise.mp3** by * el_boss*  
+  - **Source:** [freesound.org](https://freesound.org/s/630035/)
   - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
 - **throw.mp3** by *Xiko__*  

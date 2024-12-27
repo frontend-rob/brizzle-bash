@@ -15,6 +15,7 @@ class World {
     healthObjects = [];
     bombObjects = [];
     bombAmount = 0;
+    hasSeenEndboss = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -83,7 +84,7 @@ class World {
 
     runGame() {
         setInterval(() => {
-            if (!this.isPaused) {
+            if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
                 this.checkCollisions();
                 this.checkThrowObjects();
             }
@@ -93,16 +94,31 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.THROW_BALL) {
-            let spikyball = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);  // Übergibt `this.character` für die Richtung
+            let spikyball = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
             this.throwableObjects.push(spikyball);
         }
     }
 
 
     checkCollisions() {
+        if (this.character.isDead()) {
+            return;
+        }
         this.handleEnemyCollision();
         this.handleHealing();
         this.handleBombCollection();
+        this.checkEndbossProximity();
+    }
+
+    checkEndbossProximity() {
+        const endBoss = this.level.enemies.find(enemy => enemy instanceof Endboss);
+        if (endBoss) {
+            const distance = Math.abs(this.character.X - endBoss.X);
+            if (distance <= 400 && !this.hasSeenEndboss) {
+                this.character.triggerSurprise();
+                this.hasSeenEndboss = true;
+            }
+        }
     }
 
 
@@ -124,6 +140,10 @@ class World {
             this.processPunch(enemy);
         } else {
             this.processCollision(enemy);
+        }
+
+        if (this.character.isDead()) {
+            this.character.playHitBeforeDead();
         }
     }
 
@@ -230,24 +250,19 @@ class World {
 
 
     drawWorld() {
-        if (this.isPaused) return;
-
+        if (this.isPaused || (this.character.isDead() && this.character.deadAnimationPlayed)) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camFrameX, 0);
-
         this.placeObjectsOnCanvas(this.level.backgroundObjects);
         this.placeObjectsOnCanvas(this.level.enemies);
         this.placeObjectsOnCanvas(this.level.healthObjects);
         this.placeObjectsOnCanvas(this.level.bombObjects);
         this.placeObjectsOnCanvas(this.throwableObjects);
-
         this.drawObject(this.character);
         this.ctx.translate(-this.camFrameX, 0);
-
         this.ctx.imageSmoothingEnabled = true;
         this.ctx.imageSmoothingQuality = 'high';
-
-        if (!this.isPaused) {
+        if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
             this.animationFrameId = requestAnimationFrame(() => this.drawWorld());
         }
     }
@@ -286,5 +301,6 @@ class World {
         moveObj.X = moveObj.X * -1;
         this.ctx.restore();
     }
+
 
 }

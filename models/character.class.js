@@ -452,7 +452,8 @@ class Character extends MovableObject {
         punch: { widthFactor: 1.8, heightFactor: 1.0 },
         throw: { widthFactor: 2.2, heightFactor: 1.05 },
         hit: { widthFactor: 1.5, heightFactor: 1.1 },
-        dead: { widthFactor: 2.2, heightFactor: 1.25 },
+        dead: { widthFactor: 2.2, heightFactor: 1.1 },
+        surprise: { widthFactor: 1.25, heightFactor: 1.0 },
 
     };
 
@@ -468,6 +469,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_THROW);
         this.loadImages(this.IMAGES_SURPRISE);
+        this.surpriseStartTime = null;
         this.direction = 1;
         this.applyGravity();
         this.animate();
@@ -483,7 +485,7 @@ class Character extends MovableObject {
                 soundManager.pauseSound('collectHealth');
                 soundManager.pauseSound('collectItem');
                 soundManager.pauseSound('characterThrowError');
-                soundManager.throwItem('characterHurt');
+                soundManager.pauseSound('throwItem');
                 return;
             }
 
@@ -533,6 +535,9 @@ class Character extends MovableObject {
         if (this.isHurt()) {
             return 'hit';
         }
+        if (this.isSurprised()) {
+            return 'surprise';
+        }
         if (this.punch()) {
             return 'punch';
         }
@@ -554,6 +559,17 @@ class Character extends MovableObject {
         return 'idle';
     }
 
+    triggerSurprise() {
+        soundManager.playSound('characterSurprised');
+        this.surpriseStartTime = Date.now();
+    }
+
+    isSurprised() {
+        if (this.surpriseStartTime) {
+            return Date.now() - this.surpriseStartTime <= 2000;
+        }
+        return false;
+    }
 
     updateCharacterAnimation(state) {
         const animations = {
@@ -566,11 +582,12 @@ class Character extends MovableObject {
             throw: this.IMAGES_THROW,
             hit: this.IMAGES_HIT,
             dead: this.IMAGES_DEAD,
+            surprise: this.IMAGES_SURPRISE,
         };
 
         // ! adjust Y position because of different img sizes
         if (state === 'dead') {
-            this.Y = 260;
+            this.Y = 280;
         };
 
         if (state === 'hit') {
@@ -594,7 +611,32 @@ class Character extends MovableObject {
         this.width = newWidth;
         this.height = newHeight;
 
-        this.playAnimation(animations[state]);
+        if (state === 'dead') {
+            this.playDeadAnimation(animations[state]);
+        } else {
+            this.playAnimation(animations[state]);
+        }
+    }
+
+    playDeadAnimation(images) {
+        if (this.animationPaused) return;
+        if (this.currentImage >= images.length) {
+            this.currentImage = 0;
+        }
+        let imgIndex = this.currentImage;
+        let path = images[imgIndex];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+        if (this.currentImage >= images.length) {
+            this.animationPaused = true;
+        }
+    }
+
+    async playHitBeforeDead() {
+        this.updateCharacterAnimation('hit');
+        await new Promise(resolve => setTimeout(resolve, 250));
+        this.currentImage = 0;
+        this.updateCharacterAnimation('dead');
     }
 
     punch() {
@@ -611,7 +653,7 @@ class Character extends MovableObject {
         const punchRange = {
             x: this.X + (this.flipImage ? +10 : this.width),
             y: this.Y,
-            width: 10,
+            width: 5,
             height: this.height
         };
 

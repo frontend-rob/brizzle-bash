@@ -76,7 +76,7 @@ class Spinner extends MovableObject {
 
     isDead() {
         console.log(`${this.name} has died!`);
-
+        soundManager.playSound('deadEnemy');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
