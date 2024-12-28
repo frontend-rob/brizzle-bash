@@ -157,7 +157,6 @@ class World {
     processCollision(enemy) {
         this.character.getHit();
         if (!hasPlayedHurtSound) {
-            soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
             soundManager.playSound('characterHurt');
             hasPlayedHurtSound = true;
         }
@@ -173,7 +172,6 @@ class World {
                 return;
             }
             if (this.character.isColliding(healthObject)) {
-                soundManager.addSound('collectHealth', '../assets/audio/collect-health.mp3');
                 soundManager.playSound('collectHealth');
                 this.character.heal();
                 this.level.healthObjects.splice(index, 1);
@@ -204,7 +202,6 @@ class World {
             if (this.bombAmount > 100) {
                 this.bombAmount = 100;
             }
-            soundManager.addSound('collectItem', '../assets/audio/collect-item.mp3');
             soundManager.playSound('collectItem');
             this.updateBombBar();
         }
@@ -227,7 +224,6 @@ class World {
     }
 
     throwSpikyBall() {
-        soundManager.addSound('throwItem', '../assets/audio/throw.mp3');
         soundManager.playSound('throwItem');
 
         let spikyBall = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
@@ -237,7 +233,6 @@ class World {
     }
 
     showThrowError() {
-        soundManager.addSound('characterThrowError', '../assets/audio/error.mp3');
         soundManager.playSound('characterThrowError');
 
         let errorImage = new ErrorImageObject(this.character.X, this.character.Y);

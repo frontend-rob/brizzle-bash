@@ -97,13 +97,14 @@ class Endboss extends MovableObject {
         }
 
         this.enemyLife -= damage;
+        soundManager.playSound('hurtEndboss');
         if (this.enemyLife < 0) {
             this.enemyLife = 0;
         }
         console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
 
         this.isHit = true;
-        setTimeout(() => this.isHit = false, 500);
+        setTimeout(() => this.isHit = false, 2500);
 
         if (this.enemyLife <= 0) {
             this.isDead();
@@ -118,8 +119,9 @@ class Endboss extends MovableObject {
      */
     isDead() {
         console.log(`Enemy ${this.name} has died!`);
-        soundManager.playSound('deadEnemy');
-        soundManager.playSound('gameover');
+        soundManager.playSound('hurtEndboss');
+        soundManager.playSound('deadEndboss');
+        // soundManager.playSound('gameover');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);

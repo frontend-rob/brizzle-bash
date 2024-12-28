@@ -92,17 +92,22 @@ var soundManager = {
 
 
 // ! add the sounds
+soundManager.addSound('characterThrowError', '../assets/audio/character-error.mp3');
+soundManager.addSound('characterHurt', '../assets/audio/character-hurt.mp3');
+soundManager.addSound('characterJump', '../assets/audio/character-jump.mp3');
+soundManager.addSound('characterPunch', '../assets/audio/character-punch.mp3');
+soundManager.addSound('characterSurprised', '../assets/audio/character-surprise.mp3');
+soundManager.addSound('throwItem', '../assets/audio/character-throw.mp3');
+soundManager.addSound('characterWalk', '../assets/audio/character-walk.mp3');
+
+
 soundManager.addSound('collectHealth', '../assets/audio/collect-health.mp3');
 soundManager.addSound('collectItem', '../assets/audio/collect-item.mp3');
-soundManager.addSound('characterJump', '../assets/audio/jump.mp3');
-soundManager.addSound('characterWalk', '../assets/audio/walking.mp3');
-soundManager.addSound('characterPunch', '../assets/audio/punch.mp3');
-soundManager.addSound('characterHurt', '../assets/audio/hurt.mp3');
-soundManager.addSound('characterThrowError', '../assets/audio/error.mp3');
-soundManager.addSound('characterSurprised', '../assets/audio/surprise.mp3');
-soundManager.addSound('throwItem', '../assets/audio/throw.mp3');
-soundManager.addSound('deadEnemy', '../assets/audio/dead-enemy.mp3');
-soundManager.addSound('deadEndboss', '../assets/audio/dead-endboss.mp3');
+
+soundManager.addSound('deadEndboss', '../assets/audio/endboss-dead.mp3');
+soundManager.addSound('hurtEndboss', '../assets/audio/endboss-hurt.mp3');
+soundManager.addSound('deadEnemy', '../assets/audio/enemy-dead.mp3');
+
 soundManager.addSound('gameover', '../assets/audio/gameover.mp3');
 
 
