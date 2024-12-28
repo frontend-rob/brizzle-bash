@@ -15,6 +15,8 @@ Please ensure compliance with the respective licenses when using these assets in
 ```
 assets/audio/
 
+    ├── bg-game.mp3
+    ├── bg-intro.mp3
     ├── character-error.mp3
     ├── character-hurt.mp3
     ├── character-jump.mp3
@@ -25,6 +27,14 @@ assets/audio/
 ### ✏️ Credits
 
 Below is the list of sound assets and their respective authors:
+
+- **bg-intro.mp3** by *Nancy_Sinclair*  
+  - **Source:** [freesound.org](https://freesound.org/s/750225/)
+  - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
+
+- **bg-intro.mp3** by *Nancy_Sinclair*  
+  - **Source:** [freesound.org](https://freesound.org/s/750738/)
+  - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
 - **character-error.mp3** by *plasterbrain*  
   - **Source:** [freesound.org](https://freesound.org/s/423169/)

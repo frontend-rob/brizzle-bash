@@ -92,13 +92,16 @@ var soundManager = {
 
 
 // ! add the sounds
-soundManager.addSound('characterThrowError', '../assets/audio/character-error.mp3');
+soundManager.addSound('gameMusic', '../assets/audio/bg-game.mp3');
+soundManager.addSound('introMusic', '../assets/audio/bg-intro.mp3');
+
 soundManager.addSound('characterHurt', '../assets/audio/character-hurt.mp3');
 soundManager.addSound('characterJump', '../assets/audio/character-jump.mp3');
 soundManager.addSound('characterPunch', '../assets/audio/character-punch.mp3');
 soundManager.addSound('characterSurprised', '../assets/audio/character-surprise.mp3');
-soundManager.addSound('throwItem', '../assets/audio/character-throw.mp3');
 soundManager.addSound('characterWalk', '../assets/audio/character-walk.mp3');
+soundManager.addSound('characterThrowTtem', '../assets/audio/character-throw.mp3');
+soundManager.addSound('characterThrowError', '../assets/audio/character-error.mp3');
 
 
 soundManager.addSound('collectHealth', '../assets/audio/collect-health.mp3');

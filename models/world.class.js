@@ -85,6 +85,7 @@ class World {
     runGame() {
         setInterval(() => {
             if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
+                // soundManager.playSound('gameMusic');
                 this.checkCollisions();
                 this.checkThrowObjects();
                 this.checkThrowableObjectCollision();
@@ -224,7 +225,7 @@ class World {
     }
 
     throwSpikyBall() {
-        soundManager.playSound('throwItem');
+        soundManager.playSound('characterThrowTtem');
 
         let spikyBall = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
         this.throwableObjects.push(spikyBall);
