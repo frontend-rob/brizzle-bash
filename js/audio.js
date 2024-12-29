@@ -61,7 +61,7 @@ var soundManager = {
         }
         this.isMuted = true;
         localStorage.setItem('isMuted', 'true');
-        console.log('sounds muted');
+        console.log('Sounds muted');
     },
 
     /**
@@ -75,7 +75,7 @@ var soundManager = {
         }
         this.isMuted = false;
         localStorage.setItem('isMuted', 'false');
-        console.log('sounds unmuted');
+        console.log('Sounds unmuted');
     },
 
     /**

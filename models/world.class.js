@@ -85,7 +85,7 @@ class World {
     runGame() {
         setInterval(() => {
             if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
-                // soundManager.playSound('gameMusic');
+                // soundManager.playSound('introMusic');
                 this.checkCollisions();
                 this.checkThrowObjects();
                 this.checkThrowableObjectCollision();

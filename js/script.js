@@ -81,8 +81,10 @@ function handleModalEsc(event, modalId) {
  */
 function showInfoGuide() {
     showModal('info-guide-modal', 'modal-container');
-    world.pauseGame();
-    updateButtonState(PLAY_BUTTON, true);
+    if (world) {
+        world.pauseGame();
+        updateButtonState(PLAY_BUTTON, true);
+    }
     createCarousel();
 }
 
@@ -102,8 +104,10 @@ function closeInfoGuide() {
  */
 function showGameSettings() {
     showModal('game-settings-modal', 'modal-container');
-    world.pauseGame();
-    updateButtonState(PLAY_BUTTON, true);
+    if (world) {
+        world.pauseGame();
+        updateButtonState(PLAY_BUTTON, true);
+    }
 }
 
 
