@@ -15,84 +15,68 @@ let storyText = [
     "Brizzly is Moustacheshire’s final hope."
 ];
 
+
+/**
+ * toggles the visibility of the story and controls the music playback.
+ * starts the story from the first sentence.
+ */
 function showIntro() {
     const story = document.getElementById('story');
-
-    // Entferne die "hidden" Klasse, um die Story anzuzeigen
     story.classList.toggle('hidden');
 
-    // Musik abspielen/pausieren
-    if (isIntroMusicPlaying) {
-        soundManager.stopSound('introMusic');
-    } else {
-        soundManager.playSound('introMusic');
-    }
+    isIntroMusicPlaying ? soundManager.stopSound('introMusic') : soundManager.playSound('introMusic');
     isIntroMusicPlaying = !isIntroMusicPlaying;
 
-    // Reset den Text und den Ablauf
-    currentSentence = 0; // Zurücksetzen der Satznummer
-    story.innerHTML = ''; // Lösche den bisherigen Text
-
-    // Starte die Story von vorne
+    story.innerHTML = '';
+    currentSentence = 0;
     showNextSentence();
 }
 
-// Funktion für das Zeigen des nächsten Satzes
+
+/**
+ * displays the next sentence of the story with a typing effect.
+ * if all sentences are shown, hides the story.
+ */
 function showNextSentence() {
     const story = document.getElementById('story');
 
-    // Stelle sicher, dass der alte Satz entfernt wird, wenn er existiert
-    const previousSentence = story.querySelector('p');
-    if (previousSentence) {
-        previousSentence.remove(); // Entferne den alten Satz
-    }
-
     if (currentSentence < storyText.length) {
-        const sentenceElement = document.createElement('p');
-        story.appendChild(sentenceElement);
-
-        // Start des Schreibmaschineneffekts
-        typeWriterEffect(sentenceElement, storyText[currentSentence], 50, () => {
+        const sentence = storyText[currentSentence];
+        story.innerHTML = `<p><span class="cursor"></span></p>`;
+        typeWriterEffect(story, sentence, 50, () => {
             currentSentence++;
-            setTimeout(showNextSentence, 3000); // 3 Sekunden Pause vor dem nächsten Satz
+            setTimeout(showNextSentence, 3000);
         });
     } else {
-        // Wenn der Text zu Ende ist, blendet die Story aus
         setTimeout(() => {
             story.classList.toggle('hidden');
-        }, 3000); // Verzögerung von 3 Sekunden nach dem letzten Satz
+        }, 3000);
     }
 }
 
-// Schreibmaschineneffekt
+
+/**
+ * creates a typewriter effect for a given text.
+ * @param {HTMLElement} element - the DOM element to display the text in.
+ * @param {string} text - the text to display.
+ * @param {number} delay - the delay between typing each character (default is 50ms).
+ * @param {function} callback - the function to call after the text is fully typed (optional).
+ */
 function typeWriterEffect(element, text, delay = 50, callback) {
     let index = 0;
-    element.textContent = ''; // Leeren vor Beginn der Animation
+    const paragraph = element.querySelector('p');
 
-    // Füge einen blinkenden Cursor hinzu
-    const cursor = document.createElement('span');
-    cursor.classList.add('cursor'); // Füge der span-Tag eine CSS-Klasse hinzu
-    element.appendChild(cursor);
-
-    // Stoppe den vorherigen Interval, falls vorhanden
     if (typingInterval) {
         clearInterval(typingInterval);
     }
 
-    // Setze einen neuen Interval für den aktuellen Satz
     typingInterval = setInterval(() => {
-        // Füge den Text Stück für Stück hinzu
-        element.textContent = text.substring(0, index);
-
-        // Der Cursor wird immer wieder hinzugefügt, während der Text geschrieben wird
-        element.appendChild(cursor); // Füge den Cursor immer wieder hinzu
-
+        paragraph.innerHTML = `${text.substring(0, index)}<span class="cursor"></span>`;
         index++;
         if (index === text.length) {
-            clearInterval(typingInterval); // Stoppe den Interval, wenn der gesamte Text angezeigt ist
-            element.textContent = text; // Setze den Text vollständig (damit der Punkt erscheint)
-            element.appendChild(cursor); // Füge den Cursor hinzu, auch wenn der Text fertig ist
-            if (callback) callback(); // Weiter zum nächsten Satz
+            clearInterval(typingInterval);
+            paragraph.innerHTML = `${text}<span class="cursor"></span>`;
+            if (callback) callback();
         }
     }, delay);
 }
