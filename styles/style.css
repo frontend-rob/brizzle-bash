@@ -22,26 +22,14 @@
     --thumb-hover-color: #444444;
 }
 
-.main-logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    height: 4rem;
-    width: auto;
-}
-
-.logo-text {
-    color: var(--base-content);
-    font-size: 2rem;
-    font-weight: 600;
-}
-
 body {
     display: flex;
     flex-direction: column;
     background-color: var(--bg-base-100);
+    background-image: url("../assets/img/main/bg-img.svg");
+    background-size: 8rem  8rem;
+    background-position: center;
+    backdrop-filter: blur(0.125rem);
     color: var(--base-content);
 }
 
@@ -52,7 +40,8 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: var(--bg-base-100);
+    background-color: #121314aa;
+    backdrop-filter: blur(0.25rem);
 }
 
 .header-inner {
@@ -63,6 +52,17 @@ header {
     max-width: 96rem;
     margin: 0 auto;
     padding: 1rem;
+}
+
+.main-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 4rem;
+    width: auto;
 }
 
 .setting-bar {
@@ -78,7 +78,8 @@ main {
     align-items: center;
     max-width: 820px;
     width: 100%;
-    height: calc(100vh - 10rem);
+    min-height: calc(100vh - 6rem);
+    padding: 1rem;
     margin: auto;
     gap: 2rem;
 }
@@ -92,7 +93,7 @@ main {
 canvas {
     width: 45rem;
     height: 30rem;
-    border-radius: 16px;
+    border-radius: 1rem;
     border: 2px solid var(--bg-neutral);
     background-color: black;
 }
@@ -339,7 +340,6 @@ kbd svg {
     height: 240px;
 }
 
-
 #carousel-squid {
     width: 229px;
     height: 200px;
@@ -389,7 +389,7 @@ kbd svg {
     background-color: var(--bg-neutral);
     color: var(--primary-content);
     text-align: center;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 0.5rem;
     position: absolute;
     top: 100%;
@@ -400,7 +400,7 @@ kbd svg {
     transition: opacity 0.3s ease;
     z-index: 10;
     margin-top: 1rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
 }
 
 .tooltip-text::after {
@@ -493,4 +493,19 @@ kbd svg {
 
 .progress-icon-bomb svg {
     fill: hsla(45, 29%, 97%, 0.7);
+}
+
+
+
+
+
+
+
+
+
+@media (pointer: coarse) {
+    .tooltip:hover .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+        }
 }

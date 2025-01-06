@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/main/fav.png" type="image/x-icon">
 
-    <title>2S Game</title>
+    <title>Brizzle Bash - Game Play</title>
 
     <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./styles/base.css">
@@ -44,12 +45,9 @@
 
     <header>
         <div class="header-inner">
-            <div class="main-logo">
-                <img class="logo" src="" alt="">
-                <span class="logo-text">
-                    Brizzle Bash
-                </span>
-            </div>
+            <a href="./index.html" class="main-logo">
+                <img class="logo" src="./assets/img/main/logo.png" alt="Logo">
+            </a>
             <div class="setting-bar">
                 <button id="btn-volume" class="btn tooltip" aria-label="volume-btn" onclick="toggleSound()">
                     <svg id="btn-volume-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
@@ -161,6 +159,7 @@
                     </svg>
                 </button>
                 <div class="tab-content">
+
                     <section id="game-story" class="modal-content">
                         <div class="modal-guide-item">
                             <h3>Brizzle Bash</h3>
@@ -194,18 +193,25 @@
                             </div>
                         </div>
                     </section>
+
                     <section id="desktop-controls" class="modal-content hidden">
                         <div class="modal-guide-item">
                             <h3>Movement</h3>
                             <div class="kbd-control">
                                 <div class="kbd-control-row">
-                                    <kbd>A</kbd> / <kbd>D</kbd> - <span>Use the A key to move left and the D key to move right</span>
+                                    <kbd>A</kbd> - <span>Hold the A key to move to the left.</span>
                                 </div>
                                 <div class="kbd-control-row">
-                                    <kbd>W</kbd> / <kbd>␣</kbd> - <span>Use the W key or Spacebar to make the character jump.</span>
+                                    <kbd>D</kbd> - <span>Hold the D key to move to the right.</span>
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>S</kbd> - <span>Hold the S key to duck or crouch.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>W</kbd> - <span>Press the W key to make the character jump.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                     <kbd>␣</kbd> - <span>Press the Spacebar to make the character jump.</span>
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>⇧</kbd> - <span>Hold Shift to run faster during gameplay.</span>
@@ -221,9 +227,6 @@
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>K</kbd> - <span>Press the K key to launch a long-range attack with a spiky iron ball.</span>
-                                </div>
-                                <div class="kbd-control-row">
-                                    <kbd>L</kbd> - <span>Press the L key to launch a long-range attack with a devastating bomb.</span>
                                 </div>
                             </div>
                         </div>
@@ -261,18 +264,22 @@
                             </div>
                         </div>
                     </section>
+
                     <section id="mobile-controls" class="modal-content hidden">
                         <div class="modal-guide-item">
                             <h3>Movement</h3>
                             <div class="kbd-control">
                                 <div class="kbd-control-row">
-                                    <kbd>X</kbd> / <kbd>X</kbd> - <span>Use the A key to move left and the D key to move right</span>
+                                    <kbd>X</kbd> - <span>Hold the A key to move to the left.</span>
                                 </div>
                                 <div class="kbd-control-row">
-                                    <kbd>X</kbd> / <kbd>␣</kbd> - <span>Use the W key or Spacebar to make the character jump.</span>
+                                    <kbd>X</kbd> - <span>Hold the D key to move to the right.</span>
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>X</kbd> - <span>Hold the S key to duck or crouch.</span>
+                                </div>
+                                <div class="kbd-control-row">
+                                    <kbd>X</kbd> - <span>Press the W key to make the character jump.</span>
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>X</kbd> - <span>Hold Shift to run faster during gameplay.</span>
@@ -288,9 +295,6 @@
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>X</kbd> - <span>Press the K key to launch a long-range attack with a spiky iron ball.</span>
-                                </div>
-                                <div class="kbd-control-row">
-                                    <kbd>X</kbd> - <span>Press the L key to launch a long-range attack with a devastating bomb.</span>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,11 @@
 @font-face {
-    font-family: Inter;
+    font-family: "Inter";
     src: url('../assets/fonts/inter-variable-font.ttf');
+}
+
+@font-face {
+    font-family: "Fira Code";
+    src: url('../assets/fonts/firacode-variable.ttf');
 }
 
 h2 {
