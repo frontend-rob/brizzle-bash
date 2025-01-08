@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/img/main/fav.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/main/logo.png" type="image/x-icon">
 
     <title>Brizzle Bash - Introduction</title>
 
     <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/assets.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footer.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/intro.css">
 </head>
@@ -19,7 +21,7 @@
 
     <header>
         <div class="header-inner">
-            <a href="./index.html" class="main-logo">
+            <a href="./index.html">
                 <img class="logo" src="./assets/img/main/logo.png" alt="Logo">
             </a>
             <div class="setting-bar">
@@ -35,24 +37,20 @@
         </div>
     </header>
 
-
     <main>
         <div id="intro-container" class="intro-container">
-
             <div class="glitch-headline">
                 <p class="invisible-text">Brizzle Bash</p>
                 <p class="glitch-animation">Brizzle Bash</p>
                 <p class="glitch-animation">Brizzle Bash</p>
             </div>
-
             <div class="story-container">
                 <img id="story-image" class="story-image" src="./assets/img/carousel/talku-00.png" alt="Brizzly">
-                <figcaption>Light the way, fight the dark.</figcaption>
+                <figcaption>FIGHT THE SHADOWS</figcaption>
                 <div class="story-text">
                     <div id="story" class="story hidden"></div>
                 </div>
             </div>
-
             <div class="intro-buttons">
                 <button id="showIntroButton" class="btn" onclick="showIntro()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
@@ -72,17 +70,33 @@
                 </a>
             </div>
         </div>
-
     </main>
 
-
-    <!-- <footer>
-        <div class="footer-inner"></div>
-    </footer> -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-main">
+                <div class="footer-logo-wrapper">
+                    <img class="footer-logo" src="./assets/img/main/logo.png" alt="Logo">
+                    <span class="logo-txt">Brizzle Bash</span>
+                </div>
+            </div>
+            <figcaption class="made-with-section">
+                <span>made with</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                    <path
+                        d="M240,102c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,228.66,16,172,16,102A62.07,62.07,0,0,1,78,40c20.65,0,38.73,8.88,50,23.89C139.27,48.88,157.35,40,178,40A62.07,62.07,0,0,1,240,102Z">
+                    </path>
+                </svg>
+                <span>R.G.</span>
+            </figcaption>
+        </div>
+    </footer>
 
     <script src="./js/intro.js"></script>
     <script src="./js/audio.js"></script>
     <script src="./js/carousel.js"></script>
+
+    
 </body>
 
 </html>
