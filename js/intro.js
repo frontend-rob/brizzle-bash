@@ -80,3 +80,11 @@ function typeWriterEffect(element, text, delay = 50, callback) {
         }
     }, delay);
 }
+
+
+/**
+ * starts the game by navigating to the game screen.
+ */
+function startGame()  {
+    window.location.href = 'game.html';
+}

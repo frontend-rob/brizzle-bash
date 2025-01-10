@@ -50,7 +50,7 @@ class MovableObject extends DrawableObject{
             return;
         }
 
-        this.characterLife -= 10;
+        this.characterLife -= 20;
         if (this.characterLife < 0) {
             this.characterLife = 0;
         }

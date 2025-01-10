@@ -4,6 +4,7 @@
  */
 class Character extends MovableObject {
 
+    X = 160;
     width = 80;
     height = 160;
     speedX = 8;
@@ -478,9 +479,13 @@ class Character extends MovableObject {
 
         if (state === 'dead') {
             this.playDeadAnimation(animations[state]);
+            if (this.animationPaused) {
+                showGameOverScreen();
+            }
         } else {
             this.playAnimation(animations[state]);
         }
+
     }
 
     playDeadAnimation(images) {

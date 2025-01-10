@@ -115,8 +115,8 @@ class Endboss extends MovableObject {
 
 
     /**
-     * handles the logic when the enemy's life reaches zero.
-     */
+ * handles the logic when the enemy's life reaches zero.
+ */
     isDead() {
         console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('hurtEndboss');
@@ -126,7 +126,11 @@ class Endboss extends MovableObject {
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }
+
+        showGameOverScreen("The Endboss has been defeated, and peace returns to Moustacheshire... for now.");
+
         console.log(`Enemies alive:`, this.world.level.enemies);
     }
+
 
 }

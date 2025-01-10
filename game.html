@@ -123,7 +123,6 @@
                         </svg>
                     </button>
                 </div>
-
                 <button id="toggle-pause-btn" class="btn" onclick="toggleGamePause()">
                     <svg id="pause-btn-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
                         <path
@@ -132,7 +131,6 @@
                     </svg>
                     <span id="pause-btn-text">Break</span>
                 </button>
-
                 <div class="action-buttons hidden">
                     <div class="action-buttons-top">
                         <button id="btn-throw" class="btn btn-circle btn-glass">
@@ -149,6 +147,32 @@
                     </div>
                 </div>
             </div>
+
+            <div id="game-over-screen" class="game-over-screen hidden">
+                <div class="game-over-screen-content">
+                    <h1 id="game-over-screen-headline">Game Over</h1>
+                    <span id="game-over-screen-text"></span>
+                    <div class="game-over-screen-buttons">
+                        <button id="back-to-menu" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                <path
+                                    d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z">
+                                </path>
+                            </svg>
+                            Exit Game
+                        </button>
+                        <button id="restart-game" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                                <path
+                                    d="M208,144H136V95.19a40,40,0,1,0-16,0V144H48a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V160A16,16,0,0,0,208,144ZM104,56a24,24,0,1,1,24,24A24,24,0,0,1,104,56ZM208,208H48V160H208v48Zm-40-96h32a8,8,0,0,1,0,16H168a8,8,0,0,1,0-16Z">
+                                </path>
+                            </svg>
+                            Play Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -438,11 +462,15 @@
         </div>
     </div>
 
+    
+
 
 
     <script src="./js/script.js"></script>
     <script src="./js/audio.js"></script>
     <script src="./js/carousel.js"></script>
+
+
 </body>
 
 </html>

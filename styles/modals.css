@@ -249,3 +249,29 @@ kbd svg {
 .carousel-next {
     right: 0;
 }
+
+.game-over-screen {
+    position: absolute;
+}
+
+.game-over-screen-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45rem;
+    min-height: 30rem;
+    gap: 2rem;
+    text-align: center;
+    background-color: #000000aa;
+    backdrop-filter: blur(4px);
+    padding: 1rem;
+    z-index: 100;
+    border-radius: 1rem;
+    
+}
+
+.game-over-screen-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}

@@ -2,6 +2,10 @@ body {
     background-image: none;
 }
 
+main {
+    min-height: calc(100vh - 4rem);
+}
+
 header {
     position: sticky;
     top: 0;
@@ -213,7 +217,6 @@ header {
 }
 
 @media screen and (max-width: 30rem) {
-
     main {
         min-height: calc(100vh - 4rem);
     }
@@ -243,8 +246,7 @@ header {
         width: 100%;
     }
 
-    .intro-buttons button,
-    .intro-buttons a {
+    .intro-buttons button {
         width: 100%;
     }
 }
