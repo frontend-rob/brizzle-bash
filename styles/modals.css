@@ -257,7 +257,7 @@ kbd svg {
 .game-over-screen-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 45rem;
     min-height: 30rem;
     gap: 2rem;
@@ -265,9 +265,19 @@ kbd svg {
     background-color: #000000aa;
     backdrop-filter: blur(4px);
     padding: 1rem;
-    z-index: 100;
+    z-index: 1000;
     border-radius: 1rem;
-    
+}
+
+.game-over-screen-content h1 {
+    font-size: 3rem;
+}
+
+.game-over-screen-content span {
+    font-family: "Fira Code";
+    font-weight: 400;
+    line-height: 1.5rem;
+    text-wrap: pretty;
 }
 
 .game-over-screen-buttons {

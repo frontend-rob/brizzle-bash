@@ -67,6 +67,7 @@ header {
     font-weight: 400;
     color: var(--base-content);
     font-size: 1rem;
+    text-wrap: pretty;
 }
 
 .cursor {
