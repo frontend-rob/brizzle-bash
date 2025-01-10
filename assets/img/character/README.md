@@ -21,12 +21,6 @@ assets/img/character/
     │   ├── ...
     │   └── ko1u_061.png
     │
-    ├── duck/
-    │   ├── ducku_000.png
-    │   ├── ducku_001.png
-    │   ├── ...
-    │   └── ducku_061.png
-    │
     ├── hit/
     │   ├── esu_000.png
     │   ├── esu_001.png
@@ -44,12 +38,6 @@ assets/img/character/
     │   ├── juu_001.png
     │   ├── ...
     │   └── juu_017.png
-    │
-    ├── run/
-    │   ├── runu_000.png
-    │   ├── runu_001.png
-    │   ├── ...
-    │   └── runu_049.png
     │
     ├── surprise/
     │   ├── surpu_000.png

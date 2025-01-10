@@ -107,8 +107,23 @@
                     </div>
                 </div>
             </div>
+
             <canvas id="canvas" width="720" height="480"></canvas>
+
             <div class="canvas-ctrl-container">
+                <div class="movement-buttons hidden">
+                    <button id="btn-left" class="btn btn-circle btn-glass">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                            <path d="M168,48V208a8,8,0,0,1-13.66,5.66l-80-80a8,8,0,0,1,0-11.32l80-80A8,8,0,0,1,168,48Z"></path>
+                        </svg>
+                    </button>
+                    <button id="btn-right" class="btn btn-circle btn-glass">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                            <path d="M181.66,133.66l-80,80A8,8,0,0,1,88,208V48a8,8,0,0,1,13.66-5.66l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+                        </svg>
+                    </button>
+                </div>
+
                 <button id="toggle-pause-btn" class="btn" onclick="toggleGamePause()">
                     <svg id="pause-btn-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
                         <path
@@ -117,6 +132,22 @@
                     </svg>
                     <span id="pause-btn-text">Break</span>
                 </button>
+
+                <div class="action-buttons hidden">
+                    <div class="action-buttons-top">
+                        <button id="btn-throw" class="btn btn-circle btn-glass">
+                            <strong>T</strong>
+                        </button>
+                    </div>
+                    <div class="action-buttons-bottom">
+                        <button id="btn-punch" class="btn btn-circle btn-glass">
+                            <strong>P</strong>
+                        </button>
+                        <button id="btn-jump" class="btn btn-circle btn-glass">
+                            <strong>J</strong>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -213,7 +244,7 @@
                                     <kbd>W</kbd> - <span>Press the W key to make the character jump.</span>
                                 </div>
                                 <div class="kbd-control-row">
-                                     <kbd>␣</kbd> - <span>Press the Spacebar to make the character jump.</span>
+                                    <kbd>␣</kbd> - <span>Press the Spacebar to make the character jump.</span>
                                 </div>
                                 <div class="kbd-control-row">
                                     <kbd>⇧</kbd> - <span>Hold Shift to run faster during gameplay.</span>

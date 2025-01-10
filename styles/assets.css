@@ -57,10 +57,23 @@
 }
 
 .btn-circle {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 3rem;
+    width: 3rem;
     padding: .5rem;
     border-radius: 2rem;
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--primary-content);
+}
+
+.btn-glass svg {
+    fill: var(--primary-content);
 }
 
 .tab-btn {

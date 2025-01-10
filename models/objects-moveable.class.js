@@ -105,26 +105,10 @@ class MovableObject extends DrawableObject{
     }
 
 
-    isRunning() {
-        if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && this.world.keyboard.SHIFT) {
-            this.speedX = this.speedRun;
-            return true;
-        } else {
-            this.speedX = 3;
-            return false;
-        }
-    }
-
-
     jump() {
         if (!this.world.isPaused && !this.isAboveGround()) {
             this.speedY = 25;
         }
-    }
-
-
-    down() {
-        return !this.world.isPaused && this.world.keyboard.DOWN;
     }
 
 

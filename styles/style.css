@@ -61,10 +61,36 @@ canvas {
     background-color: black;
 }
 
+/* ! COBTROLS*/
 .canvas-ctrl-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
 }
+
+.movement-buttons,
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.action-buttons {
+    flex-direction: column;
+}
+
+.action-buttons-top {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+.action-buttons-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
 
 /* ! PROGRESS-BAR */
 #canvas-container {
@@ -142,3 +168,19 @@ canvas {
     fill: hsla(45, 29%, 97%, 0.7);
 }
 
+@media (pointer: coarse) and (orientation: landscape) {
+    .canvas-ctrl-container {
+        position: absolute;
+        justify-content: space-between;
+        align-items: end;
+        bottom: 0;
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .movement-buttons,
+    .action-buttons {
+        display: flex !important;
+        justify-content: space-between;
+    }
+}

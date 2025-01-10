@@ -6,8 +6,7 @@ class Character extends MovableObject {
 
     width = 80;
     height = 160;
-    speedX = 3;
-    speedRun = 8;
+    speedX = 8;
     characterLife = 100;
 
 
@@ -76,117 +75,54 @@ class Character extends MovableObject {
     ];
 
     IMAGES_WALK = [
-        '../assets/img/character/walk/walku_000.png',
-        '../assets/img/character/walk/walku_001.png',
-        '../assets/img/character/walk/walku_002.png',
-        '../assets/img/character/walk/walku_003.png',
-        '../assets/img/character/walk/walku_004.png',
-        '../assets/img/character/walk/walku_005.png',
-        '../assets/img/character/walk/walku_006.png',
-        '../assets/img/character/walk/walku_007.png',
-        '../assets/img/character/walk/walku_008.png',
-        '../assets/img/character/walk/walku_009.png',
-        '../assets/img/character/walk/walku_010.png',
-        '../assets/img/character/walk/walku_011.png',
-        '../assets/img/character/walk/walku_012.png',
-        '../assets/img/character/walk/walku_013.png',
-        '../assets/img/character/walk/walku_014.png',
-        '../assets/img/character/walk/walku_015.png',
-        '../assets/img/character/walk/walku_016.png',
-        '../assets/img/character/walk/walku_017.png',
-        '../assets/img/character/walk/walku_018.png',
-        '../assets/img/character/walk/walku_019.png',
-        '../assets/img/character/walk/walku_021.png',
-        '../assets/img/character/walk/walku_022.png',
-        '../assets/img/character/walk/walku_023.png',
-        '../assets/img/character/walk/walku_024.png',
-        '../assets/img/character/walk/walku_025.png',
-        '../assets/img/character/walk/walku_026.png',
-        '../assets/img/character/walk/walku_027.png',
-        '../assets/img/character/walk/walku_028.png',
-        '../assets/img/character/walk/walku_029.png',
-        '../assets/img/character/walk/walku_031.png',
-        '../assets/img/character/walk/walku_032.png',
-        '../assets/img/character/walk/walku_033.png',
-        '../assets/img/character/walk/walku_034.png',
-        '../assets/img/character/walk/walku_035.png',
-        '../assets/img/character/walk/walku_036.png',
-        '../assets/img/character/walk/walku_037.png',
-        '../assets/img/character/walk/walku_038.png',
-        '../assets/img/character/walk/walku_039.png',
-        '../assets/img/character/walk/walku_040.png',
-        '../assets/img/character/walk/walku_041.png',
-        '../assets/img/character/walk/walku_042.png',
-        '../assets/img/character/walk/walku_043.png',
-        '../assets/img/character/walk/walku_044.png',
-        '../assets/img/character/walk/walku_045.png',
-        '../assets/img/character/walk/walku_046.png',
-        '../assets/img/character/walk/walku_047.png',
-        '../assets/img/character/walk/walku_048.png',
-        '../assets/img/character/walk/walku_049.png',
-        '../assets/img/character/walk/walku_050.png',
-        '../assets/img/character/walk/walku_051.png',
-        '../assets/img/character/walk/walku_052.png',
-        '../assets/img/character/walk/walku_053.png',
-        '../assets/img/character/walk/walku_054.png',
-        '../assets/img/character/walk/walku_055.png',
-        '../assets/img/character/walk/walku_056.png',
-        '../assets/img/character/walk/walku_057.png',
-        '../assets/img/character/walk/walku_058.png',
-        '../assets/img/character/walk/walku_059.png',
-        '../assets/img/character/walk/walku_060.png',
-        '../assets/img/character/walk/walku_061.png',
-    ];
-
-    IMAGES_RUN = [
-        '../assets/img/character/run/runu_000.png',
-        '../assets/img/character/run/runu_001.png',
-        '../assets/img/character/run/runu_002.png',
-        '../assets/img/character/run/runu_003.png',
-        '../assets/img/character/run/runu_004.png',
-        '../assets/img/character/run/runu_005.png',
-        '../assets/img/character/run/runu_006.png',
-        '../assets/img/character/run/runu_007.png',
-        '../assets/img/character/run/runu_008.png',
-        '../assets/img/character/run/runu_009.png',
-        '../assets/img/character/run/runu_010.png',
-        '../assets/img/character/run/runu_011.png',
-        '../assets/img/character/run/runu_012.png',
-        '../assets/img/character/run/runu_014.png',
-        '../assets/img/character/run/runu_015.png',
-        '../assets/img/character/run/runu_016.png',
-        '../assets/img/character/run/runu_017.png',
-        '../assets/img/character/run/runu_018.png',
-        '../assets/img/character/run/runu_019.png',
-        '../assets/img/character/run/runu_020.png',
-        '../assets/img/character/run/runu_021.png',
-        '../assets/img/character/run/runu_022.png',
-        '../assets/img/character/run/runu_023.png',
-        '../assets/img/character/run/runu_024.png',
-        '../assets/img/character/run/runu_025.png',
-        '../assets/img/character/run/runu_026.png',
-        '../assets/img/character/run/runu_027.png',
-        '../assets/img/character/run/runu_028.png',
-        '../assets/img/character/run/runu_029.png',
-        '../assets/img/character/run/runu_030.png',
-        '../assets/img/character/run/runu_031.png',
-        '../assets/img/character/run/runu_032.png',
-        '../assets/img/character/run/runu_033.png',
-        '../assets/img/character/run/runu_034.png',
-        '../assets/img/character/run/runu_035.png',
-        '../assets/img/character/run/runu_036.png',
-        '../assets/img/character/run/runu_037.png',
-        '../assets/img/character/run/runu_038.png',
-        '../assets/img/character/run/runu_039.png',
-        '../assets/img/character/run/runu_040.png',
-        '../assets/img/character/run/runu_041.png',
-        '../assets/img/character/run/runu_042.png',
-        '../assets/img/character/run/runu_043.png',
-        '../assets/img/character/run/runu_044.png',
-        '../assets/img/character/run/runu_045.png',
-        '../assets/img/character/run/runu_046.png',
-        '../assets/img/character/run/runu_047.png',
-        '../assets/img/character/run/runu_048.png'
+            '../assets/img/character/walk/runu_000.png',
+            '../assets/img/character/walk/runu_001.png',
+            '../assets/img/character/walk/runu_002.png',
+            '../assets/img/character/walk/runu_003.png',
+            '../assets/img/character/walk/runu_004.png',
+            '../assets/img/character/walk/runu_005.png',
+            '../assets/img/character/walk/runu_006.png',
+            '../assets/img/character/walk/runu_007.png',
+            '../assets/img/character/walk/runu_008.png',
+            '../assets/img/character/walk/runu_009.png',
+            '../assets/img/character/walk/runu_010.png',
+            '../assets/img/character/walk/runu_011.png',
+            '../assets/img/character/walk/runu_012.png',
+            '../assets/img/character/walk/runu_014.png',
+            '../assets/img/character/walk/runu_015.png',
+            '../assets/img/character/walk/runu_016.png',
+            '../assets/img/character/walk/runu_017.png',
+            '../assets/img/character/walk/runu_018.png',
+            '../assets/img/character/walk/runu_019.png',
+            '../assets/img/character/walk/runu_020.png',
+            '../assets/img/character/walk/runu_021.png',
+            '../assets/img/character/walk/runu_022.png',
+            '../assets/img/character/walk/runu_023.png',
+            '../assets/img/character/walk/runu_024.png',
+            '../assets/img/character/walk/runu_025.png',
+            '../assets/img/character/walk/runu_026.png',
+            '../assets/img/character/walk/runu_027.png',
+            '../assets/img/character/walk/runu_028.png',
+            '../assets/img/character/walk/runu_029.png',
+            '../assets/img/character/walk/runu_030.png',
+            '../assets/img/character/walk/runu_031.png',
+            '../assets/img/character/walk/runu_032.png',
+            '../assets/img/character/walk/runu_033.png',
+            '../assets/img/character/walk/runu_034.png',
+            '../assets/img/character/walk/runu_035.png',
+            '../assets/img/character/walk/runu_036.png',
+            '../assets/img/character/walk/runu_037.png',
+            '../assets/img/character/walk/runu_038.png',
+            '../assets/img/character/walk/runu_039.png',
+            '../assets/img/character/walk/runu_040.png',
+            '../assets/img/character/walk/runu_041.png',
+            '../assets/img/character/walk/runu_042.png',
+            '../assets/img/character/walk/runu_043.png',
+            '../assets/img/character/walk/runu_044.png',
+            '../assets/img/character/walk/runu_045.png',
+            '../assets/img/character/walk/runu_046.png',
+            '../assets/img/character/walk/runu_047.png',
+            '../assets/img/character/walk/runu_048.png'
     ];
 
     IMAGES_JUMP = [
@@ -210,70 +146,6 @@ class Character extends MovableObject {
         '../assets/img/character/jump/juu_017.png'
 
 
-    ];
-
-    IMAGES_DOWN = [
-        '../assets/img/character/duck/ducku_000.png',
-        '../assets/img/character/duck/ducku_001.png',
-        '../assets/img/character/duck/ducku_002.png',
-        '../assets/img/character/duck/ducku_003.png',
-        '../assets/img/character/duck/ducku_004.png',
-        '../assets/img/character/duck/ducku_005.png',
-        '../assets/img/character/duck/ducku_006.png',
-        '../assets/img/character/duck/ducku_007.png',
-        '../assets/img/character/duck/ducku_008.png',
-        '../assets/img/character/duck/ducku_009.png',
-        '../assets/img/character/duck/ducku_010.png',
-        '../assets/img/character/duck/ducku_011.png',
-        '../assets/img/character/duck/ducku_012.png',
-        '../assets/img/character/duck/ducku_013.png',
-        '../assets/img/character/duck/ducku_014.png',
-        '../assets/img/character/duck/ducku_015.png',
-        '../assets/img/character/duck/ducku_016.png',
-        '../assets/img/character/duck/ducku_017.png',
-        '../assets/img/character/duck/ducku_018.png',
-        '../assets/img/character/duck/ducku_019.png',
-        '../assets/img/character/duck/ducku_020.png',
-        '../assets/img/character/duck/ducku_021.png',
-        '../assets/img/character/duck/ducku_022.png',
-        '../assets/img/character/duck/ducku_023.png',
-        '../assets/img/character/duck/ducku_024.png',
-        '../assets/img/character/duck/ducku_025.png',
-        '../assets/img/character/duck/ducku_026.png',
-        '../assets/img/character/duck/ducku_027.png',
-        '../assets/img/character/duck/ducku_028.png',
-        '../assets/img/character/duck/ducku_029.png',
-        '../assets/img/character/duck/ducku_030.png',
-        '../assets/img/character/duck/ducku_021.png',
-        '../assets/img/character/duck/ducku_032.png',
-        '../assets/img/character/duck/ducku_033.png',
-        '../assets/img/character/duck/ducku_034.png',
-        '../assets/img/character/duck/ducku_035.png',
-        '../assets/img/character/duck/ducku_036.png',
-        '../assets/img/character/duck/ducku_037.png',
-        '../assets/img/character/duck/ducku_038.png',
-        '../assets/img/character/duck/ducku_039.png',
-        '../assets/img/character/duck/ducku_040.png',
-        '../assets/img/character/duck/ducku_041.png',
-        '../assets/img/character/duck/ducku_042.png',
-        '../assets/img/character/duck/ducku_043.png',
-        '../assets/img/character/duck/ducku_044.png',
-        '../assets/img/character/duck/ducku_045.png',
-        '../assets/img/character/duck/ducku_046.png',
-        '../assets/img/character/duck/ducku_047.png',
-        '../assets/img/character/duck/ducku_049.png',
-        '../assets/img/character/duck/ducku_050.png',
-        '../assets/img/character/duck/ducku_051.png',
-        '../assets/img/character/duck/ducku_052.png',
-        '../assets/img/character/duck/ducku_053.png',
-        '../assets/img/character/duck/ducku_054.png',
-        '../assets/img/character/duck/ducku_055.png',
-        '../assets/img/character/duck/ducku_056.png',
-        '../assets/img/character/duck/ducku_057.png',
-        '../assets/img/character/duck/ducku_058.png',
-        '../assets/img/character/duck/ducku_059.png',
-        '../assets/img/character/duck/ducku_060.png',
-        '../assets/img/character/duck/ducku_061.png'
     ];
 
     IMAGES_PUNCH = [
@@ -450,25 +322,20 @@ class Character extends MovableObject {
 
     animationScales = {
         idle: { widthFactor: 1.0, heightFactor: 1.0 },
-        walking: { widthFactor: 1.0, heightFactor: 1.0 },
-        running: { widthFactor: 1.1, heightFactor: 1.0 },
+        walking: { widthFactor: 1.15, heightFactor: 1.03 },
         jumping: { widthFactor: 1.0, heightFactor: 1.0 },
-        down: { widthFactor: 1.25, heightFactor: 0.8 },
         punch: { widthFactor: 1.8, heightFactor: 1.0 },
         throw: { widthFactor: 2.2, heightFactor: 1.05 },
         hit: { widthFactor: 1.5, heightFactor: 1.1 },
         dead: { widthFactor: 2.2, heightFactor: 1.1 },
-        surprise: { widthFactor: 1.25, heightFactor: 1.0 },
-
+        surprise: { widthFactor: 1.25, heightFactor: 1.0 }
     };
 
     constructor() {
         super().loadImage('../assets/img/character/idle/idleu_000.png');
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALK);
-        this.loadImages(this.IMAGES_RUN);
         this.loadImages(this.IMAGES_JUMP);
-        this.loadImages(this.IMAGES_DOWN);
         this.loadImages(this.IMAGES_PUNCH);
         this.loadImages(this.IMAGES_HIT);
         this.loadImages(this.IMAGES_DEAD);
@@ -525,7 +392,7 @@ class Character extends MovableObject {
                 soundManager.playSound('characterPunch');
             }
 
-            this.world.camFrameX = -this.X + 96;
+            this.world.camFrameX = -this.X + 160;
         }, 1000 / 60);
 
         setInterval(() => {
@@ -552,15 +419,11 @@ class Character extends MovableObject {
         if (this.throwBall() && this.world.bombAmount > 0) {
             return 'throw';
         }
-        if (this.down()) {
-            return 'down';
-        }
+
         if (this.isAboveGround()) {
             return 'jumping';
         }
-        if (this.isRunning()) {
-            return 'running';
-        }
+
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             return 'walking';
         }
@@ -583,9 +446,7 @@ class Character extends MovableObject {
         const animations = {
             idle: this.IMAGES_IDLE,
             walking: this.IMAGES_WALK,
-            running: this.IMAGES_RUN,
             jumping: this.IMAGES_JUMP,
-            down: this.IMAGES_DOWN,
             punch: this.IMAGES_PUNCH,
             throw: this.IMAGES_THROW,
             hit: this.IMAGES_HIT,
@@ -600,10 +461,6 @@ class Character extends MovableObject {
 
         if (state === 'hit') {
             this.Y = 272;
-        };
-
-        if (state === 'down') {
-            this.Y = 320;
         };
 
         if (state === 'throw') {
