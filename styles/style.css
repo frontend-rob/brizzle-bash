@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Inter;
+    font-family: "Inter", sans-serif;
 }
 
 :root {
@@ -48,20 +48,19 @@ main {
 }
 
 .canvas-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    margin: 0 auto;
 }
 
 canvas {
-    width: 45rem;
-    height: 30rem;
     border-radius: 1rem;
     border: 2px solid var(--bg-neutral);
     background-color: black;
 }
 
-/* ! COBTROLS*/
 .canvas-ctrl-container {
     display: flex;
     justify-content: center;
@@ -85,19 +84,11 @@ canvas {
     justify-content: flex-end;
     gap: 1.5rem;
 }
+
 .action-buttons-bottom {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-}
-
-
-/* ! PROGRESS-BAR */
-#canvas-container {
-    position: relative;
-    width: 720px;
-    height: 480px;
-    margin: 0 auto;
 }
 
 .progress-wrapper {
@@ -107,7 +98,7 @@ canvas {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: calc(100% - 60%);
+    width: calc(100% - 65%);
 }
 
 .progress-bar-item {
@@ -169,6 +160,22 @@ canvas {
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
+
+    .canvas-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+        border-radius: unset;
+        border: unset;
+    }
+
     .canvas-ctrl-container {
         position: absolute;
         justify-content: space-between;

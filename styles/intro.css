@@ -45,7 +45,7 @@ header {
     font-size: 1.25rem;
     text-transform: uppercase;
     text-align: center;
-    font-family: "Fira Code";
+    font-family: "Fira Code", monospace;
     line-height: 2rem;
 }
 
@@ -249,5 +249,12 @@ header {
 
     .intro-buttons button {
         width: 100%;
+    }
+}
+
+@media (pointer: coarse) and (orientation: landscape) {
+
+    .logo {
+        display: block;
     }
 }

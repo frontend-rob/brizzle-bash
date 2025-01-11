@@ -106,3 +106,16 @@ header {
         height: 2.5rem;
     }
 }
+
+
+@media (pointer: coarse) and (orientation: landscape) {
+    header {
+        z-index: 10;
+        background-color: unset;
+        backdrop-filter: unset;
+    }
+
+    .logo {
+        display: none;
+    }
+}

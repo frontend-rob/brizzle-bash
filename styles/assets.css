@@ -64,10 +64,10 @@
 }
 
 .btn-glass {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(0.25rem);
+    -webkit-backdrop-filter: blur(0.25rem);
     border: 1px solid rgba(255, 255, 255, 0.4);
     color: var(--primary-content);
 }
