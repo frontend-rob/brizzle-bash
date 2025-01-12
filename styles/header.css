@@ -87,7 +87,6 @@ header {
 }
 
 @media screen and (max-width: 30rem) {
-
     header {
         height: 4rem;
     }
@@ -101,12 +100,12 @@ header {
         width: auto;
     }
 
-    #btn-volume {
+    #btn-volume,
+    #btn-game-guide {
         padding: 0 0.5rem;
         height: 2.5rem;
     }
 }
-
 
 @media (pointer: coarse) and (orientation: landscape) {
     header {
