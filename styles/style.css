@@ -16,7 +16,7 @@
     --success: #2da179;
     --error: #e91e63;
     --base-content: #abacad;
-    --primary-content: #faf9f6;
+    --primary-content: #f1f2f3;
     --track-color: #121314;
     --thumb-color: #333333;
     --thumb-hover-color: #444444;
@@ -51,11 +51,13 @@ main {
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2rem;
     margin: 0 auto;
 }
 
 canvas {
+    position: relative;
     border-radius: 1rem;
     border: 2px solid var(--bg-neutral);
     background-color: black;
@@ -101,6 +103,7 @@ canvas {
     flex-direction: column;
     gap: 0.5rem;
     width: calc(100% - 65%);
+    z-index: 1;
 }
 
 .progress-bar-item {

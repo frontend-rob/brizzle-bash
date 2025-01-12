@@ -154,3 +154,67 @@ function goToHome() {
     hideGameOverScreen();
     window.location.href = 'index.html';
 }
+
+
+// ! ### game pause and button controls ###
+
+
+// play button state
+const PLAY_BUTTON = {
+    svg: `
+        <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z">
+        </path>
+    `,
+    text: 'Return',
+};
+
+
+// pause button state
+const PAUSE_BUTTON = {
+    svg: `
+        <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM112,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z">
+        </path>
+    `,
+    text: 'Break',
+};
+
+
+// helper function to update the button
+function updateButtonState(buttonState, isPaused) {
+    const iconSvg = document.getElementById('pause-btn-icon');
+    const buttonText = document.getElementById('pause-btn-text');
+    const btn = document.getElementById('toggle-pause-btn');
+
+    iconSvg.innerHTML = buttonState.svg;
+    buttonText.textContent = buttonState.text;
+
+    if (isPaused) {
+        btn.classList.add('btn-primary');
+    } else {
+        btn.classList.remove('btn-primary');
+    }
+}
+
+
+/**
+ * toggles the game pause and updates the button state accordingly.
+ */
+function toggleGamePause() {
+    if (world.isPaused) {
+        world.resumeGame();
+        updateButtonState(PAUSE_BUTTON, false);
+    } else {
+        world.pauseGame();
+        updateButtonState(PLAY_BUTTON, true);
+    }
+}
+
+
+// event listener for the 'P' key press to toggle pause
+document.addEventListener('keydown', function (event) {
+    if (event.code === 'KeyP') {
+        toggleGamePause();
+    }
+});

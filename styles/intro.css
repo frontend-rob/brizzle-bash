@@ -25,6 +25,31 @@ header {
     width: 100%;
 }
 
+.fade-in {
+    -webkit-animation: fade-in 1.2s ease-in-out both;
+    animation: fade-in 1.2s ease-in-out both;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 .story-container {
     display: flex;
     flex-direction: column;
@@ -253,7 +278,6 @@ header {
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
-
     .logo {
         display: block;
     }

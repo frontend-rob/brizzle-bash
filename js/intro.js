@@ -85,6 +85,6 @@ function typeWriterEffect(element, text, delay = 50, callback) {
 /**
  * starts the game by navigating to the game screen.
  */
-function startGame()  {
+function startGame() {
     window.location.href = 'game.html';
 }
