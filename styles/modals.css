@@ -12,6 +12,7 @@
     background-color: #000000aa;
     backdrop-filter: blur(4px);
     padding: 1rem;
+    
 }
 
 .modal-container {
@@ -20,7 +21,7 @@
     max-width: 50rem;
     width: 100%;
     max-height: 40rem;
-    height: auto;
+    height: 100%;
     margin: auto;
     padding: 2rem;
     border-radius: 1.5rem;
