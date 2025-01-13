@@ -8,6 +8,7 @@ header {
     background-color: #0c0d0e;
     backdrop-filter: blur(0.25rem);
     height: 5rem;
+    user-select: none;
 }
 
 .header-inner {
@@ -20,7 +21,14 @@ header {
     padding: 1rem;
 }
 
-.logo {
+.main-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.logo-img {
     height: 3rem;
     width: auto;
 }
@@ -74,8 +82,12 @@ header {
     opacity: 1;
 }
 
-@media (pointer: coarse),
-(max-width: 768px) {
+@media (pointer: coarse) and (max-width: 768px) {
+
+    .main-logo span {
+        display: none;
+    }
+
     .tooltip:hover .tooltip-text {
         visibility: hidden;
         opacity: 0;
@@ -114,7 +126,15 @@ header {
         backdrop-filter: unset;
     }
 
-    .logo {
+    #header-inner-game {
+        justify-content: flex-end;
+    }
+
+    .header-inner {
+        max-width: unset;
+    }
+
+    #main-logo {
         display: none;
     }
 }

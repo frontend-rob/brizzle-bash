@@ -15,6 +15,10 @@ a {
     color: var(--base-content);
 }
 
+::selection {
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent 100%);
+}
+
 
 
 ::-webkit-scrollbar {

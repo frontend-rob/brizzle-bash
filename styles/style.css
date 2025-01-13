@@ -165,7 +165,7 @@ canvas {
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
-
+    
     .canvas-container {
         position: absolute;
         top: 0;
