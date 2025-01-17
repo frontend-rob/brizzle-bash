@@ -74,7 +74,7 @@ header {
 
 .story-image {
     width: 100%;
-    max-width: 10rem;
+    max-width: clamp(6rem, 4.444vw + 4.667rem, 12rem);
     height: auto;
     filter: drop-shadow(0 0 6rem var(--primary));
 }
@@ -152,10 +152,11 @@ header {
 
 .glitch-animation,
 .invisible-text {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 2.778vw + 1.667rem, 3rem);
     font-weight: 600;
     color: var(--primary-content);
     position: absolute;
+    letter-spacing: -2px;
 }
 
 .invisible-text {
@@ -266,17 +267,16 @@ header {
         gap: 1rem;
     }
 
-    .glitch-animation,
+    /* .glitch-animation,
     .invisible-text {
         font-size: 2.5rem;
-    }
+    } */
 
     .story-container {
         gap: 1.5rem;
     }
 
     .story-image {
-        max-width: 6rem;
         filter: drop-shadow(0 0 4rem var(--primary));
     }
 

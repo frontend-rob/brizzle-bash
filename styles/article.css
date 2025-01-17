@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     min-height: calc(100vh - 5rem);
-    padding: 1rem;
+    padding: 2rem;
     margin: auto;
     margin-top: 12rem;
     padding-bottom: 8rem;
@@ -12,7 +12,7 @@
 article {
     display: flex;
     flex-direction: column;
-    max-width: 50rem;
+    max-width: 60rem;
     gap: 6rem;
     line-height: 1.75rem;
     color: var(--base-content);
@@ -21,7 +21,7 @@ article {
 .article-header {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 3rem;
 }
 
 .external-link {
@@ -37,13 +37,15 @@ article {
 }
 
 .external-link svg {
-    fill: var(--base-content);
     height: 1.75rem;
     width: 1.75rem;
+    fill: var(--base-content);
 }
 
 .article-headline {
     font-size: 3rem;
+    letter-spacing: -1px;
+    line-height: normal;
 }
 
 .external-link:hover {
@@ -97,4 +99,33 @@ section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+@media screen and (max-width: 48rem) {
+    .main-logo span {
+        display: block;
+    }
+
+    .article-wrapper {
+        margin-top: 8rem;
+    }
+
+    .external-link {
+        display: none;
+    }
+
+    article {
+        gap: 4rem;
+    }
+}
+
+@media screen and (max-width: 37.5rem) {
+    .article-wrapper {
+        padding: 1rem;
+        padding-bottom: 4rem;
+    }
+
+    .article-headline {
+        font-size: 2.5rem;
+    }
 }

@@ -26,6 +26,8 @@ header {
     align-items: center;
     gap: 0.5rem;
     font-size: 1.5rem;
+    letter-spacing: -0.75px;
+    font-weight: 500;
 }
 
 .logo-img {
@@ -39,7 +41,6 @@ header {
     gap: 1rem;
 }
 
-/* ! TOOLTIP STYLING */
 .tooltip {
     position: relative;
     display: inline-block;

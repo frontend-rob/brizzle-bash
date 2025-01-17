@@ -9,10 +9,9 @@
     max-height: 100vh;
     width: 100%;
     z-index: 100;
-    background-color: #000000aa;
-    backdrop-filter: blur(4px);
+    background-color: var(--backdrop-md);
+    backdrop-filter: blur(0.25rem);
     padding: 1rem;
-    
 }
 
 .modal-container {
@@ -29,6 +28,8 @@
     background-color: var(--bg-base-100);
     gap: 3rem;
     overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
+    clip-path: inset(0 round 1.5rem);
 }
 
 .modal-header {
@@ -292,11 +293,9 @@ kbd svg {
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
-
     .modal-container {
         gap: 1.5rem;
     }
-    
 
     .game-over-screen {
         width: 100vw;
