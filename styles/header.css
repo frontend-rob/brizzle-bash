@@ -89,7 +89,7 @@ header {
     }
 }
 
-@media (pointer: coarse) and (max-width: 48rem) {
+@media (pointer: coarse) {
     .tooltip:hover .tooltip-text {
         visibility: hidden;
         opacity: 0;

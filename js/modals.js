@@ -120,24 +120,25 @@ function closeGameSettings() {
 
 
 /**
- * switches between different tab contents based on the clicked tab button.
- * hides the currently visible tab, shows the new tab, and updates the active button.
+ * switches the visible tab and updates the active button state.
+ * ensures only one tab is visible at a time and only one button has the 'active' class.
  *
- * @param {Event} event - the click event triggered by clicking a tab button
+ * @param {event} event - the click event triggered by a tab button
  * @param {string} tabId - the id of the tab content to be displayed
  */
 function switchTab(event, tabId) {
+    const button = event.target.closest('.tab-btn');
+    if (!button) return;
+
     document.getElementById('game-story').classList.add('hidden');
     document.getElementById('desktop-controls').classList.add('hidden');
     document.getElementById('mobile-controls').classList.add('hidden');
     document.getElementById(tabId).classList.remove('hidden');
 
-    document.querySelectorAll('.tab-btn').forEach(button => {
-        button.classList.remove('active');
-    });
-
-    event.target.classList.add('active');
+    Array.from(button.parentNode.children).forEach(sibling => sibling.classList.remove('active'));
+    button.classList.add('active');
 }
+
 
 
 // ! ### toggle checkboxes on settings modal ###

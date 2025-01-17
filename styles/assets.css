@@ -77,29 +77,6 @@
     fill: var(--primary-content);
 }
 
-.tab-btn {
-    border: 1px dashed var(--bg-neutral);
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
-    background-color: unset;
-    border-bottom: unset;
-    height: 2.5rem;
-}
-
-.tab-btn svg {
-    height: .75rem;
-    width: .75rem;
-    fill: var(--bg-neutral);
-}
-
-.tab-btn.active {
-    color: var(--primary-content);
-
-    svg {
-        fill: var(--primary);
-    }
-}
-
 .checkbox {
     flex-shrink: 0;
     background-color: var(--bg-base-100);

@@ -96,6 +96,35 @@
     height: 2rem;
 }
 
+.tabs-button-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tab-btn {
+    border: 1px dashed var(--bg-neutral);
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+    background-color: unset;
+    border-bottom: unset;
+    height: 2.5rem;
+}
+
+.tab-btn>.indicator {
+    height: 1.25rem;
+    width: 1.25rem;
+    fill: var(--bg-neutral);
+}
+
+.tab-btn.active {
+    color: var(--primary-content);
+
+    .indicator {
+        fill: var(--primary);
+    }
+}
+
 .tab-content {
     border-radius: 1rem;
     border-top-left-radius: unset;
@@ -107,6 +136,10 @@
     border-radius: 1rem;
     border: 1px dashed var(--bg-neutral);
     padding: 1.5rem;
+}
+
+.tab-btn-txt-mobile {
+    display: none;
 }
 
 .modal-content-explanation {
@@ -141,6 +174,7 @@ kbd {
     font-weight: 500;
     height: 2.5rem;
     width: 2.5rem;
+    aspect-ratio: 1/1;
     padding: 1rem .5rem;
     color: var(--primary-content);
 }
@@ -309,6 +343,18 @@ kbd svg {
     }
 }
 
+@media (pointer: coarse) and (orientation: portrait) {
+    .modal {
+        padding: 1rem;
+    }
+
+    .modal-container {
+        max-width: unset;
+        max-height: unset;
+        gap: 3rem;
+    }
+}
+
 @media (pointer: coarse) and (orientation: landscape) and (max-height: 32rem) {
     .modal-container {
         max-height: 100%;
@@ -317,5 +363,34 @@ kbd svg {
 
     .kbd-control-row {
         gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 38rem) {
+    .modal {
+        padding: unset;
+    }
+
+    .modal-container {
+        padding: 1rem;
+        max-height: 100%;
+        max-width: 100%;
+        border-radius: unset;
+        clip-path: unset;
+        border: unset;
+    }
+
+    .kbd-control-row {
+        gap: 1.5rem;
+    }
+
+    .tab-btn {
+        font-size: 0.875rem;
+    }
+}
+
+@media screen and (max-width: 24rem) {
+    .tab-btn-txt {
+        display: none;
     }
 }
