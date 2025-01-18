@@ -39,6 +39,22 @@
     }
 }
 
+.btn.disabled {
+    cursor: not-allowed;
+}
+
+.btn.disabled:hover {
+    cursor: not-allowed;
+
+    svg {
+        fill: var(--base-content);
+    }
+
+    .tooltip-text {
+        display: none;
+    }
+}
+
 .btn-primary {
     background-color: var(--primary);
     color: var(--bg-base-200);

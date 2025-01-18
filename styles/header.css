@@ -35,7 +35,8 @@ header {
     width: auto;
 }
 
-.setting-bar {
+.setting-bar,
+.menu-btns {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -87,16 +88,6 @@ header {
     display: none;
 }
 
-[popover]::backdrop {
-    background: var(--backdrop-md);
-}
-
-
-.popover-menu {
-    /* display: flex; */
-    flex-direction: column;
-    background-color: var(--bg-base-100);
-}
 
 @media screen and (max-width: 48rem) {
     .main-logo span {
@@ -129,8 +120,7 @@ header {
         width: auto;
     }
 
-    #btn-volume,
-    #btn-game-guide {
+    .menu-btns {
         display: none;
     }
 

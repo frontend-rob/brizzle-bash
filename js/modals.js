@@ -177,6 +177,16 @@ function switchTab(event, tabId) {
 // ! ### toggle checkboxes on settings modal ###
 
 /**
+ * Checkt den aktuellen Fullscreen-Status und setzt den Zustand der Checkbox.
+ */
+function updateFullscreenCheckboxState() {
+    const checkbox = document.getElementById('chk-full-screen');
+    if (checkbox) {
+        checkbox.checked = document.fullscreenElement !== null;
+    }
+}
+
+/**
  * toggles the state of the checkbox and updates the sound or other features accordingly.
  * 
  * @param {string} checkboxId - the id of the checkbox to toggle
@@ -190,8 +200,14 @@ function toggleCheckbox(checkboxId) {
             toggleSound(); // sync the sound state with the checkbox
         }
 
+        if (checkboxId === 'chk-full-screen') {
+            toggleFullscreen();
+            closeGameSettings();
+            updateFullscreenCheckboxState();
+        }
+
         if (checkboxId === 'chk-debug') {
-            MovableObject.setDebugMode(checkbox.checked); // sets the debug mode directly
+            MovableObject.setDebugMode(checkbox.checked);
         }
     }
 }
@@ -201,12 +217,6 @@ function toggleCheckbox(checkboxId) {
  * ensures the initial state of checkboxes when the page loads.
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const debugCheckbox = document.getElementById('chk-debug');
-    if (debugCheckbox) {
-        debugCheckbox.checked = MovableObject.debugMode; // set the checkbox state based on the static debugMode variable
-    }
-
-    // add event listeners to the checkboxes
     const checkboxIds = ['chk-sound', 'chk-full-screen', 'chk-debug'];
     addCheckboxEventListeners(checkboxIds);
 });

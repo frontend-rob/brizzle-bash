@@ -103,17 +103,48 @@ function shouldStopInput() {
 
 
 /**
- * shows the game over screen and disables input.
- * Accepts a dynamicText argument to set the text based on the game's status.
+ * shows the game over screen with a custom or default message.
+ * 
+ * @param {string} [dynamicText] optional custom message for the game over screen.
  */
 function showGameOverScreen(dynamicText) {
     stopAllActions();
+    displayGameOverScreen(dynamicText);
+    disableSettingBarButtons();
+    addGameOverScreenListeners();
+}
+
+
+/**
+ * displays the game over screen and sets the message text.
+ * 
+ * @param {string} [dynamicText] optional custom message for the game over screen.
+ */
+function displayGameOverScreen(dynamicText) {
     const gameOverScreen = document.getElementById('game-over-screen');
     gameOverScreen.classList.remove('hidden');
 
     const gameOverText = document.getElementById('game-over-screen-text');
     gameOverText.innerHTML = dynamicText || "The Shadow Monsters still reign, and darkness prevails over Moustacheshire...";
+}
 
+
+/**
+ * disables all buttons in the setting bar.
+ */
+function disableSettingBarButtons() {
+    const settingBarButtons = document.querySelectorAll('.setting-bar button');
+    settingBarButtons.forEach((button) => {
+        button.disabled = true;
+        button.classList.add('disabled');
+    });
+}
+
+
+/**
+ * adds event listeners for the restart and back-to-menu buttons.
+ */
+function addGameOverScreenListeners() {
     document.getElementById('restart-game').addEventListener('click', restartGame);
     document.getElementById('back-to-menu').addEventListener('click', goToHome);
 }
@@ -130,11 +161,32 @@ function stopAllActions() {
 
 
 /**
- * hides the game over screen.
+ * hides the game-over screen and re-enables setting bar buttons.
  */
 function hideGameOverScreen() {
+    hideGameOverScreenElement();
+    enableSettingBarButtons();
+}
+
+
+/**
+ * hides the game-over screen by adding the 'hidden' class.
+ */
+function hideGameOverScreenElement() {
     const gameOverScreen = document.getElementById('game-over-screen');
     gameOverScreen.classList.add('hidden');
+}
+
+
+/**
+ * enables all buttons in the setting bar by removing the 'disabled' state and class.
+ */
+function enableSettingBarButtons() {
+    const settingBarButtons = document.querySelectorAll('.setting-bar button');
+    settingBarButtons.forEach((button) => {
+        button.disabled = false;
+        button.classList.remove('disabled');
+    });
 }
 
 
@@ -218,3 +270,70 @@ document.addEventListener('keydown', function (event) {
         toggleGamePause();
     }
 });
+
+
+/**
+ * toggles fullscreen mode for the canvas container.
+ */
+function toggleFullscreen() {
+    const canvasContainer = document.getElementById("canvas-container");
+
+    if (!isFullscreenActive()) {
+        enterFullscreen(canvasContainer);
+        canvasContainer.classList.add("fullscreen");
+    } else {
+        exitFullscreen();
+        canvasContainer.classList.remove("fullscreen");
+    }
+}
+
+
+/**
+ * checks if fullscreen mode is currently active.
+ * @returns {boolean} - true if fullscreen mode is active, otherwise false.
+ */
+function isFullscreenActive() {
+    return !!document.fullscreenElement;
+}
+
+
+/**
+ * activates fullscreen mode for a given element.
+ * @param {HTMLElement} element - the element to set to fullscreen mode.
+ */
+function enterFullscreen(element) {
+    requestFullscreen(element, [
+        "requestFullscreen",
+        "mozRequestFullScreen", // firefox
+        "webkitRequestFullscreen", // chrome, safari, opera
+        "msRequestFullscreen" // ie/edge
+    ]);
+}
+
+
+/**
+ * exits fullscreen mode.
+ */
+function exitFullscreen() {
+    requestFullscreen(document, [
+        "exitFullscreen",
+        "mozCancelFullScreen", // firefox
+        "webkitExitFullscreen", // chrome, safari, opera
+        "msExitFullscreen" // ie/edge
+    ]);
+}
+
+
+/**
+ * requests fullscreen mode or exits fullscreen mode based on the provided methods.
+ * @param {HTMLElement|Document} target - the target element or document.
+ * @param {string[]} methodNames - an array of method names to attempt.
+ */
+function requestFullscreen(target, methodNames) {
+    for (const method of methodNames) {
+        if (typeof target[method] === "function") {
+            target[method]();
+            break;
+        }
+    }
+}

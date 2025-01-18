@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <canvas id="canvas" width="768" height="480" class="fullscreen"></canvas>
+            <canvas id="canvas" width="854" height="480"></canvas>
             <div class="canvas-ctrl-container">
                 <div class="movement-buttons hidden">
                     <button id="btn-left" class="btn btn-circle btn-glass">
@@ -295,7 +295,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
                                             <path d="M168,48V208a8,8,0,0,1-13.66,5.66l-80-80a8,8,0,0,1,0-11.32l80-80A8,8,0,0,1,168,48Z"></path>
                                         </svg>
-                                    </kbd> - 
+                                    </kbd> -
                                     <span>To move the character to the left, press the button.</span>
                                 </div>
                                 <div class="kbd-control-row">
@@ -303,7 +303,7 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
                                             <path d="M181.66,133.66l-80,80A8,8,0,0,1,88,208V48a8,8,0,0,1,13.66-5.66l80,80A8,8,0,0,1,181.66,133.66Z"></path>
                                         </svg>
-                                    </kbd> - 
+                                    </kbd> -
                                     <span>To move the character to the right, press the button.</span>
                                 </div>
                                 <div class="kbd-control-row">
@@ -405,15 +405,15 @@
             </div>
             <section class="tab-content-settings">
                 <div class="modal-content">
-                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-sound')">
-                        <h3>Sounds</h3>
+                    <div id="checkbox-sound" class="modal-settings-item" onclick="toggleCheckbox('chk-sound')">
+                        <h3>Sound Effects</h3>
                         <input type="checkbox" name="checkbox-sound" id="chk-sound" class="checkbox">
                     </div>
-                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-full-screen')">
-                        <h3>Full Screen</h3>
+                    <div id="fullscreen-checkbox" class="modal-settings-item" onclick="toggleCheckbox('chk-full-screen')">
+                        <h3>Fullscreen View</h3>
                         <input type="checkbox" name="checkbox-full-screen" id="chk-full-screen" class="checkbox">
                     </div>
-                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-debug')">
+                    <div id="debug-checkbox" class="modal-settings-item" onclick="toggleCheckbox('chk-debug')">
                         <h3>Collision Frames</h3>
                         <input type="checkbox" name="checkbox-debug-mode" id="chk-debug" class="checkbox">
                     </div>
@@ -429,7 +429,7 @@
             </section>
             <div class="modal-content-explanation">
                 <span class="asteriks">*</span>
-                <p>This feature will be enabled after reload.</p>
+                <p>Settings will be applied when the game is resumed.</p>
             </div>
         </div>
     </div>
