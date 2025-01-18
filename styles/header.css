@@ -83,6 +83,21 @@ header {
     opacity: 1;
 }
 
+#btn-popup-menu {
+    display: none;
+}
+
+[popover]::backdrop {
+    background: var(--backdrop-md);
+}
+
+
+.popover-menu {
+    /* display: flex; */
+    flex-direction: column;
+    background-color: var(--bg-base-100);
+}
+
 @media screen and (max-width: 48rem) {
     .main-logo span {
         display: none;
@@ -116,8 +131,15 @@ header {
 
     #btn-volume,
     #btn-game-guide {
+        display: none;
+    }
+
+    #btn-popup-menu {
+        display: flex;
         padding: 0 0.5rem;
         height: 2.5rem;
+        width: 2.5rem;
+        aspect-ratio: 1/1;
     }
 }
 

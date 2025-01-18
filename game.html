@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <canvas id="canvas" width="768" height="480"></canvas>
+            <canvas id="canvas" width="768" height="480" class="fullscreen"></canvas>
             <div class="canvas-ctrl-container">
                 <div class="movement-buttons hidden">
                     <button id="btn-left" class="btn btn-circle btn-glass">
@@ -406,7 +406,7 @@
             <section class="tab-content-settings">
                 <div class="modal-content">
                     <div class="modal-settings-item" onclick="toggleCheckbox('chk-sound')">
-                        <h3>Game Sound</h3>
+                        <h3>Sounds</h3>
                         <input type="checkbox" name="checkbox-sound" id="chk-sound" class="checkbox">
                     </div>
                     <div class="modal-settings-item" onclick="toggleCheckbox('chk-full-screen')">
@@ -414,17 +414,17 @@
                         <input type="checkbox" name="checkbox-full-screen" id="chk-full-screen" class="checkbox">
                     </div>
                     <div class="modal-settings-item" onclick="toggleCheckbox('chk-debug')">
-                        <h3>Debugging Mode
-                            <sup class="asteriks">*</sup>
-                        </h3>
+                        <h3>Collision Frames</h3>
                         <input type="checkbox" name="checkbox-debug-mode" id="chk-debug" class="checkbox">
                     </div>
-                    <div class="modal-settings-item" onclick="toggleCheckbox('chk-console')">
-                        <h3>Console Logs
-                            <sup class="asteriks">*</sup>
-                        </h3>
-                        <input type="checkbox" name="checkbox-console-logs" id="chk-console" class="checkbox">
-                    </div>
+                    <a href="./index.html" class="modal-settings-item">
+                        <h3>Exit Game</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 256 256">
+                            <path
+                                d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z">
+                            </path>
+                        </svg>
+                    </a>
                 </div>
             </section>
             <div class="modal-content-explanation">

@@ -120,36 +120,44 @@ let isSoundOn = true;
 // check localStorage for the muted state when the page loads
 window.addEventListener('load', function () {
     const savedMutedState = localStorage.getItem('isMuted');
+    const soundCheckbox = document.getElementById('chk-sound');
+
     if (savedMutedState === 'true') {
         soundManager.muteSounds();
         isSoundOn = false;
         updateIconAndTooltip(document.getElementById('btn-volume-icon'), document.getElementById('btn-volume-tooltip'), "Sound On", getMutedIcon());
+        if (soundCheckbox) soundCheckbox.checked = false; // sync checkbox with state
     } else {
         soundManager.unmuteSounds();
         isSoundOn = true;
         updateIconAndTooltip(document.getElementById('btn-volume-icon'), document.getElementById('btn-volume-tooltip'), "Sound Off", getUnmutedIcon());
+        if (soundCheckbox) soundCheckbox.checked = true; // sync checkbox with state
     }
 });
 
 
 /**
- * toggles the sound state and updates the button's svg icon and tooltip text.
+ * toggles the sound state and updates the button's svg icon, tooltip text, and checkbox state.
  */
 function toggleSound() {
     const svgContainer = document.getElementById('btn-volume-icon');
     const tooltipText = document.getElementById('btn-volume-tooltip');
+    const soundCheckbox = document.getElementById('chk-sound');
 
     if (isSoundOn) {
-        // sound off (mute)
+        // Sound off (mute)
         updateIconAndTooltip(svgContainer, tooltipText, "Sound On", getMutedIcon());
         soundManager.muteSounds();
+        if (soundCheckbox) soundCheckbox.checked = false;
     } else {
-        // sound on (unmute)
+        // Sound on (unmute)
         updateIconAndTooltip(svgContainer, tooltipText, "Sound Off", getUnmutedIcon());
         soundManager.unmuteSounds();
+        if (soundCheckbox) soundCheckbox.checked = true;
     }
 
     isSoundOn = !isSoundOn;
+    localStorage.setItem('isMuted', !isSoundOn);
 }
 
 
@@ -174,7 +182,8 @@ function getMutedIcon() {
     return `
         <path
             d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM32,96H72v64H32ZM144,207.64,88,164.09V91.91l56-43.55Zm101.66-61.3a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z">
-        </path>`;
+        </path>
+    `;
 }
 
 
@@ -186,5 +195,6 @@ function getUnmutedIcon() {
     return `
         <path
             d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM32,96H72v64H32ZM144,207.64,88,164.09V91.91l56-43.55Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z">
-        </path>`;
+        </path>
+    `;
 }

@@ -20,8 +20,9 @@ h3 {
 }
 
 p {
-    font-weight: 300;
-    color: hsla(210, 1%, 67%, 65%);
+    font-size: 1rem;
+    font-weight: 400;
+    color: hsla(210, 1%, 67%, 70%);
 }
 
 a {

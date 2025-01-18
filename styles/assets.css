@@ -57,6 +57,14 @@
     }
 }
 
+.btn-ghost {
+    background-color: unset;
+}
+
+.btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
+}
+
 .btn-circle {
     height: 3rem;
     width: 3rem;

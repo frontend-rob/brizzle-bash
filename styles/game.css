@@ -29,7 +29,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 
 canvas {
@@ -78,7 +78,7 @@ canvas {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: calc(100% - 65%);
+    width: calc(100% - 70%);
     z-index: 1;
 }
 
@@ -170,4 +170,10 @@ canvas {
         display: flex !important;
         justify-content: space-between;
     }
+}
+
+
+.fullscreen {
+    width: 100%;
+    height: 100%;
 }

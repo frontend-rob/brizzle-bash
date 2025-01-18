@@ -14,6 +14,10 @@
     padding: 1rem;
 }
 
+#popup-menu {
+    z-index: 99;
+}
+
 .modal-container {
     display: flex;
     flex-direction: column;
@@ -68,6 +72,12 @@
     align-items: center;
     padding: 1rem;
     border-radius: .5rem;
+}
+
+.modal-settings-item svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: var(--base-content);
 }
 
 .modal-settings-item:hover {
@@ -323,6 +333,40 @@ kbd svg {
 .game-over-screen-buttons {
     display: flex;
     justify-content: center;
+    gap: 1rem;
+}
+
+.popup-menu-inner {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    border: 1px dashed var(--bg-neutral);
+    padding: 1.5rem;
+    gap: 2rem;
+}
+
+.popup-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.popup-setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-setting-item svg,
+.popup-menu-item svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: var(--base-content);
+}
+
+label {
+    display: flex;
+    align-items: center;
     gap: 1rem;
 }
 

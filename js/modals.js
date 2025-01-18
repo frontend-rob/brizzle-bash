@@ -58,6 +58,10 @@ function handleModalClick(event, modalId, contentClass) {
     if (modalId === 'game-settings-modal' && !modalContent.contains(event.target)) {
         closeModal(modalId);
     }
+
+    if (modalId === 'popover-menu' && !modalContent.contains(event.target)) {
+        closeModal(modalId);
+    }
 }
 
 
@@ -78,15 +82,24 @@ function handleModalEsc(event, modalId) {
 
 /**
  * displays the "info guide" modal.
+ * if triggered from the "popup menu" modal, it closes the "popup menu" modal first.
  */
 function showInfoGuide() {
+    const popupMenu = document.getElementById('popup-menu');
+    if (popupMenu && !popupMenu.classList.contains('hidden')) {
+        closePopupMenu(); 
+    }
+
     showModal('info-guide-modal', 'modal-container');
-    if (typeof world !== 'undefined' && world) { // Überprüfen, ob `world` definiert ist
+
+    if (typeof world !== 'undefined' && world) {
         world.pauseGame();
         updateButtonState(PLAY_BUTTON, true);
     }
+
     createCarousel();
 }
+
 
 
 /**
@@ -120,6 +133,26 @@ function closeGameSettings() {
 
 
 /**
+ * displays the "popup menu" modal.
+ */
+function showPopupMenu() {
+    showModal('popup-menu', 'modal-container');
+    if (typeof world !== 'undefined' && world) { // Überprüfen, ob `world` definiert ist
+        world.pauseGame();
+        updateButtonState(PLAY_BUTTON, true);
+    }
+}
+
+
+/**
+ * closes the "popup menu" modal.
+ */
+function closePopupMenu() {
+    closeModal('popup-menu');
+}
+
+
+/**
  * switches the visible tab and updates the active button state.
  * ensures only one tab is visible at a time and only one button has the 'active' class.
  *
@@ -144,35 +177,37 @@ function switchTab(event, tabId) {
 // ! ### toggle checkboxes on settings modal ###
 
 /**
- * toggles the state of the checkbox and updates the debug mode if necessary.
+ * toggles the state of the checkbox and updates the sound or other features accordingly.
  * 
  * @param {string} checkboxId - the id of the checkbox to toggle
  */
 function toggleCheckbox(checkboxId) {
     const checkbox = document.getElementById(checkboxId);
     if (checkbox) {
-        // toggle the checked state
         checkbox.checked = !checkbox.checked;
 
-        // if it's the debug checkbox, update the debug mode
+        if (checkboxId === 'chk-sound') {
+            toggleSound(); // sync the sound state with the checkbox
+        }
+
         if (checkboxId === 'chk-debug') {
-            MovableObject.setDebugMode(checkbox.checked);  // sets the debug mode directly
+            MovableObject.setDebugMode(checkbox.checked); // sets the debug mode directly
         }
     }
 }
 
 
 /**
- * ensures that the debug mode is correctly set when the page loads.
+ * ensures the initial state of checkboxes when the page loads.
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const checkbox = document.getElementById('chk-debug');
-    if (checkbox) {
-        checkbox.checked = MovableObject.debugMode; // set the checkbox state based on the static debugMode variable
+    const debugCheckbox = document.getElementById('chk-debug');
+    if (debugCheckbox) {
+        debugCheckbox.checked = MovableObject.debugMode; // set the checkbox state based on the static debugMode variable
     }
 
     // add event listeners to the checkboxes
-    const checkboxIds = ['chk-sound', 'chk-full-screen', 'chk-debug', 'chk-console'];
+    const checkboxIds = ['chk-sound', 'chk-full-screen', 'chk-debug'];
     addCheckboxEventListeners(checkboxIds);
 });
 
@@ -186,7 +221,8 @@ function addCheckboxEventListeners(checkboxIds) {
     checkboxIds.forEach(checkboxId => {
         const checkbox = document.getElementById(checkboxId);
         if (checkbox) {
-            checkbox.addEventListener('click', () => {
+            checkbox.addEventListener('click', (event) => {
+                event.stopPropagation();
                 toggleCheckbox(checkboxId);
             });
         }
