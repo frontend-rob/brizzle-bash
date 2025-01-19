@@ -10,42 +10,42 @@ let currentSlide = 0;
 const carouselData = [
     {
         id: "carousel-brizzly",
-        image: "../assets/img/carousel/talku-00.png",
+        image: "./assets/img/carousel/talku-00.png",
         title: "Brizzly"
     },
     {
         id: "carousel-candle",
-        image: "../assets/img/carousel/cm-00.png",
+        image: "./assets/img/carousel/cm-00.png",
         title: "Candle Bug"
     },
     {
         id: "carousel-mushroom",
-        image: "../assets/img/carousel/mr-00.png",
+        image: "./assets/img/carousel/mr-00.png",
         title: "Fungal Colossus"
     },
     {
         id: "carousel-plant",
-        image: "../assets/img/carousel/ep-00.png",
+        image: "./assets/img/carousel/ep-00.png",
         title: "Flesh Lotus"
     },
     {
         id: "carousel-spider",
-        image: "../assets/img/carousel/sp-00.png",
+        image: "./assets/img/carousel/sp-00.png",
         title: "Toxic Widow"
     },
     {
         id: "carousel-spinner",
-        image: "../assets/img/carousel/spi-00.png",
+        image: "./assets/img/carousel/spi-00.png",
         title: "Ocular Spinner"
     },
     {
         id: "carousel-spirit",
-        image: "../assets/img/carousel/spr-00.png",
+        image: "./assets/img/carousel/spr-00.png",
         title: "Soul Phantom"
     },
     {
         id: "carousel-squid",
-        image: "../assets/img/carousel/squ-00.png",
+        image: "./assets/img/carousel/squ-00.png",
         title: "Shadow Squid"
     },
 ];

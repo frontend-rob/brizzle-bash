@@ -12,7 +12,7 @@ class ThrowableObject extends MovableObject {
      * @param {Object} character - the character throwing the object.
      */
     constructor(X, Y, world, character) {
-        super().loadImage('../assets/img/ornaments/spiky-ball.png');
+        super().loadImage('./assets/img/ornaments/spiky-ball.png');
         this.X = X;
         this.Y = Y;
         this.width = 56;

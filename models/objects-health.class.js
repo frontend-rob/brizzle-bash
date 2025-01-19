@@ -13,7 +13,7 @@ class HealthObject extends MovableObject {
      * @param {number} posY - the y-coordinate of the object.
      */
     constructor(posX, posY) {
-        super().loadImage('../assets/img/ornaments/collectable-heart.png');
+        super().loadImage('./assets/img/ornaments/collectable-heart.png');
         this.X = posX;
         this.Y = posY;
     }

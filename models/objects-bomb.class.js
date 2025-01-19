@@ -13,7 +13,7 @@ class BombObject extends MovableObject {
      * @param {number} posY - the y-coordinate of the object.
      */
     constructor(posX, posY) {
-        super().loadImage('../assets/img/ornaments/collectable-bomb.png');
+        super().loadImage('./assets/img/ornaments/collectable-bomb.png');
         this.X = posX;
         this.Y = posY;
     }

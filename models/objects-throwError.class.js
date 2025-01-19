@@ -10,7 +10,7 @@ class ErrorImageObject extends MovableObject {
      * @param {number} Y - the y-coordinate of the object.
      */
     constructor(X, Y) {
-        super().loadImage('../assets/img/ornaments/throw-error.png');
+        super().loadImage('./assets/img/ornaments/throw-error.png');
         this.X = X;
         this.Y = Y;
         this.width = 64;

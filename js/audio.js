@@ -141,21 +141,21 @@ var soundManager = {
 };
 
 // add sounds
-soundManager.addSound('gameMusic', '../assets/audio/bg-game.mp3');
-soundManager.addSound('introMusic', '../assets/audio/bg-intro.mp3');
-soundManager.addSound('characterHurt', '../assets/audio/character-hurt.mp3');
-soundManager.addSound('characterJump', '../assets/audio/character-jump.mp3');
-soundManager.addSound('characterPunch', '../assets/audio/character-punch.mp3');
-soundManager.addSound('characterSurprised', '../assets/audio/character-surprise.mp3');
-soundManager.addSound('characterWalk', '../assets/audio/character-walk.mp3');
-soundManager.addSound('characterThrowItem', '../assets/audio/character-throw.mp3');
-soundManager.addSound('characterThrowError', '../assets/audio/character-error.mp3');
-soundManager.addSound('collectHealth', '../assets/audio/collect-health.mp3');
-soundManager.addSound('collectItem', '../assets/audio/collect-item.mp3');
-soundManager.addSound('deadEndboss', '../assets/audio/endboss-dead.mp3');
-soundManager.addSound('hurtEndboss', '../assets/audio/endboss-hurt.mp3');
-soundManager.addSound('deadEnemy', '../assets/audio/enemy-dead.mp3');
-soundManager.addSound('gameover', '../assets/audio/gameover.mp3');
+soundManager.addSound('gameMusic', './assets/audio/bg-game.mp3');
+soundManager.addSound('introMusic', './assets/audio/bg-intro.mp3');
+soundManager.addSound('characterHurt', './assets/audio/character-hurt.mp3');
+soundManager.addSound('characterJump', './assets/audio/character-jump.mp3');
+soundManager.addSound('characterPunch', './assets/audio/character-punch.mp3');
+soundManager.addSound('characterSurprised', './assets/audio/character-surprise.mp3');
+soundManager.addSound('characterWalk', './assets/audio/character-walk.mp3');
+soundManager.addSound('characterThrowItem', './assets/audio/character-throw.mp3');
+soundManager.addSound('characterThrowError', './assets/audio/character-error.mp3');
+soundManager.addSound('collectHealth', './assets/audio/collect-health.mp3');
+soundManager.addSound('collectItem', './assets/audio/collect-item.mp3');
+soundManager.addSound('deadEndboss', './assets/audio/endboss-dead.mp3');
+soundManager.addSound('hurtEndboss', './assets/audio/endboss-hurt.mp3');
+soundManager.addSound('deadEnemy', './assets/audio/enemy-dead.mp3');
+soundManager.addSound('gameover', './assets/audio/gameover.mp3');
 
 
 let isSoundOn = true;
