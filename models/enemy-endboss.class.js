@@ -27,7 +27,7 @@ class Endboss extends MovableObject {
         this.name = "Fungal Colossus";
         this.X = posX;
         this.animate();
-    };
+    }
 
 
     /**
@@ -42,36 +42,25 @@ class Endboss extends MovableObject {
                 this.playAnimation(ENDBOSS_IMAGES.WALK);
             }
         }, 1000 / 60);
-    };
+    }
 
 
-/**
- * reduces the enemy's life by the specified amount of damage, increases its speed, and plays a hit animation.
- * @param {number} damage - the amount of damage inflicted.
- */
+    /**
+     * reduces the enemy's life by the specified amount of damage, increases its speed, and plays a hit animation.
+     * @param {number} damage - the amount of damage inflicted.
+     */
     getHit(damage) {
         const currentTime = new Date().getTime();
+
         if (currentTime - this.lastHitTime < this.hitCooldown) {
             return;
         }
 
-        // Reduces life
-        this.enemyLife -= damage;
-        soundManager.playSound('hurtEndboss');
-        if (this.enemyLife < 0) {
-            this.enemyLife = 0;
-        }
-        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
+        this.reduceLife(damage);
+        this.increaseSpeed();
+        this.playHitAnimation();
 
-        // Increases speed after being hit
-        this.speedX += 0.25;
-        console.log(`Endboss speed increased to: ${this.speedX}`);
 
-        // Play hit animation
-        this.isHit = true;
-        setTimeout(() => this.isHit = false, 2500);
-
-        // Check if enemy is dead
         if (this.enemyLife <= 0) {
             this.isDead();
         }
@@ -80,10 +69,41 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * reduces the life of the endboss.
+     * @param {number} damage - the amount of damage to subtract from the endboss's life.
+     */
+    reduceLife(damage) {
+        this.enemyLife -= damage;
+        if (this.enemyLife < 0) {
+            this.enemyLife = 0;
+        }
+        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
+    }
 
-/**
- * handles the logic when the enemy's life reaches zero.
- */
+
+    /**
+     * increases the speed of the endboss after being hit.
+     */
+    increaseSpeed() {
+        this.speedX += 0.25;
+        console.log(`Endboss speed increased to: ${this.speedX}`);
+    }
+
+
+    /**
+     * plays the hit animation and resets it after a short duration.
+     */
+    playHitAnimation() {
+        this.isHit = true;
+        setTimeout(() => this.isHit = false, 2500);
+        soundManager.playSound('hurtEndboss');
+    }
+
+
+    /**
+     * handles the logic when the enemy's life reaches zero.
+     */
     isDead() {
         console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('deadEndboss');
@@ -96,6 +116,4 @@ class Endboss extends MovableObject {
 
         console.log(`Enemies alive:`, this.world.level.enemies);
     }
-
-
 }

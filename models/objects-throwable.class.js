@@ -76,5 +76,4 @@ class ThrowableObject extends MovableObject {
             y + height > enemy.Y
         );
     }
-
 }

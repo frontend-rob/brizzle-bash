@@ -1,4 +1,7 @@
-class MovableObject extends DrawableObject{
+/**
+ * represents a movable object that extends the functionality of a drawable object.
+ */
+class MovableObject extends DrawableObject {
     X = 96;
     Y = 288;
     width = 64;
@@ -13,14 +16,22 @@ class MovableObject extends DrawableObject{
     frequency = 0;
     time = 0;
     oscillateY = 0;
-
     static debugMode = false;
+
+
+    /**
+     * sets the debug mode for all movable objects.
+     * @param {boolean} isEnabled - whether debug mode should be enabled or not.
+     */
     static setDebugMode(isEnabled) {
         MovableObject.debugMode = isEnabled;
         console.log("Debug Mode: ", MovableObject.debugMode ? "enabled" : "disabled");
     }
 
 
+    /**
+     * applies gravity to the object, making it fall until it reaches the ground.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.world && this.world.isPaused) return;
@@ -37,11 +48,18 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * checks if the object is above the ground.
+     * @returns {boolean} true if the object is above the ground, otherwise false.
+     */
     isAboveGround() {
         return this instanceof ThrowableObject || this.Y < 288;
     }
 
 
+    /**
+     * applies damage to the object, reducing its life and triggering cooldowns.
+     */
     getHit() {
         if (this.world.isPaused) return;
 
@@ -62,6 +80,9 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * heals the object by restoring life points.
+     */
     heal() {
         if (this.world.isPaused) return;
 
@@ -73,22 +94,37 @@ class MovableObject extends DrawableObject{
         this.updateCharacterHealthBar();
     }
 
+
+    /**
+     * updates the character's health bar on the screen.
+     */
     updateCharacterHealthBar() {
         const progressBar = document.getElementById('progress-bar-health');
         progressBar.style.width = `${this.characterLife}%`;
     }
 
 
+    /**
+     * checks if the object is currently hurt (in hit cooldown).
+     * @returns {boolean} true if the object is hurt, otherwise false.
+     */
     isHurt() {
         return new Date().getTime() - this.lastHitTime < this.hitCooldown;
     }
 
 
+    /**
+     * checks if the object is dead.
+     * @returns {boolean} true if the object's life is 0, otherwise false.
+     */
     isDead() {
-        return this.characterLife == 0;
+        return this.characterLife === 0;
     }
 
 
+    /**
+     * moves the object to the right.
+     */
     moveRight() {
         if (!this.world || !this.world.isPaused) {
             this.X += this.speedX;
@@ -97,6 +133,9 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * moves the object to the left.
+     */
     moveLeft() {
         if (!this.world || !this.world.isPaused) {
             this.X -= this.speedX;
@@ -105,6 +144,9 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * makes the object jump, setting an upward speed.
+     */
     jump() {
         if (!this.world.isPaused && !this.isAboveGround()) {
             this.speedY = 25;
@@ -112,16 +154,42 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * checks if the punch action is triggered.
+     * @returns {boolean} true if the punch action is triggered, otherwise false.
+     */
     punch() {
         return !this.world.isPaused && this.world.keyboard.PUNCH;
     }
 
 
+    /**
+     * checks if the throw ball action is triggered.
+     * @returns {boolean} true if the throw ball action is triggered, otherwise false.
+     */
     throwBall() {
         return !this.world.isPaused && this.world.keyboard.THROW_BALL;
     }
 
 
+    /**
+     * moves the object in a sinusoidal path.
+     */
+    moveSinus() {
+        if (!this.world || !this.world.isPaused) {
+            this.Y += Math.sin(this.frequency * Date.now()) * this.amplitude;
+            this.X += this.speedX * this.direction;
+
+            if (this.X > this.startX + this.rangeX || this.X < this.startX) {
+                this.direction *= -1;
+            }
+        }
+    }
+
+
+    /**
+     * moves the object to the left while oscillating vertically.
+     */
     moveLeftOscillate() {
         if (!this.world || !this.world.isPaused) {
             this.moveLeft();
@@ -131,6 +199,10 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * plays an animation using a set of images.
+     * @param {Array<string>} images - the array of image paths for the animation.
+     */
     playAnimation(images) {
         if (this.animationPaused) return;
         let imgIndex = this.currentImage % images.length;
@@ -140,13 +212,18 @@ class MovableObject extends DrawableObject{
     }
 
 
+    /**
+     * pauses the animation for the object.
+     */
     pauseAnimation() {
         this.animationPaused = true;
     }
 
 
+    /**
+     * resumes the animation for the object.
+     */
     resumeAnimation() {
         this.animationPaused = false;
     }
-
 }

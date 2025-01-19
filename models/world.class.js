@@ -1,3 +1,6 @@
+/**
+ * represents the game world, including the character, level, and game mechanics.
+ */
 class World {
 
     character = new Character();
@@ -10,13 +13,18 @@ class World {
     collisionOffsetY = 10;
     isPaused = false;
     animationFrameId = null;
-
     throwableObjects = [];
     healthObjects = [];
     bombObjects = [];
     bombAmount = 0;
     hasSeenEndboss = false;
 
+
+    /**
+     * creates an instance of the World class.
+     * @param {HTMLCanvasElement} canvas - the canvas element for rendering the game.
+     * @param {Object} keyboard - the keyboard input manager.
+     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -29,6 +37,9 @@ class World {
     }
 
 
+    /**
+     * sets the world reference for all objects in the game.
+     */
     setWorld() {
         this.character.world = this;
         this.level.enemies.forEach(enemy => {
@@ -46,46 +57,64 @@ class World {
     }
 
 
+    /**
+     * initializes the health bar UI.
+     */
     initializeHealthBar() {
         const progressBar = document.getElementById('progress-bar-health');
         progressBar.style.width = `${this.characterLife}%`;
     }
 
-    
 
+    /**
+     * initializes the bomb bar UI.
+     */
     initializeBombBar() {
         const progressBar = document.getElementById('progress-bar-bomb');
         progressBar.style.width = `${this.bombAmount}%`;
     }
 
 
+    /**
+     * pauses the game and stops animations.
+     */
     pauseGame() {
         this.isPaused = true;
         console.log("Game Paused");
-        soundManager.setVolume('gameMusic', 0.25);
-        cancelAnimationFrame(this.animationFrameId);
 
+        soundManager.pauseSound('gameMusic');
+
+        cancelAnimationFrame(this.animationFrameId);
         this.character.pauseAnimation();
         this.level.enemies.forEach(enemy => enemy.pauseAnimation());
         this.throwableObjects.forEach(obj => obj.pauseAnimation());
     }
 
 
+    /**
+     * resumes the game and restarts animations.
+     */
     resumeGame() {
         this.isPaused = false;
         console.log("Game Resumed");
+        soundManager.playSound('gameMusic');
 
         this.character.resumeAnimation();
         this.level.enemies.forEach(enemy => enemy.resumeAnimation());
-        this.throwableObjects.forEach(obj => obj.resumeAnimation()); 
+        this.throwableObjects.forEach(obj => obj.resumeAnimation());
         this.animationFrameId = requestAnimationFrame(() => this.drawWorld());
     }
 
 
+    /**
+     * runs the game logic in intervals, including collision detection.
+     */
     runGame() {
         setInterval(() => {
             if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
-                soundManager.playSound('gameMusic');
+                if (isSoundOn) {
+                    soundManager.playSound('gameMusic');
+                }
                 soundManager.initializeSoundVolumes();
                 this.checkCollisions();
                 this.checkThrowObjects();
@@ -95,14 +124,21 @@ class World {
     }
 
 
+    /**
+     * checks whether the player is throwing objects.
+     */
     checkThrowObjects() {
-        if (this.keyboard.THROW_BALL) {
-            let spikyball = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
-            this.throwableObjects.push(spikyball);
+        if (this.keyboard.THROW_BALL && this.bombAmount > 0) {
+            this.throwSpikyBall();
+        } else if (this.keyboard.THROW_BALL && this.bombAmount <= 0) {
+            this.showThrowError();
         }
     }
 
 
+    /**
+     * checks collisions between the character and enemies or other objects.
+     */
     checkCollisions() {
         if (this.character.isDead()) {
             return;
@@ -113,6 +149,10 @@ class World {
         this.checkEndbossProximity();
     }
 
+
+    /**
+     * checks the proximity of the character to the end boss and triggers an event when close.
+     */
     checkEndbossProximity() {
         const endBoss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         if (endBoss) {
@@ -125,6 +165,9 @@ class World {
     }
 
 
+    /**
+     * checks for collisions between the character and enemies in the level.
+     */
     handleEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
             const offsetX = enemy.collisionOffsetX || 0;
@@ -136,6 +179,11 @@ class World {
         });
     }
 
+
+    /**
+     * handles the collision logic between the character and a specific enemy.
+     * @param {Object} enemy - the enemy object the character collides with.
+     */
     handleCollisionWithEnemy(enemy) {
         if (this.character.isHurt()) {
             console.log("Character is hurt and cannot punch.");
@@ -154,11 +202,19 @@ class World {
     }
 
 
+    /**
+     * processes the logic when the character punches an enemy.
+     * @param {Object} enemy - the enemy object being punched.
+     */
     processPunch(enemy) {
         enemy.getHit(10);
     }
 
-    
+
+    /**
+     * processes the logic when the character collides with an enemy.
+     * @param {Object} enemy - the enemy object the character collides with.
+     */
     processCollision(enemy) {
         this.character.getHit();
         if (!hasPlayedHurtSound) {
@@ -169,8 +225,9 @@ class World {
     }
 
 
-
-
+    /**
+     * handles the healing logic when the character collects health objects.
+     */
     handleHealing() {
         this.level.healthObjects.forEach((healthObject, index) => {
             if (this.character.characterLife === 100) {
@@ -186,6 +243,9 @@ class World {
     }
 
 
+    /**
+     * handles the collection of bombs when the character collides with bomb objects.
+     */
     handleBombCollection() {
         if (this.bombAmount === 100) {
             return;
@@ -201,6 +261,9 @@ class World {
     }
 
 
+    /**
+     * collects a bomb and updates the bomb amount and progress bar.
+     */
     collectBomb() {
         if (this.bombAmount < 100) {
             this.bombAmount += 20;
@@ -213,13 +276,18 @@ class World {
     }
 
 
+    /**
+     * updates the bomb progress bar to reflect the current bomb amount.
+     */
     updateBombBar() {
         const progressBar = document.getElementById('progress-bar-bomb');
         progressBar.style.width = `${this.bombAmount}%`;
     }
 
 
-
+    /**
+     * checks if the character throws an object and processes the throwing logic.
+     */
     checkThrowObjects() {
         if (this.keyboard.THROW_BALL && this.bombAmount > 0) {
             this.throwSpikyBall();
@@ -228,6 +296,10 @@ class World {
         }
     }
 
+
+    /**
+     * throws a spiky ball from the character's position.
+     */
     throwSpikyBall() {
         soundManager.playSound('characterThrowItem');
 
@@ -237,6 +309,10 @@ class World {
         this.updateBombBar();
     }
 
+
+    /**
+     * displays an error when the character tries to throw without enough bombs.
+     */
     showThrowError() {
         soundManager.playSound('characterThrowError');
 
@@ -249,6 +325,24 @@ class World {
     }
 
 
+    /**
+     * checks collisions between throwable objects and enemies.
+     */
+    checkThrowableObjectCollision() {
+        this.throwableObjects.forEach((throwableObject) => {
+            this.level.enemies.forEach((enemy) => {
+                if (throwableObject.isColliding(enemy, throwableObject.X, throwableObject.Y, throwableObject.width, throwableObject.height)) {
+                    enemy.getHit(20);
+                    console.log(`Enemy ${enemy.name} was hit by a throwable object! Current Life: ${enemy.enemyLife}`);
+                }
+            });
+        });
+    }
+
+
+    /**
+     * draws all elements of the game world on the canvas.
+     */
     drawWorld() {
         if (this.isPaused || (this.character.isDead() && this.character.deadAnimationPlayed)) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -268,6 +362,10 @@ class World {
     }
 
 
+    /**
+     * places an array of objects on the canvas.
+     * @param {Array<Object>} objects - the objects to be placed on the canvas.
+     */
     placeObjectsOnCanvas(objects) {
         objects.forEach(object => {
             this.drawObject(object);
@@ -275,6 +373,10 @@ class World {
     }
 
 
+    /**
+     * draws a single object on the canvas.
+     * @param {Object} moveObj - the object to be drawn.
+     */
     drawObject(moveObj) {
         if (moveObj.flipImage) {
             this.flipImage(moveObj);
@@ -289,6 +391,10 @@ class World {
     }
 
 
+    /**
+     * flips an image horizontally for rendering on the canvas.
+     * @param {Object} moveObj - the object to be flipped.
+     */
     flipImage(moveObj) {
         this.ctx.save();
         this.ctx.translate(moveObj.width, 0);
@@ -296,21 +402,13 @@ class World {
         moveObj.X = moveObj.X * -1;
     }
 
-    
+
+    /**
+     * reverses the horizontal flip of an image.
+     * @param {Object} moveObj - the object whose flip is to be reversed.
+     */
     flipImageReverse(moveObj) {
         moveObj.X = moveObj.X * -1;
         this.ctx.restore();
     }
-
-    checkThrowableObjectCollision() {
-        this.throwableObjects.forEach((throwableObject) => {
-            this.level.enemies.forEach((enemy) => {
-                if (throwableObject.isColliding(enemy, throwableObject.X, throwableObject.Y, throwableObject.width, throwableObject.height)) {
-                    enemy.getHit(20);
-                    console.log(`Enemy ${enemy.name} was hit by a throwable object! Current Life: ${enemy.enemyLife}`);
-                }
-            });
-        });
-    }
-
 }

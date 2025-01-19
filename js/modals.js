@@ -1,5 +1,3 @@
-// ! ### modal control ###
-
 /**
  * displays a modal by removing the 'hidden' class and adding 'no-scroll' to the body.
  * adds event listeners for clicking outside the modal and pressing the ESC key.
@@ -137,7 +135,7 @@ function closeGameSettings() {
  */
 function showPopupMenu() {
     showModal('popup-menu', 'modal-container');
-    if (typeof world !== 'undefined' && world) { // Überprüfen, ob `world` definiert ist
+    if (typeof world !== 'undefined' && world) {
         world.pauseGame();
         updateButtonState(PLAY_BUTTON, true);
     }
@@ -173,19 +171,6 @@ function switchTab(event, tabId) {
 }
 
 
-
-// ! ### toggle checkboxes on settings modal ###
-
-/**
- * Checkt den aktuellen Fullscreen-Status und setzt den Zustand der Checkbox.
- */
-function updateFullscreenCheckboxState() {
-    const checkbox = document.getElementById('chk-full-screen');
-    if (checkbox) {
-        checkbox.checked = document.fullscreenElement !== null;
-    }
-}
-
 /**
  * toggles the state of the checkbox and updates the sound or other features accordingly.
  * 
@@ -197,7 +182,7 @@ function toggleCheckbox(checkboxId) {
         checkbox.checked = !checkbox.checked;
 
         if (checkboxId === 'chk-sound') {
-            toggleSound(); // sync the sound state with the checkbox
+            toggleSound();
         }
 
         if (checkboxId === 'chk-full-screen') {
@@ -237,4 +222,15 @@ function addCheckboxEventListeners(checkboxIds) {
             });
         }
     });
+}
+
+
+/**
+ * checks the fullscreen status and sets the state of the checkbox.
+ */
+function updateFullscreenCheckboxState() {
+    const checkbox = document.getElementById('chk-full-screen');
+    if (checkbox) {
+        checkbox.checked = document.fullscreenElement !== null;
+    }
 }

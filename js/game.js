@@ -208,10 +208,9 @@ function goToHome() {
 }
 
 
-// ! ### game pause and button controls ###
-
-
-// play button state
+/**
+ * play button state with SVG icon and text.
+ */
 const PLAY_BUTTON = {
     svg: `
         <path
@@ -222,7 +221,9 @@ const PLAY_BUTTON = {
 };
 
 
-// pause button state
+/**
+ * pause button state with SVG icon and text.
+ */
 const PAUSE_BUTTON = {
     svg: `
         <path
@@ -233,7 +234,11 @@ const PAUSE_BUTTON = {
 };
 
 
-// helper function to update the button
+/**
+ * updates button icon, text, and style.
+ * @param {{svg: string, text: string}} buttonState - button state object.
+ * @param {boolean} isPaused - whether the game is paused.
+ */
 function updateButtonState(buttonState, isPaused) {
     const iconSvg = document.getElementById('pause-btn-icon');
     const buttonText = document.getElementById('pause-btn-text');
@@ -242,11 +247,8 @@ function updateButtonState(buttonState, isPaused) {
     iconSvg.innerHTML = buttonState.svg;
     buttonText.textContent = buttonState.text;
 
-    if (isPaused) {
-        btn.classList.add('btn-primary');
-    } else {
-        btn.classList.remove('btn-primary');
-    }
+    if (isPaused) btn.classList.add('btn-primary');
+    else btn.classList.remove('btn-primary');
 }
 
 

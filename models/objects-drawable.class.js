@@ -76,5 +76,4 @@ class DrawableObject {
             this.Y + offsetY < moveObj.Y + moveObj.height - offsetY
         );
     }
-
 }

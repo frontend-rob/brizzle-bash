@@ -22,15 +22,43 @@ let storyText = [
  */
 function showIntro() {
     const story = document.getElementById('story');
-    story.classList.toggle('hidden');
-
-    isIntroMusicPlaying ? soundManager.stopSound('introMusic') : soundManager.playSound('introMusic');
-    isIntroMusicPlaying = !isIntroMusicPlaying;
-
-    story.innerHTML = '';
-    currentSentence = 0;
+    toggleVisibility(story);
+    toggleMusic();
+    resetStory(story);
     showNextSentence();
 }
+
+
+/**
+ * toggles the visibility of an element by adding/removing the "hidden" class.
+ */
+function toggleVisibility(element) {
+    element.classList.toggle('hidden');
+}
+
+
+/**
+ * toggles the intro music on and off.
+ */
+function toggleMusic() {
+    if (isIntroMusicPlaying) {
+        soundManager.stopSound('introMusic');
+    } else {
+        soundManager.playSound('introMusic');
+    }
+    isIntroMusicPlaying = !isIntroMusicPlaying;
+}
+
+
+/**
+ * resets the story element and prepares for the first sentence.
+ */
+function resetStory(story) {
+    story.innerHTML = '';
+    currentSentence = 0;
+}
+
+
 
 
 /**
@@ -42,16 +70,36 @@ function showNextSentence() {
 
     if (currentSentence < storyText.length) {
         const sentence = storyText[currentSentence];
-        story.innerHTML = `<p><span class="cursor"></span></p>`;
-        typeWriterEffect(story, sentence, 50, () => {
+        displayTypingEffect(story, sentence, () => {
             currentSentence++;
             setTimeout(showNextSentence, 3000);
         });
     } else {
-        setTimeout(() => {
-            story.classList.toggle('hidden');
-        }, 3000);
+        hideStoryAfterDelay(story, 3000);
     }
+}
+
+/**
+ * displays the typing effect for a sentence.
+ * @param {HTMLElement} element - the element to display the text in.
+ * @param {string} text - the text to display.
+ * @param {function} callback - the function to call after the text is fully typed (optional).
+ */
+function displayTypingEffect(element, text, callback) {
+    element.innerHTML = `<p><span class="cursor"></span></p>`;
+    typeWriterEffect(element, text, 50, callback);
+}
+
+
+/**
+ * hides the story element after a specified delay.
+ * @param {HTMLElement} element - the element to hide.
+ * @param {number} delay - the time in milliseconds to wait before hiding.
+ */
+function hideStoryAfterDelay(element, delay) {
+    setTimeout(() => {
+        element.classList.toggle('hidden');
+    }, delay);
 }
 
 

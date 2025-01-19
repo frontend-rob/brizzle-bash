@@ -3,18 +3,15 @@
  * @extends MovableObject
  */
 class Character extends MovableObject {
-
+    
+    world;
     X = 160;
     width = 80;
     height = 160;
     speedX = 8;
     characterLife = 100;
-
-    world;
-
     referenceWidth = 80;
     referenceHeight = 160;
-
     animationScales = {
         idle: { widthFactor: 1.0, heightFactor: 1.0 },
         walking: { widthFactor: 1.15, heightFactor: 1.03 },
@@ -24,8 +21,13 @@ class Character extends MovableObject {
         hit: { widthFactor: 1.5, heightFactor: 1.1 },
         dead: { widthFactor: 2.2, heightFactor: 1.1 },
         surprise: { widthFactor: 1.25, heightFactor: 1.0 }
-    };
+    }
 
+
+    /**
+     * creates an instance of the Character object.
+     * initializes the character with various animations and properties.
+     */
     constructor() {
         super().loadImage(BRIZZLY_IMAGES.IDLE[0]);
         this.IMAGES_IDLE = BRIZZLY_IMAGES.IDLE;
@@ -50,8 +52,13 @@ class Character extends MovableObject {
         this.direction = 1;
         this.applyGravity();
         this.animate();
-    };
+    }
 
+
+    /**
+     * handles the character's animation and movement.
+     * it updates the character's state and plays relevant sounds.
+     */
     animate() {
         setInterval(() => {
             if (this.world.isPaused) {
@@ -107,7 +114,10 @@ class Character extends MovableObject {
     }
 
 
-    // ! prioization from top to down
+    /**
+     * determines the current state of the character based on its actions and status.
+     * @returns {string} the current state of the character ('idle', 'walking', 'jumping', 'punch', 'throw', 'hit', 'dead', 'surprise').
+     */
     getCharacterState() {
         if (this.isDead()) {
             return 'dead';
@@ -135,11 +145,20 @@ class Character extends MovableObject {
         return 'idle';
     }
 
+
+    /**
+     * triggers the surprise animation for the character and plays the surprise sound.
+     */
     triggerSurprise() {
         soundManager.playSound('characterSurprised');
         this.surpriseStartTime = Date.now();
     }
 
+
+    /**
+     * checks if the character is currently surprised based on the time elapsed since the surprise was triggered.
+     * @returns {boolean} true if the character is surprised, otherwise false.
+     */
     isSurprised() {
         if (this.surpriseStartTime) {
             return Date.now() - this.surpriseStartTime <= 2000;
@@ -147,6 +166,11 @@ class Character extends MovableObject {
         return false;
     }
 
+
+    /**
+     * updates the character's animation based on its current state.
+     * @param {string} state the current state of the character (e.g., 'idle', 'walking', 'jumping', etc.).
+     */
     updateCharacterAnimation(state) {
         const animations = {
             idle: this.IMAGES_IDLE,
@@ -159,18 +183,17 @@ class Character extends MovableObject {
             surprise: this.IMAGES_SURPRISE,
         };
 
-        // ! adjust Y position because of different img sizes
         if (state === 'dead') {
             this.Y = 280;
-        };
+        }
 
         if (state === 'hit') {
             this.Y = 272;
-        };
+        }
 
         if (state === 'throw') {
             this.Y = 280;
-        };
+        }
 
         const scale = this.animationScales[state];
         const newWidth = this.referenceWidth * scale.widthFactor;
@@ -189,9 +212,13 @@ class Character extends MovableObject {
         } else {
             this.playAnimation(animations[state]);
         }
-
     }
 
+
+    /**
+     * plays the dead animation for the character.
+     * @param {Array} images array of images to display during the dead animation.
+     */
     playDeadAnimation(images) {
         if (this.animationPaused) return;
         if (this.currentImage >= images.length) {
@@ -206,6 +233,11 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+     * plays the hit animation followed by the dead animation when the character dies.
+     * @returns {Promise} resolves after the hit animation is played, followed by the dead animation.
+     */
     async playHitBeforeDead() {
         this.updateCharacterAnimation('hit');
         await new Promise(resolve => setTimeout(resolve, 250));
@@ -214,6 +246,11 @@ class Character extends MovableObject {
         soundManager.playSound('gameover');
     }
 
+
+    /**
+     * executes the punch action when the punch button is pressed.
+     * @returns {boolean} true if the punch action is performed, otherwise false.
+     */
     punch() {
         if (this.world.isPaused) return false;
 
@@ -224,6 +261,10 @@ class Character extends MovableObject {
         return false;
     }
 
+
+    /**
+     * checks for collisions between the punch and the enemies.
+     */
     checkPunchCollision() {
         const punchRange = {
             x: this.X + (this.flipImage ? +10 : this.width),
@@ -240,6 +281,11 @@ class Character extends MovableObject {
         });
     }
 
+
+    /**
+     * executes the throw action when the throw button is pressed.
+     * @returns {boolean} true if the throw action is performed, otherwise false.
+     */
     throw() {
         if (this.world.isPaused) return false;
 
@@ -250,6 +296,10 @@ class Character extends MovableObject {
         return false;
     }
 
+
+    /**
+     * checks for collisions between the throw and the enemies.
+     */
     checkThrowCollision() {
         const throwRange = {
             x: this.X + (this.flipImage ? +10 : this.width + 10),
@@ -265,5 +315,4 @@ class Character extends MovableObject {
             }
         });
     }
-
 }

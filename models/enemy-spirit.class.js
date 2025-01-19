@@ -1,12 +1,11 @@
 /**
  * represents an enemy object.
- * @extends MovableObject
+ * @extends Enemy
  */
-class Spirit extends MovableObject {
+class Spirit extends Enemy {
     
     width = 171;
     height = 150;
-    enemyLife = 10;
     collisionOffsetX = 0;
     collisionOffsetY = 20;
 
@@ -28,7 +27,7 @@ class Spirit extends MovableObject {
         this.frequency = 0.075;
         this.time = 0;
         this.animate();
-    };
+    }
 
 
     /**
@@ -40,35 +39,4 @@ class Spirit extends MovableObject {
             this.playAnimation(SPIRIT_IMAGES.WALK);
         }, 1000 / 45);
     }
-
-
-    /**
-     * reduces the enemy's life by the given damage amount.
-     * @param {number} damage - the amount of damage to inflict.
-     */
-    getHit(damage) {
-        this.enemyLife -= damage;
-        if (this.enemyLife < 0) {
-            this.enemyLife = 0;
-        }
-        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
-        if (this.enemyLife <= 0) {
-            this.isDead();
-        }
-    }
-
-
-    /**
-     * handles the logic when the enemy's life reaches zero.
-     */
-    isDead() {
-        console.log(`Enemy ${this.name} has died!`);
-        soundManager.playSound('deadEnemy');
-        const index = this.world.level.enemies.indexOf(this);
-        if (index > -1) {
-            this.world.level.enemies.splice(index, 1);
-        }
-        console.log(`Enemies alive:`, this.world.level.enemies);
-    }
-
 }

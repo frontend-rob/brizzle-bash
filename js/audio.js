@@ -253,44 +253,59 @@ function updateSoundText(savedMutedState, soundText) {
 
 
 /**
- * toggles the sound state and updates the button's svg icon, tooltip text, checkbox state, and sound status text.
+ * toggles the sound on/off and updates the UI accordingly.
+ * it switches the sound on/off and adjusts the game music volume.
+ * the sound status is also updated in the localStorage.
  */
 function toggleSound() {
     toggleSoundState();
     updateSoundUI();
-    syncSoundUI();
-}
 
-
-/**
- * toggles the sound state.
- * It switches the sound on/off and updates the localStorage.
- */
-function toggleSoundState() {
-    isSoundOn = !isSoundOn;
-    localStorage.setItem('isMuted', !isSoundOn); // Update localStorage
-}
-
-
-/**
- * updates the sound button's icon and tooltip text based on the sound state.
- */
-function updateSoundUI() {
-    const svgContainer = document.getElementById('btn-volume-icon');
-    const tooltipText = document.getElementById('btn-volume-tooltip');
-
-    if (isSoundOn) {
-        updateIconAndTooltip(svgContainer, tooltipText, "Sound Off", getUnmutedIcon());
-        soundManager.unmuteSounds();
-    } else {
-        updateIconAndTooltip(svgContainer, tooltipText, "Sound On", getMutedIcon());
+    if (!isSoundOn) {
         soundManager.muteSounds();
+        soundManager.setVolume('gameMusic', 0);
+        soundManager.stopSound('gameMusic');
+    } else {
+        soundManager.unmuteSounds();
+        soundManager.setVolume('gameMusic', 1);
+        soundManager.playSound('gameMusic');
     }
 }
 
 
 /**
- * updates the sound status text and checkbox state based on the sound state.
+ * updates the sound-related UI elements based on the current sound state.
+ * updates the volume icon, tooltip text, checkbox, and sound status text.
+ */
+function updateSoundUI() {
+    const svgContainer = document.getElementById('btn-volume-icon');
+    const tooltipText = document.getElementById('btn-volume-tooltip');
+    const soundCheckbox = document.getElementById('chk-sound');
+    const soundText = document.getElementById('sound-status');
+
+    if (isSoundOn) {
+        updateIconAndTooltip(svgContainer, tooltipText, "Sound Off", getUnmutedIcon());
+    } else {
+        updateIconAndTooltip(svgContainer, tooltipText, "Sound On", getMutedIcon());
+    }
+
+    if (soundCheckbox) soundCheckbox.checked = isSoundOn;
+    if (soundText) soundText.textContent = isSoundOn ? 'Sound ON' : 'Sound OFF';
+}
+
+
+/**
+ * toggles the sound state (on/off) and updates the localStorage to reflect the current state.
+ * switches the sound on or off and saves this state to localStorage.
+ */
+function toggleSoundState() {
+    isSoundOn = !isSoundOn;
+    localStorage.setItem('isMuted', !isSoundOn);
+}
+
+
+/**
+ * synchronizes the UI elements with the current sound state.
  */
 function syncSoundUI() {
     const soundCheckbox = document.getElementById('chk-sound');

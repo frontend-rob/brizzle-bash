@@ -28,5 +28,4 @@ class ErrorImageObject extends MovableObject {
         this.X = X + 88;
         this.Y = Y - 24;
     }
-
 }

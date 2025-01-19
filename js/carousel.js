@@ -85,9 +85,7 @@ function createCarousel() {
 function moveSlide(step) {
     const items = document.querySelectorAll('.carousel-item');
     const totalSlides = items.length;
-
     currentSlide = (currentSlide + step + totalSlides) % totalSlides;
-
     updateCarousel();
 }
 

@@ -17,5 +17,4 @@ class HealthObject extends MovableObject {
         this.X = posX;
         this.Y = posY;
     }
-
 }

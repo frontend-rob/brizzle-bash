@@ -21,5 +21,4 @@ class Level {
         this.healthObjects = healthObjects;
         this.bombObjects = bombObjects;
     }
-
 }
