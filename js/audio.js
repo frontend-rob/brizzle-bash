@@ -1,5 +1,21 @@
 let hasPlayedHurtSound = false;
 
+const DEFAULT_VOLUMES = {
+    gameMusic: 1,
+    characterHurt: 0.5,
+    characterJump: 0.5,
+    characterPunch: 0.5,
+    characterSurprised: 0.5,
+    characterWalk: 0.5,
+    characterThrowItem: 0.5,
+    characterThrowError: 0.5,
+    collectHealth: 0.5,
+    collectItem: 0.5,
+    deadEndboss: 0.5,
+    hurtEndboss: 0.5,
+    deadEnemy: 0.5,
+    gameover: 0.25,
+};
 
 var soundManager = {
     sounds: {},
@@ -12,7 +28,7 @@ var soundManager = {
      */
     addSound: function (key, src) {
         this.sounds[key] = new Audio(src);
-        this.sounds[key].volume = 1;
+        this.sounds[key].volume = DEFAULT_VOLUMES[key] || 1;
     },
 
     /**
@@ -20,12 +36,12 @@ var soundManager = {
      * @param {string} key - the key of the sound to be played.
      */
     playSound: function (key) {
-        if (this.isMuted) {
-            return;
-        }
+        if (this.isMuted) return;
 
         if (this.sounds[key]) {
             this.sounds[key].play();
+        } else {
+            console.warn(`sound "${key}" not found.`);
         }
     },
 
@@ -61,21 +77,32 @@ var soundManager = {
         }
         this.isMuted = true;
         localStorage.setItem('isMuted', 'true');
-        console.log('Sounds muted');
+        console.log('sounds muted');
     },
 
     /**
-     * unmutes all sounds by restoring their volume to 1.
+     * unmutes all sounds by restoring their volume to predefined levels.
      */
     unmuteSounds: function () {
         for (let key in this.sounds) {
             if (this.sounds.hasOwnProperty(key)) {
-                this.sounds[key].volume = 1;
+                this.sounds[key].volume = DEFAULT_VOLUMES[key] || 1;
             }
         }
         this.isMuted = false;
         localStorage.setItem('isMuted', 'false');
-        console.log('Sounds unmuted');
+        console.log('sounds unmuted');
+    },
+
+    /**
+     * toggles the mute state of all sounds.
+     */
+    toggleMute: function () {
+        if (this.isMuted) {
+            this.unmuteSounds();
+        } else {
+            this.muteSounds();
+        }
     },
 
     /**
@@ -87,30 +114,47 @@ var soundManager = {
         if (this.sounds[key]) {
             this.sounds[key].volume = volume;
         }
-    }
+    },
+
+    /**
+     * initializes default volumes for all sounds based on predefined levels.
+     */
+    initializeSoundVolumes: function () {
+        for (const key in DEFAULT_VOLUMES) {
+            if (DEFAULT_VOLUMES.hasOwnProperty(key)) {
+                this.setVolume(key, DEFAULT_VOLUMES[key]);
+            }
+        }
+    },
+
+    /**
+     * initializes the mute state based on localStorage.
+     */
+    initializeMuteState: function () {
+        const isMuted = localStorage.getItem('isMuted') === 'true';
+        if (isMuted) {
+            this.muteSounds();
+        } else {
+            this.unmuteSounds();
+        }
+    },
 };
 
-
-// ! add the sounds
+// add sounds
 soundManager.addSound('gameMusic', '../assets/audio/bg-game.mp3');
 soundManager.addSound('introMusic', '../assets/audio/bg-intro.mp3');
-
 soundManager.addSound('characterHurt', '../assets/audio/character-hurt.mp3');
 soundManager.addSound('characterJump', '../assets/audio/character-jump.mp3');
 soundManager.addSound('characterPunch', '../assets/audio/character-punch.mp3');
 soundManager.addSound('characterSurprised', '../assets/audio/character-surprise.mp3');
 soundManager.addSound('characterWalk', '../assets/audio/character-walk.mp3');
-soundManager.addSound('characterThrowTtem', '../assets/audio/character-throw.mp3');
+soundManager.addSound('characterThrowItem', '../assets/audio/character-throw.mp3');
 soundManager.addSound('characterThrowError', '../assets/audio/character-error.mp3');
-
-
 soundManager.addSound('collectHealth', '../assets/audio/collect-health.mp3');
 soundManager.addSound('collectItem', '../assets/audio/collect-item.mp3');
-
 soundManager.addSound('deadEndboss', '../assets/audio/endboss-dead.mp3');
 soundManager.addSound('hurtEndboss', '../assets/audio/endboss-hurt.mp3');
 soundManager.addSound('deadEnemy', '../assets/audio/enemy-dead.mp3');
-
 soundManager.addSound('gameover', '../assets/audio/gameover.mp3');
 
 
@@ -252,8 +296,8 @@ function syncSoundUI() {
     const soundCheckbox = document.getElementById('chk-sound');
     const soundText = document.getElementById('sound-status');
 
-    if (soundCheckbox) soundCheckbox.checked = isSoundOn; // Sync checkbox with sound state
-    if (soundText) soundText.textContent = isSoundOn ? 'Sound ON' : 'Sound OFF'; // Update sound status text
+    if (soundCheckbox) soundCheckbox.checked = isSoundOn;
+    if (soundText) soundText.textContent = isSoundOn ? 'Sound ON' : 'Sound OFF';
 }
 
 

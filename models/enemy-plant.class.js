@@ -7,30 +7,10 @@ class Plant extends MovableObject {
     Y = 304;
     width = 171;
     height = 150;
-    enemyLife = 20;
-
-    IMAGES_WALK = [
-        '../assets/img/monsters/plant/ep-00.png',
-        '../assets/img/monsters/plant/ep-01.png',
-        '../assets/img/monsters/plant/ep-02.png',
-        '../assets/img/monsters/plant/ep-03.png',
-        '../assets/img/monsters/plant/ep-04.png',
-        '../assets/img/monsters/plant/ep-05.png',
-        '../assets/img/monsters/plant/ep-06.png',
-        '../assets/img/monsters/plant/ep-07.png',
-        '../assets/img/monsters/plant/ep-08.png',
-        '../assets/img/monsters/plant/ep-09.png',
-        '../assets/img/monsters/plant/ep-10.png',
-        '../assets/img/monsters/plant/ep-11.png',
-        '../assets/img/monsters/plant/ep-12.png',
-        '../assets/img/monsters/plant/ep-13.png',
-        '../assets/img/monsters/plant/ep-14.png',
-        '../assets/img/monsters/plant/ep-15.png',
-        '../assets/img/monsters/plant/ep-16.png',
-        '../assets/img/monsters/plant/ep-17.png',
-        '../assets/img/monsters/plant/ep-18.png',
-        '../assets/img/monsters/plant/ep-19.png'
-    ];
+    enemyLife = 10;
+    collisionOffsetX = 20;
+    collisionOffsetY = 20;
+    
 
 
     /**
@@ -38,8 +18,8 @@ class Plant extends MovableObject {
      * @param {number} posX - the initial x position of the plant.
      */
     constructor(posX) {
-        super().loadImage(this.IMAGES_WALK[0]);
-        this.loadImages(this.IMAGES_WALK);
+        super().loadImage(PLANT_IMAGES.IDLE[0]);
+        this.loadImages(PLANT_IMAGES.IDLE);
         this.X = posX;
         this.name = "Flesh Lotus";
         this.animate();
@@ -51,7 +31,7 @@ class Plant extends MovableObject {
      */
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALK);
+            this.playAnimation(PLANT_IMAGES.IDLE);
         }, 1000 / 35);
     };
 

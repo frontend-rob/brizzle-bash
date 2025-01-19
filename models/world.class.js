@@ -62,7 +62,7 @@ class World {
     pauseGame() {
         this.isPaused = true;
         console.log("Game Paused");
-
+        soundManager.setVolume('gameMusic', 0.25);
         cancelAnimationFrame(this.animationFrameId);
 
         this.character.pauseAnimation();
@@ -85,7 +85,8 @@ class World {
     runGame() {
         setInterval(() => {
             if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
-                // soundManager.playSound('introMusic');
+                soundManager.playSound('gameMusic');
+                soundManager.initializeSoundVolumes();
                 this.checkCollisions();
                 this.checkThrowObjects();
                 this.checkThrowableObjectCollision();
@@ -116,7 +117,7 @@ class World {
         const endBoss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         if (endBoss) {
             const distance = Math.abs(this.character.X - endBoss.X);
-            if (distance <= 400 && !this.hasSeenEndboss) {
+            if (distance <= 480 && !this.hasSeenEndboss) {
                 this.character.triggerSurprise();
                 this.hasSeenEndboss = true;
             }
@@ -126,7 +127,10 @@ class World {
 
     handleEnemyCollision() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy, this.collisionOffsetX, this.collisionOffsetY)) {
+            const offsetX = enemy.collisionOffsetX || 0;
+            const offsetY = enemy.collisionOffsetY || 0;
+
+            if (this.character.isColliding(enemy, offsetX, offsetY)) {
                 this.handleCollisionWithEnemy(enemy);
             }
         });
@@ -225,7 +229,7 @@ class World {
     }
 
     throwSpikyBall() {
-        soundManager.playSound('characterThrowTtem');
+        soundManager.playSound('characterThrowItem');
 
         let spikyBall = new ThrowableObject(this.character.X + 20, this.character.Y + 50, this, this.character);
         this.throwableObjects.push(spikyBall);

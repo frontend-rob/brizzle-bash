@@ -304,9 +304,9 @@ function isFullscreenActive() {
 function enterFullscreen(element) {
     requestFullscreen(element, [
         "requestFullscreen",
-        "mozRequestFullScreen", // firefox
-        "webkitRequestFullscreen", // chrome, safari, opera
-        "msRequestFullscreen" // ie/edge
+        "mozRequestFullScreen",
+        "webkitRequestFullscreen",
+        "msRequestFullscreen"
     ]);
 }
 
@@ -317,9 +317,9 @@ function enterFullscreen(element) {
 function exitFullscreen() {
     requestFullscreen(document, [
         "exitFullscreen",
-        "mozCancelFullScreen", // firefox
-        "webkitExitFullscreen", // chrome, safari, opera
-        "msExitFullscreen" // ie/edge
+        "mozCancelFullScreen",
+        "webkitExitFullscreen",
+        "msExitFullscreen"
     ]);
 }
 

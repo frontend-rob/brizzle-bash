@@ -7,54 +7,13 @@ class Endboss extends MovableObject {
     Y = 100;
     width = 400;
     height = 350;
-    speedX = 0.125;
+    speedX = 0.25;
     enemyLife = 100;
     lastHitTime = 0;
     hitCooldown = 1000;
     isHit = false;
-
-    IMAGES_WALK = [
-        '../assets/img/monsters/mushroom/walk/mr-00.png',
-        '../assets/img/monsters/mushroom/walk/mr-01.png',
-        '../assets/img/monsters/mushroom/walk/mr-02.png',
-        '../assets/img/monsters/mushroom/walk/mr-03.png',
-        '../assets/img/monsters/mushroom/walk/mr-04.png',
-        '../assets/img/monsters/mushroom/walk/mr-05.png',
-        '../assets/img/monsters/mushroom/walk/mr-06.png',
-        '../assets/img/monsters/mushroom/walk/mr-07.png',
-        '../assets/img/monsters/mushroom/walk/mr-08.png',
-        '../assets/img/monsters/mushroom/walk/mr-09.png',
-        '../assets/img/monsters/mushroom/walk/mr-10.png',
-        '../assets/img/monsters/mushroom/walk/mr-11.png',
-        '../assets/img/monsters/mushroom/walk/mr-12.png',
-        '../assets/img/monsters/mushroom/walk/mr-13.png',
-        '../assets/img/monsters/mushroom/walk/mr-14.png',
-        '../assets/img/monsters/mushroom/walk/mr-15.png',
-        '../assets/img/monsters/mushroom/walk/mr-16.png',
-        '../assets/img/monsters/mushroom/walk/mr-17.png',
-        '../assets/img/monsters/mushroom/walk/mr-18.png',
-        '../assets/img/monsters/mushroom/walk/mr-19.png',
-        '../assets/img/monsters/mushroom/walk/mr-20.png',
-        '../assets/img/monsters/mushroom/walk/mr-21.png',
-        '../assets/img/monsters/mushroom/walk/mr-22.png',
-        '../assets/img/monsters/mushroom/walk/mr-23.png',
-        '../assets/img/monsters/mushroom/walk/mr-24.png',
-        '../assets/img/monsters/mushroom/walk/mr-25.png',
-        '../assets/img/monsters/mushroom/walk/mr-26.png',
-        '../assets/img/monsters/mushroom/walk/mr-27.png',
-        '../assets/img/monsters/mushroom/walk/mr-28.png',
-        '../assets/img/monsters/mushroom/walk/mr-29.png'
-    ];
-
-    IMAGES_HIT = [
-        '../assets/img/monsters/mushroom/hit/mrh-00.png',
-        '../assets/img/monsters/mushroom/hit/mrh-01.png',
-        '../assets/img/monsters/mushroom/hit/mrh-02.png',
-        '../assets/img/monsters/mushroom/hit/mrh-03.png',
-        '../assets/img/monsters/mushroom/hit/mrh-04.png',
-        '../assets/img/monsters/mushroom/hit/mrh-05.png',
-        '../assets/img/monsters/mushroom/hit/mrh-06.png'
-    ];
+    collisionOffsetX = 30;
+    collisionOffsetY = 25;
 
 
     /**
@@ -62,9 +21,9 @@ class Endboss extends MovableObject {
      * @param {number} posX - the initial x position of the endboss.
      */
     constructor(posX) {
-        super().loadImage(this.IMAGES_WALK[0]);
-        this.loadImages(this.IMAGES_WALK);
-        this.loadImages(this.IMAGES_HIT);
+        super().loadImage(ENDBOSS_IMAGES.WALK[0]);
+        this.loadImages(ENDBOSS_IMAGES.WALK);
+        this.loadImages(ENDBOSS_IMAGES.HIT);
         this.name = "Fungal Colossus";
         this.X = posX;
         this.animate();
@@ -78,24 +37,25 @@ class Endboss extends MovableObject {
         setInterval(() => {
             this.moveLeft();
             if (this.isHit) {
-                this.playAnimation(this.IMAGES_HIT);
+                this.playAnimation(ENDBOSS_IMAGES.HIT);
             } else {
-                this.playAnimation(this.IMAGES_WALK);
+                this.playAnimation(ENDBOSS_IMAGES.WALK);
             }
         }, 1000 / 60);
     };
 
 
-    /**
-     * reduces the enemy's life by the specified amount of damage and plays a hit animation.
-     * @param {number} damage - the amount of damage inflicted.
-     */
+/**
+ * reduces the enemy's life by the specified amount of damage, increases its speed, and plays a hit animation.
+ * @param {number} damage - the amount of damage inflicted.
+ */
     getHit(damage) {
         const currentTime = new Date().getTime();
         if (currentTime - this.lastHitTime < this.hitCooldown) {
             return;
         }
 
+        // Reduces life
         this.enemyLife -= damage;
         soundManager.playSound('hurtEndboss');
         if (this.enemyLife < 0) {
@@ -103,9 +63,15 @@ class Endboss extends MovableObject {
         }
         console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
 
+        // Increases speed after being hit
+        this.speedX += 0.25;
+        console.log(`Endboss speed increased to: ${this.speedX}`);
+
+        // Play hit animation
         this.isHit = true;
         setTimeout(() => this.isHit = false, 2500);
 
+        // Check if enemy is dead
         if (this.enemyLife <= 0) {
             this.isDead();
         }
@@ -114,14 +80,13 @@ class Endboss extends MovableObject {
     }
 
 
-    /**
+
+/**
  * handles the logic when the enemy's life reaches zero.
  */
     isDead() {
         console.log(`Enemy ${this.name} has died!`);
-        soundManager.playSound('hurtEndboss');
         soundManager.playSound('deadEndboss');
-        // soundManager.playSound('gameover');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
