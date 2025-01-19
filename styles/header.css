@@ -5,9 +5,9 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: #0c0d0e;
-    backdrop-filter: blur(0.25rem);
     height: 5rem;
+    background-color: var(--bg-base-200);
+    backdrop-filter: blur(0.25rem);
     user-select: none;
 }
 
@@ -26,8 +26,8 @@ header {
     align-items: center;
     gap: 0.5rem;
     font-size: 1.5rem;
-    letter-spacing: -0.75px;
     font-weight: 500;
+    letter-spacing: -0.75px;
 }
 
 .logo-img {
@@ -51,10 +51,10 @@ header {
 .tooltip-text {
     visibility: hidden;
     width: max-content;
+    padding: 0.75rem;
     background-color: var(--bg-neutral);
     color: var(--primary-content);
     text-align: center;
-    padding: 0.75rem;
     border-radius: 0.5rem;
     position: absolute;
     top: 100%;
@@ -87,7 +87,6 @@ header {
 #btn-popup-menu {
     display: none;
 }
-
 
 @media screen and (max-width: 48rem) {
     .main-logo span {

@@ -1,17 +1,16 @@
 .modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    z-index: 100;
+    height: 100%;
+    padding: 1rem;
     background-color: var(--backdrop-md);
     backdrop-filter: blur(0.25rem);
-    padding: 1rem;
+    z-index: 100;
 }
 
 #popup-menu {
@@ -27,10 +26,10 @@
     height: 100%;
     margin: auto;
     padding: 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid var(--bg-neutral);
-    background-color: var(--bg-base-100);
     gap: 3rem;
+    background-color: var(--bg-base-100);
+    border: 1px solid var(--bg-neutral);
+    border-radius: 1.5rem;
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
     clip-path: inset(0 round 1.5rem);
@@ -50,9 +49,9 @@
 }
 
 .modal-headline svg {
-    fill: var(--base-content);
     height: 2rem;
     width: 2rem;
+    fill: var(--base-content);
 }
 
 .modal-content {
@@ -64,6 +63,7 @@
 .modal-guide-item {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
 }
 
 .modal-settings-item {
@@ -83,15 +83,10 @@
 .modal-settings-item:hover {
     background-color: color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
     cursor: pointer;
-
-    input {
-        border-color: var(--success);
-    }
 }
 
-.modal-guide-item,
-.modal-settings-item {
-    gap: 1.5rem;
+.modal-settings-item:hover input {
+    border-color: var(--success);
 }
 
 .modal-guide-item-category {
@@ -101,9 +96,9 @@
 }
 
 .modal-guide-item-category svg {
-    fill: var(--base-content);
-    width: 2rem;
     height: 2rem;
+    width: 2rem;
+    fill: var(--base-content);
 }
 
 .tabs-button-bar {
@@ -113,12 +108,12 @@
 }
 
 .tab-btn {
+    height: 2.5rem;
     border: 1px dashed var(--bg-neutral);
     border-bottom-left-radius: unset;
     border-bottom-right-radius: unset;
     background-color: unset;
     border-bottom: unset;
-    height: 2.5rem;
 }
 
 .tab-btn>.indicator {
@@ -129,23 +124,23 @@
 
 .tab-btn.active {
     color: var(--primary-content);
+}
 
-    .indicator {
-        fill: var(--primary);
-    }
+.tab-btn.active .indicator {
+    fill: var(--primary);
 }
 
 .tab-content {
+    padding: 1.5rem;
+    border: 1px dashed var(--bg-neutral);
     border-radius: 1rem;
     border-top-left-radius: unset;
-    border: 1px dashed var(--bg-neutral);
-    padding: 1.5rem;
 }
 
 .tab-content-settings {
-    border-radius: 1rem;
-    border: 1px dashed var(--bg-neutral);
     padding: 1.5rem;
+    border: 1px dashed var(--bg-neutral);
+    border-radius: 1rem;
 }
 
 .tab-btn-txt-mobile {
@@ -177,22 +172,22 @@ kbd {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: .5rem;
-    border: 1px solid var(--bg-neutral);
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 1rem .5rem;
     background-color: var(--bg-base-200);
+    border: 1px solid var(--bg-neutral);
+    border-radius: .5rem;
     font-size: 1.25rem;
     font-weight: 500;
-    height: 2.5rem;
-    width: 2.5rem;
-    aspect-ratio: 1/1;
-    padding: 1rem .5rem;
     color: var(--primary-content);
+    aspect-ratio: 1/1;
 }
 
 kbd svg {
-    fill: var(--primary-content);
     height: 1.5rem;
     width: 1.5rem;
+    fill: var(--primary-content);
 }
 
 .health-icon {
@@ -201,18 +196,6 @@ kbd svg {
 
 .bomb-icon {
     fill: var(--primary-content);
-}
-
-.article {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    line-height: 1.75;
-}
-
-.article-accent {
-    font-weight: 700;
-    color: var(--base-content);
 }
 
 .carousel-container {
@@ -225,8 +208,8 @@ kbd svg {
 
 .carousel {
     display: flex;
-    transition: transform 300ms ease-in-out;
     height: 100%;
+    transition: transform 300ms ease-in-out;
 }
 
 .carousel-item {
@@ -241,13 +224,13 @@ kbd svg {
 }
 
 .image-container {
-    width: 100%;
-    flex: 1;
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: auto;
     overflow: visible;
+    flex: 1;
 }
 
 .carousel-item img {
@@ -270,8 +253,8 @@ kbd svg {
 .carousel-caption {
     display: flex;
     justify-content: center;
-    background-color: var(--bg-base-200);
     padding: 0.75rem 1.5rem;
+    background-color: var(--bg-base-200);
     border-radius: 0.75rem;
     text-align: center;
 }
@@ -300,8 +283,8 @@ kbd svg {
 
 .game-over-screen {
     position: absolute;
-    height: calc(100% - 6rem);
     width: 100%;
+    height: calc(100% - 6rem);
     z-index: 1000;
 }
 
@@ -311,12 +294,12 @@ kbd svg {
     justify-content: space-evenly;
     width: 100%;
     height: 100%;
+    padding: 1rem;
     gap: 2rem;
-    text-align: center;
     background-color: #000000aa;
     backdrop-filter: blur(4px);
-    padding: 1rem;
     border-radius: calc(1rem - 2px);
+    text-align: center;
 }
 
 .game-over-screen-content h1 {
@@ -339,10 +322,10 @@ kbd svg {
 .popup-menu-inner {
     display: flex;
     flex-direction: column;
-    border-radius: 1rem;
-    border: 1px dashed var(--bg-neutral);
     padding: 1.5rem;
     gap: 1rem;
+    border: 1px dashed var(--bg-neutral);
+    border-radius: 1rem;
 }
 
 .popup-menu-item {
@@ -365,9 +348,9 @@ kbd svg {
 label {
     display: flex;
     align-items: center;
+    width: 100%;
     gap: 1rem;
     cursor: pointer;
-    width: 100%;
 }
 
 @media (pointer: coarse) and (orientation: landscape) {

@@ -33,10 +33,10 @@
 .btn:hover {
     background-color: var(--bg-neutral);
     color: var(--primary-content);
+}
 
-    svg {
-        fill: var(--primary-content);
-    }
+.btn:hover svg {
+    fill: var(--primary-content);
 }
 
 .btn.disabled {
@@ -45,14 +45,14 @@
 
 .btn.disabled:hover {
     cursor: not-allowed;
+}
 
-    svg {
-        fill: var(--base-content);
-    }
+.btn.disabled:hover svg {
+    fill: var(--base-content);
+}
 
-    .tooltip-text {
-        display: none;
-    }
+.btn.disabled:hover .tooltip-text {
+    display: none;
 }
 
 .btn-primary {
@@ -67,10 +67,10 @@
 .btn-primary:hover {
     background-color: color-mix(in srgb, var(--primary) 70%, #ff52d9 30%);
     color: var(--bg-base-200);
+}
 
-    svg {
-        fill: var(--bg-base-200);
-    }
+.btn-primary:hover svg {
+    fill: var(--bg-base-200);
 }
 
 .btn-ghost {
@@ -103,15 +103,15 @@
 
 .checkbox {
     flex-shrink: 0;
-    background-color: var(--bg-base-100);
     height: 1.5rem;
     width: 1.5rem;
+    background-color: var(--bg-base-100);
+    border: 1px solid var(--bg-neutral);
+    border-radius: 0.5rem;
     cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 0.5rem;
-    border: 1px solid var(--bg-neutral);
 }
 
 .checkbox:checked,

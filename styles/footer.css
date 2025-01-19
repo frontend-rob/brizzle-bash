@@ -57,22 +57,22 @@ footer {
 .footer-links a {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--base-content);
+    padding: .375rem 0.75rem;
     border: 1px solid color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
     border-radius: 1.5rem;
     background-color: unset;
-    padding: .375rem 0.75rem;
+    gap: 0.5rem;
+    color: var(--base-content);
 }
 
 .footer-links a:hover {
     color: var(--primary-content);
     border: 1px solid var(--primary);
     background-color: color-mix(in srgb, var(--primary) 10%, transparent 100%);
+}
 
-    svg {
-        fill: var(--primary-content);
-    }
+.footer-links a:hover svg {
+    fill: var(--primary-content);
 }
 
 .made-with-section {
@@ -86,13 +86,12 @@ footer {
 }
 
 .made-with-section>svg {
-    fill: var(--primary);
     height: 1.0rem;
     width: 1.0rem;
+    fill: var(--primary);
 }
 
 @media screen and (max-width: 30rem) {
-
     .footer-links {
         flex-direction: column;
     }
