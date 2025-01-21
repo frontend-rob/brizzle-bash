@@ -85,7 +85,7 @@ class Character extends MovableObject {
                 this.flipImage = true;
             }
 
-            if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isHurt()) {
+            if ((this.world.keyboard.UP) && !this.isHurt()) {
                 this.jump();
                 soundManager.playSound('characterJump');
             }
