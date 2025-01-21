@@ -25,11 +25,13 @@ class Plant extends Enemy {
 
 
     /**
-     * animates the plant by playing the walk animation.
-     */
+    * animates the squid by moving it left and playing the walk animation.
+    */
     animate() {
         setInterval(() => {
-            this.playAnimation(PLANT_IMAGES.IDLE);
+            if (this.shouldAnimate()) {
+                this.playAnimation(PLANT_IMAGES.IDLE);
+            }
         }, 1000 / 35);
     }
 }

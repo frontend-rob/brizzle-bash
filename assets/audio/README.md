@@ -8,8 +8,6 @@ This directory contains various sound assets used for the game. The assets are s
 
 Please ensure compliance with the respective licenses when using these assets in your projects.
 
-
-
 ### 📂 Folder Structure
 
 ```
@@ -60,10 +58,6 @@ Below is the list of sound assets and their respective authors:
   - **Source:** [freesound.org](https://freesound.org/s/711256/)
   - **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-- **character-walk.mp3** by *Geoff-Bremner-Audio*  
-  - **Source:** [freesound.org](https://freesound.org/s/745654/)
-  - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
-
 - **collect-health.mp3** by *Xiko__*  
   - **Source:** [freesound.org](https://freesound.org/s/711252/)
   - **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
@@ -87,4 +81,3 @@ Below is the list of sound assets and their respective authors:
 - **gameover.mp3** by *el_boss*  
   - **Source:** [freesound.org](https://freesound.org/s/631984/)
   - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
-

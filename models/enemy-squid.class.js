@@ -35,8 +35,10 @@ class Squid extends Enemy {
      */
     animate() {
         setInterval(() => {
-            this.moveLeftOscillate();
-            this.playAnimation(SQUID_IMAGES.WALK);
+            if (this.shouldAnimate()) {
+                this.moveLeftOscillate();
+                this.playAnimation(SQUID_IMAGES.WALK);
+            }
         }, 1000 / 30);
     }
 }

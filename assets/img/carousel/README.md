@@ -20,7 +20,6 @@ assets/img/carousel/
     ├── spr-00.png    # Soul Phantom
     ├── squ-00.png    # Shadow Squid
     └── talku-00.png  # Brizzly
-
 ```
 
 

@@ -369,9 +369,9 @@ label {
         border-radius: unset;
     }
 
-    #fullscreen-checkbox {
+    /* #fullscreen-checkbox {
         display: none;
-    }
+    } */
 }
 
 @media (pointer: coarse) and (orientation: portrait) {

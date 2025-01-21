@@ -6,7 +6,6 @@ const DEFAULT_VOLUMES = {
     characterJump: 0.5,
     characterPunch: 0.5,
     characterSurprised: 0.5,
-    characterWalk: 0.5,
     characterThrowItem: 0.5,
     characterThrowError: 0.5,
     collectHealth: 0.5,
@@ -147,7 +146,6 @@ soundManager.addSound('characterHurt', './assets/audio/character-hurt.mp3');
 soundManager.addSound('characterJump', './assets/audio/character-jump.mp3');
 soundManager.addSound('characterPunch', './assets/audio/character-punch.mp3');
 soundManager.addSound('characterSurprised', './assets/audio/character-surprise.mp3');
-soundManager.addSound('characterWalk', './assets/audio/character-walk.mp3');
 soundManager.addSound('characterThrowItem', './assets/audio/character-throw.mp3');
 soundManager.addSound('characterThrowError', './assets/audio/character-error.mp3');
 soundManager.addSound('collectHealth', './assets/audio/collect-health.mp3');
@@ -162,7 +160,7 @@ let isSoundOn = true;
 
 
 // check localStorage for the muted state when the page loads
-window.addEventListener('load', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const savedMutedState = loadMutedState();
     initializeSoundState(savedMutedState);
     initializeSoundUI(savedMutedState);
@@ -263,12 +261,16 @@ function toggleSound() {
 
     if (!isSoundOn) {
         soundManager.muteSounds();
-        soundManager.setVolume('gameMusic', 0);
-        soundManager.stopSound('gameMusic');
+        if (window.location.pathname.endsWith('game.html')) {
+            soundManager.setVolume('gameMusic', 0);
+            soundManager.stopSound('gameMusic');
+        }
     } else {
         soundManager.unmuteSounds();
-        soundManager.setVolume('gameMusic', 1);
-        soundManager.playSound('gameMusic');
+        if (window.location.pathname.endsWith('game.html')) {
+            soundManager.setVolume('gameMusic', 1);
+            soundManager.playSound('gameMusic');
+        }
     }
 }
 

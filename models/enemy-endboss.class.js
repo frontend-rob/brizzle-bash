@@ -1,8 +1,8 @@
 /**
  * represents an object of the endboss.
- * @extends MovableObject
+ * @extends Enemy
  */
-class Endboss extends MovableObject {
+class Endboss extends Enemy {
 
     Y = 100;
     width = 400;
@@ -35,11 +35,13 @@ class Endboss extends MovableObject {
      */
     animate() {
         setInterval(() => {
-            this.moveLeft();
-            if (this.isHit) {
-                this.playAnimation(ENDBOSS_IMAGES.HIT);
-            } else {
-                this.playAnimation(ENDBOSS_IMAGES.WALK);
+            if (this.shouldAnimate()) {
+                if (!this.isHit) {
+                    this.moveLeft();
+                    this.playAnimation(ENDBOSS_IMAGES.WALK);
+                } else {
+                    this.playAnimation(ENDBOSS_IMAGES.HIT);
+                }
             }
         }, 1000 / 60);
     }
@@ -86,7 +88,7 @@ class Endboss extends MovableObject {
      * increases the speed of the endboss after being hit.
      */
     increaseSpeed() {
-        this.speedX += 0.25;
+        this.speedX += 0.5;
         console.log(`Endboss speed increased to: ${this.speedX}`);
     }
 

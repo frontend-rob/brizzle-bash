@@ -51,9 +51,7 @@ assets/img/monsters/
         ├── ...
         └── squ-19.png
 
-
 ```
-
 
 ### ⚠️ Why Are the Assets Excluded?
 

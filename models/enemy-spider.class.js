@@ -27,12 +27,14 @@ class Spider extends Enemy {
 
 
     /**
-     * animates the spider by moving it left and playing the walk animation.
+     * animates the squid by moving it left and playing the walk animation.
      */
     animate() {
         setInterval(() => {
-            this.moveLeft();
-            this.playAnimation(SPIDER_IMAGES.WALK);
+            if (this.shouldAnimate()) {
+                this.moveLeft();
+                this.playAnimation(SPIDER_IMAGES.WALK);
+            }
         }, 1000 / 60);
     }
 }

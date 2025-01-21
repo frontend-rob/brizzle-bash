@@ -31,12 +31,14 @@ class Spirit extends Enemy {
 
 
     /**
-     * animates the spirit by moving it left and playing the walk animation.
+     * animates the squid by moving it left and playing the walk animation.
      */
     animate() {
         setInterval(() => {
-            this.moveLeftOscillate();
-            this.playAnimation(SPIRIT_IMAGES.WALK);
+            if (this.shouldAnimate()) {
+                this.moveLeftOscillate();
+                this.playAnimation(SPIRIT_IMAGES.WALK);
+            }
         }, 1000 / 45);
     }
 }

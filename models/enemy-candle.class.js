@@ -27,15 +27,14 @@ class Candle extends Enemy {
 
 
     /**
-     * animates the candle by moving it left and playing the walk animation.
+     * animates the squid by moving it left and playing the walk animation.
      */
     animate() {
         setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
-
-        setInterval(() => {
-            this.playAnimation(CANDLE_IMAGES.WALK);
-        }, 1000 / 60);
+            if (this.shouldAnimate()) {
+                this.moveLeft();
+                this.playAnimation(CANDLE_IMAGES.WALK);
+            }
+        }, 1000 / 30);
     }
 }

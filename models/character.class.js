@@ -62,7 +62,6 @@ class Character extends MovableObject {
     animate() {
         setInterval(() => {
             if (this.world.isPaused) {
-                soundManager.pauseSound('characterWalk');
                 soundManager.pauseSound('characterJump');
                 soundManager.pauseSound('characterPunch');
                 soundManager.pauseSound('characterHurt');
@@ -76,22 +75,14 @@ class Character extends MovableObject {
                 return;
             }
 
-            soundManager.pauseSound('characterWalk');
-
             if (this.world.keyboard.RIGHT && this.X < this.world.level.levelEndX) {
                 this.moveRight();
                 this.flipImage = false;
-                if (!this.isHurt()) {
-                    soundManager.playSound('characterWalk');
-                }
             }
 
             if (this.world.keyboard.LEFT && this.X > -480) {
                 this.moveLeft();
                 this.flipImage = true;
-                if (!this.isHurt()) {
-                    soundManager.playSound('characterWalk');
-                }
             }
 
             if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isHurt()) {

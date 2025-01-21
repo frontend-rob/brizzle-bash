@@ -28,6 +28,12 @@ header {
     font-size: 1.5rem;
     font-weight: 500;
     letter-spacing: -0.75px;
+    border-bottom: unset
+}
+
+.main-logo:hover {
+    border-bottom: unset;
+    color: unset;
 }
 
 .logo-img {

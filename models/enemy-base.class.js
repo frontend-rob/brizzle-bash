@@ -11,6 +11,29 @@ class Enemy extends MovableObject {
 
 
     /**
+     * calculates the distance between the squid and the character.
+     * @returns {number} the distance between the squid and the character.
+     */
+    calculateDistanceToCharacter() {
+        if (this.world && this.world.character) {
+            const characterX = this.world.character.X;
+            return Math.abs(this.X - characterX);
+        }
+        return null;
+    }
+
+
+    /**
+     * checks if the squid should animate based on the distance to the character.
+     * @returns {boolean} true if the squid should animate, otherwise false.
+     */
+    shouldAnimate() {
+        const distance = this.calculateDistanceToCharacter();
+        return distance !== null && distance <= 768;
+    }
+
+
+    /**
     * reduces the enemy's life by the given damage amount.
     * @param {number} damage - the amount of damage to inflict.
     */

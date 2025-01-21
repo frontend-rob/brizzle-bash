@@ -34,12 +34,14 @@ class Spinner extends Enemy {
 
 
     /**
-     * animates the spinner by moving it in a sinusoidal pattern and playing the walk animation.
+     * animates the squid by moving it left and playing the walk animation.
      */
     animate() {
         setInterval(() => {
-            this.moveSinus();
-            this.playAnimation(SPINNER_IMAGES.WALK);
+            if (this.shouldAnimate()) {
+                this.moveSinus();
+                this.playAnimation(SPINNER_IMAGES.WALK);
+            }
         }, 1000 / 60);
     }
 }

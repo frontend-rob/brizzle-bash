@@ -1,3 +1,6 @@
+/* .main-logo {
+    border-bottom: unset
+} */
 .article-wrapper {
     display: flex;
     flex-direction: column;
@@ -97,6 +100,47 @@ section {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.article-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    gap: unset;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style-position: inside;
+    color: hsla(210, 1%, 67%, 70%);
+}
+
+li {
+    padding-left: 1rem;
+}
+
+a {
+    border-bottom: 1px dashed var(--base-content);
+}
+
+a:hover {
+    color: var(--primary);
+    border-bottom: 1px dashed var(--primary);
+}
+
+code {
+    font-family: "Fira Code", monospace;
+    padding: 0.125rem 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
+    border-radius: 1.5rem;
+    background-color: unset;
 }
 
 @media screen and (max-width: 48rem) {

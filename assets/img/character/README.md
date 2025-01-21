@@ -56,9 +56,7 @@ assets/img/character/
         ├── walku_001.png
         ├── ...
         └── walku_061.png
-
 ```
-
 
 ### ⚠️ Why Are the Assets Excluded?
 

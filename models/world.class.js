@@ -107,14 +107,25 @@ class World {
 
 
     /**
+     * 
+    /**
+     * starts the background music if sound is on.
+     */
+    startBackgroundMusic() {
+        if (isSoundOn) {
+            soundManager.playSound('gameMusic');
+        }
+    }
+
+
+    /**
      * runs the game logic in intervals, including collision detection.
      */
     runGame() {
+        this.startBackgroundMusic();
+
         setInterval(() => {
             if (!this.isPaused && (!this.character.isDead() || !this.character.deadAnimationPlayed)) {
-                if (isSoundOn) {
-                    soundManager.playSound('gameMusic');
-                }
                 soundManager.initializeSoundVolumes();
                 this.checkCollisions();
                 this.checkThrowObjects();
