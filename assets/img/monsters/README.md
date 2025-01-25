@@ -16,10 +16,17 @@ assets/img/monsters/
     │   └── cm-39.png
     │
     ├── mushroom/
-    │   ├── mr-00.png
-    │   ├── mr-01.png
-    │   ├── ...
-    │   └── mr-29.png
+    │   ├── hit
+    │   │   ├── mrh-01.png
+    │   │   ├── mrh-02.png
+    │   │   ├── ...
+    │   │   └── mrh-06.png
+    │   │       
+    │   └── walk/
+    │       ├── mr-01.png
+    │       ├── mr-02.png
+    │       ├── ...
+    │       └── mr-29.png
     │
     ├── plant/
     │   ├── ep-00.png
@@ -50,7 +57,6 @@ assets/img/monsters/
         ├── squ-01.png
         ├── ...
         └── squ-19.png
-
 ```
 
 ### ⚠️ Why Are the Assets Excluded?

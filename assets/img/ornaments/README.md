@@ -11,7 +11,6 @@ assets/img/ornaments/
     ├── collectable-heart.png
     ├── spiky-ball.png
     └── throw-error.mp3
-
 ```
 
 ### ⚠️ Why Are the Assets Excluded?

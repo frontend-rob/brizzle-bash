@@ -3,8 +3,6 @@
 This directory contains exclusive assets displayed in a carousel as part of the project.
 Each asset represents a unique character or state.
 
-
-
 ### 📂 Folder Structure
 
 The images are organized in the carousel folder with filenames corresponding to different characters:
@@ -21,7 +19,6 @@ assets/img/carousel/
     ├── squ-00.png    # Shadow Squid
     └── talku-00.png  # Brizzly
 ```
-
 
 ### ⚠️ Why Are the Assets Excluded?
 

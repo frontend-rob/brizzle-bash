@@ -9,7 +9,6 @@ assets/img/main/
 
     ├── bg-img.svg
     └── logo.mp3
-
 ```
 
 ### ⚠️ Why Are the Assets Excluded?
