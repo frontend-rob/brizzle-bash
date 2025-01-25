@@ -163,7 +163,7 @@ let isSoundOn = true;
 document.addEventListener('DOMContentLoaded', () => {
     const savedMutedState = loadMutedState();
     initializeSoundState(savedMutedState);
-    initializeSoundUI(savedMutedState);
+    initializeSoundUI(savedMutedState);  // Stelle sicher, dass das UI immer synchronisiert wird
 });
 
 
@@ -184,12 +184,15 @@ function initializeSoundState(savedMutedState) {
     if (savedMutedState === 'true') {
         soundManager.muteSounds();
         isSoundOn = false;
-    } else {
+    } else if (savedMutedState === 'false') {
         soundManager.unmuteSounds();
         isSoundOn = true;
+    } else {
+        // Wenn der localStorage-Wert nicht gesetzt ist, setze Standardwert (stumm)
+        soundManager.muteSounds();
+        isSoundOn = false;
     }
 }
-
 
 /**
  * initializes the sound UI (icon, tooltip, checkbox, text) based on the current sound state.
@@ -205,6 +208,7 @@ function initializeSoundUI(savedMutedState) {
     syncCheckboxState(savedMutedState, soundCheckbox);
     updateSoundText(savedMutedState, soundText);
 }
+
 
 
 /**

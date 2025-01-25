@@ -89,10 +89,6 @@ function preloadImage(url) {
 }
 
 
-
-
-
-
 /**
  * shows the game over screen with a custom or default message.
  * 
@@ -101,7 +97,7 @@ function preloadImage(url) {
 function showGameOverScreen(dynamicText) {
     stopAllActions();
     displayGameOverScreen(dynamicText);
-    disableSettingBarButtons();
+    disableGameControls();
     addGameOverScreenListeners();
 }
 
@@ -121,13 +117,23 @@ function displayGameOverScreen(dynamicText) {
 
 
 /**
- * disables all buttons in the setting bar.
+ * disables all specified buttons in the setting bar and the toggle-pause-btn.
  */
-function disableSettingBarButtons() {
-    const settingBarButtons = document.querySelectorAll('.setting-bar button');
-    settingBarButtons.forEach((button) => {
-        button.disabled = true;
-        button.classList.add('disabled');
+function disableGameControls() {
+
+    const buttonIds = [
+        'btn-volume',
+        'btn-game-guide',
+        'btn-settings',
+        'btn-toggle-pause'
+    ];
+
+    buttonIds.forEach((buttonId) => {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            button.disabled = true;
+            button.classList.add('disabled');
+        }
     });
 }
 
@@ -231,9 +237,9 @@ const PAUSE_BUTTON = {
  * @param {boolean} isPaused - whether the game is paused.
  */
 function updateButtonState(buttonState, isPaused) {
-    const iconSvg = document.getElementById('pause-btn-icon');
-    const buttonText = document.getElementById('pause-btn-text');
-    const btn = document.getElementById('toggle-pause-btn');
+    const iconSvg = document.getElementById('btn-pause-icon');
+    const buttonText = document.getElementById('btn-pause-text');
+    const btn = document.getElementById('btn-toggle-pause');
 
     iconSvg.innerHTML = buttonState.svg;
     buttonText.textContent = buttonState.text;

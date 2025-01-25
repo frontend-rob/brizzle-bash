@@ -125,8 +125,14 @@ function closeInfoGuide() {
  * displays the "game settings" modal.
  */
 function showGameSettings() {
+    const soundCheckbox = document.getElementById('chk-sound');
+    if (soundCheckbox) {
+        soundCheckbox.checked = isSoundOn;
+    }
+
     showModal('game-settings-modal', 'modal-container');
-    if (typeof world !== 'undefined' && world) { // Überprüfen, ob `world` definiert ist
+
+    if (typeof world !== 'undefined' && world) {
         world.pauseGame();
         updateButtonState(PLAY_BUTTON, true);
     }

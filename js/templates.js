@@ -152,18 +152,18 @@ function getSettingsModalTemplate() {
             <section class="tab-content-settings">
                 <div class="modal-content">
                     <form id="settings-form" class="settings-form" onsubmit="applySettings(event)">
-                        <div id="checkbox-sound" class="modal-settings-item">
+                        <label for="chk-sound" id="checkbox-sound" class="modal-settings-item">
                             <h3>Sound Effects</h3>
                             <input type="checkbox" name="checkbox-sound" id="chk-sound" class="checkbox">
-                        </div>
-                        <div id="fullscreen-checkbox" class="modal-settings-item">
+                        </label>
+                        <label for="chk-full-screen" id="fullscreen-checkbox" class="modal-settings-item">
                             <h3>Fullscreen View</h3>
                             <input type="checkbox" name="checkbox-full-screen" id="chk-full-screen" class="checkbox">
-                        </div>
-                        <div id="debug-checkbox" class="modal-settings-item">
+                        </label>
+                        <label for="chk-debug" id="debug-checkbox" class="modal-settings-item">
                             <h3>Collision Frames</h3>
                             <input type="checkbox" name="checkbox-debug-mode" id="chk-debug" class="checkbox">
-                        </div>
+                        </label>
                     </form>
                     <a href="./index.html" class="modal-settings-item">
                         <h3>Exit Game</h3>
