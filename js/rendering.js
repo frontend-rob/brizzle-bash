@@ -17,7 +17,6 @@ function getComponents() {
         header: document.getElementById('header-content'),
         footer: document.getElementById('footer-content'),
         mobileMenu: document.getElementById('popup-menu'),
-        loader: document.getElementById('loader-screen'),
         settingsModal: document.getElementById('game-settings-modal'),
         infoModal: document.getElementById('info-guide-modal'),
         gameoverModal: document.getElementById('game-over-screen'),
@@ -33,7 +32,6 @@ function getComponents() {
  * @param {HTMLElement} [components.header] - the header element of the page.
  * @param {HTMLElement} [components.footer] - the footer element of the page.
  * @param {HTMLElement} [components.mobileMenu] - the mobile menu element.
- * @param {HTMLElement} [components.loader] - the loader screen element.
  * @param {HTMLElement} [components.settingsModal] - the settings modal element.
  * @param {HTMLElement} [components.infoModal] - the info guide modal element.
  * @param {HTMLElement} [components.gameoverModal] - the game-over screen element.
@@ -44,7 +42,6 @@ function loadTemplates(components) {
         header: getHeaderTemplate,
         footer: getFooterTemplate,
         mobileMenu: getMobileMenuTemplate,
-        loader: getLoaderScreenTemplate,
         settingsModal: getSettingsModalTemplate,
         infoModal: getInfoGuideModalTemplate,
         gameoverModal: getGameOverScreenTemplate,

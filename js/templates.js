@@ -118,17 +118,6 @@ function getMobileMenuTemplate() {
 }
 
 
-function getLoaderScreenTemplate() {
-    return `
-        <div class="loader-content fade-in">
-            <div class="loader"></div>
-            <div class="blur"></div>
-            <h3>Loading</h3>
-        </div>
-    `;
-}
-
-
 function getSettingsModalTemplate() {
     return `
         <div class="modal-container">
