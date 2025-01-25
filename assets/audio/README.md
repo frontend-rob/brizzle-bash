@@ -26,7 +26,7 @@ assets/audio/
 
 Below is the list of sound assets and their respective authors:
 
-- **bg-intro.mp3** by *Nancy_Sinclair*  
+- **bg-game.mp3** by *Nancy_Sinclair*  
   - **Source:** [freesound.org](https://freesound.org/s/750225/)
   - **License:** [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en)
 
