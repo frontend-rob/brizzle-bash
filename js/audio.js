@@ -152,12 +152,16 @@ soundManager.addSound('deadEnemy', './assets/audio/enemy-dead.mp3');
 soundManager.addSound('gameover', './assets/audio/gameover.mp3');
 
 
-let isSoundOn = true;
+let isSoundOn = false;
 
 
 // check localStorage for the muted state when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-    const savedMutedState = loadMutedState();
+    let savedMutedState = loadMutedState();
+    if (savedMutedState === null) {
+        savedMutedState = 'true';
+    }
+
     initializeSoundState(savedMutedState);
     initializeSoundUI(savedMutedState);
 });
@@ -177,16 +181,12 @@ function loadMutedState() {
  * @param {string} savedMutedState - the saved muted state ('true' or 'false')
  */
 function initializeSoundState(savedMutedState) {
-    if (savedMutedState === null) {
-        soundManager.unmuteSounds();
-        isSoundOn = true;
-    } else if (savedMutedState === 'true') {
-        soundManager.muteSounds();
-        isSoundOn = false;
-    } else if (savedMutedState === 'false') {
-        soundManager.unmuteSounds();
-        isSoundOn = true;
-    }
+    const isMuted = savedMutedState === 'true';
+
+    soundManager[isMuted ? 'muteSounds' : 'unmuteSounds']();
+    isSoundOn = !isMuted;
+
+    initializeSoundUI(savedMutedState);
 }
 
 
