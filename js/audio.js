@@ -177,17 +177,18 @@ function loadMutedState() {
  * @param {string} savedMutedState - the saved muted state ('true' or 'false')
  */
 function initializeSoundState(savedMutedState) {
-    if (savedMutedState === 'true') {
+    if (savedMutedState === null) {
+        soundManager.unmuteSounds();
+        isSoundOn = true;
+    } else if (savedMutedState === 'true') {
         soundManager.muteSounds();
         isSoundOn = false;
     } else if (savedMutedState === 'false') {
         soundManager.unmuteSounds();
         isSoundOn = true;
-    } else {
-        soundManager.muteSounds();
-        isSoundOn = false;
     }
 }
+
 
 /**
  * initializes the sound UI (icon, tooltip, checkbox, text) based on the current sound state.
@@ -203,7 +204,6 @@ function initializeSoundUI(savedMutedState) {
     syncCheckboxState(savedMutedState, soundCheckbox);
     updateSoundText(savedMutedState, soundText);
 }
-
 
 
 /**
