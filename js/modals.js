@@ -152,6 +152,8 @@ function closeGameSettings() {
  */
 function showPopupMenu() {
     showModal('popup-menu', 'modal-container');
+    const savedMutedState = loadMutedState();
+    updateSoundText(savedMutedState, document.getElementById('sound-status'));
     if (typeof world !== 'undefined' && world) {
         world.pauseGame();
         updateButtonState(PLAY_BUTTON, true);

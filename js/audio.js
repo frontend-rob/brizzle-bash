@@ -159,7 +159,7 @@ let isSoundOn = true;
 document.addEventListener('DOMContentLoaded', () => {
     const savedMutedState = loadMutedState();
     initializeSoundState(savedMutedState);
-    initializeSoundUI(savedMutedState);  // Stelle sicher, dass das UI immer synchronisiert wird
+    initializeSoundUI(savedMutedState);
 });
 
 
@@ -184,7 +184,6 @@ function initializeSoundState(savedMutedState) {
         soundManager.unmuteSounds();
         isSoundOn = true;
     } else {
-        // Wenn der localStorage-Wert nicht gesetzt ist, setze Standardwert (stumm)
         soundManager.muteSounds();
         isSoundOn = false;
     }
