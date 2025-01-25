@@ -10,3 +10,5 @@ assets/img/ornaments/**/*.png
 assets/img/carousel/**/*.png
 assets/img/main/**/*.png
 assets/img/main/**/*.svg
+
+js/templates.js

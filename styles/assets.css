@@ -95,9 +95,14 @@
     -webkit-backdrop-filter: blur(0.25rem);
     border: 1px solid rgba(255, 255, 255, 0.4);
     color: var(--primary-content);
+    height: 3.5rem;
+    width: 3.5rem;
+    font-size: 1.25rem;
 }
 
 .btn-glass svg {
+    height: 1.75rem;
+    width: 1.75rem;
     fill: var(--primary-content);
 }
 
@@ -137,4 +142,32 @@
         background-position: 0 0;
         opacity: 1;
     }
+}
+
+.external-link {
+    display: flex;
+    align-items: center;
+    padding: .375rem 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
+    border-radius: 1.5rem;
+    background-color: unset;
+    gap: 0.5rem;
+    color: var(--base-content);
+    user-select: none;
+}
+
+.external-link svg {
+    height: 1.75rem;
+    width: 1.75rem;
+    fill: var(--base-content);
+}
+
+.external-link:hover {
+    border: 1px solid var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 10%, transparent 100%);
+    color: var(--primary-content);
+}
+
+.external-link:hover svg {
+    fill: var(--primary-content);
 }

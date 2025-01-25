@@ -45,8 +45,11 @@
     }
 }
 
-@media (pointer: coarse) and (orientation: portrait) {
-    .landscape-modal {
-        display: flex !important;
+@media (max-width: 40rem) {
+    @media (pointer: coarse) and (orientation: portrait),
+    screen {
+        .landscape-modal {
+            display: flex !important;
+        }
     }
 }

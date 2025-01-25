@@ -1,0 +1,94 @@
+.loader-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-base-100);
+    z-index: 100;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.loader-content h3 {
+    font-weight: 300;
+    color: var(--primary-content);
+}
+
+.blur {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 8rem;
+    width: 8rem;
+    border-radius: 3rem;
+    background-color: var(--primary);
+    filter: blur(6rem);
+}
+
+.fade-in {
+    -webkit-animation: fade-in 750ms ease-in-out both;
+    animation: fade-in 750ms ease-in-out both;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.loader {
+    width: fit-content;
+    height: 1.5rem;
+    aspect-ratio: 2.5;
+    --dot: no-repeat radial-gradient(circle closest-side, var(--primary-content) 90%, transparent);
+    background:
+        var(--dot) 0% 50%,
+        var(--dot) 50% 50%,
+        var(--dot) 100% 50%;
+    background-size: calc(100%/3) 50%;
+    animation: bounce 1s infinite linear;
+}
+
+@keyframes bounce {
+    20% {
+        background-position: 0% 0%, 50% 50%, 100% 50%
+    }
+
+    40% {
+        background-position: 0% 100%, 50% 0%, 100% 50%
+    }
+
+    60% {
+        background-position: 0% 50%, 50% 100%, 100% 0%
+    }
+
+    80% {
+        background-position: 0% 50%, 50% 50%, 100% 100%
+    }
+}

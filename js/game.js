@@ -7,12 +7,90 @@ let keyboard = new Keyboard();
  * initializes the game by setting up the canvas, world, and button controls.
  * this function is called to start the game and establish the game environment.
  */
-function initGame() {
-    canvas = document.getElementById('canvas');
+async function initGame() {
+    const canvas = document.getElementById('canvas');
+
+    await loadResources();
     world = new World(canvas, keyboard);
+
     setupButtonControls();
     hideGameOverScreen();
 }
+
+
+/**
+ * hides the loader screen and shows the header and main content.
+ */
+function hideLoaderAndShowContent() {
+    const loaderScreen = document.getElementById('loader-screen');
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+
+    loaderScreen.classList.add('hidden');
+    header.classList.remove('hidden');
+    main.classList.remove('hidden');
+}
+
+
+/**
+ * loads all resources, ensures a minimum display time, and manages the loader visibility.
+ */
+async function loadResources() {
+    const preloadPromise = preload();
+    const minDisplayTime = new Promise(resolve => setTimeout(resolve, 2500));
+    await Promise.all([preloadPromise, minDisplayTime]);
+    hideLoaderAndShowContent();
+}
+
+
+/**
+ * centralized function to preload all image groups sequentially.
+ */
+async function preload() {
+    await preloadImages(BRIZZLY_IMAGES['IDLE']);
+    await preloadImages(BRIZZLY_IMAGES['WALK']);
+    await preloadImages(BRIZZLY_IMAGES['JUMP']);
+    await preloadImages(BRIZZLY_IMAGES['PUNCH']);
+    await preloadImages(BRIZZLY_IMAGES['THROW']);
+    await preloadImages(BRIZZLY_IMAGES['HIT']);
+    await preloadImages(BRIZZLY_IMAGES['DEAD']);
+    await preloadImages(BRIZZLY_IMAGES['SURPRISE']);
+    await preloadImages(ENDBOSS_IMAGES['WALK']);
+    await preloadImages(ENDBOSS_IMAGES['HIT']);
+    await preloadImages(CANDLE_IMAGES['WALK']);
+    await preloadImages(SPIRIT_IMAGES['WALK']);
+    await preloadImages(SPIDER_IMAGES['WALK']);
+    await preloadImages(SPINNER_IMAGES['WALK']);
+    await preloadImages(SQUID_IMAGES['WALK']);
+}
+
+/**
+ * loads all images in an array and returns a promise that resolves when all are loaded.
+ * @param {Array} array - array of image URLs.
+ * @returns {Promise} - resolves when all images are loaded.
+ */
+async function preloadImages(array) {
+    const promises = array.map((url) => preloadImage(url));
+    return Promise.all(promises);
+}
+
+/**
+ * loads a single image and returns a promise.
+ * @param {string} url - image URL.
+ * @returns {Promise} - resolves when the image is loaded.
+ */
+function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
+    });
+}
+
+
+
+
 
 
 /**
@@ -188,15 +266,16 @@ document.addEventListener('keydown', function (event) {
 
 
 /**
- * toggles fullscreen mode for the canvas container.
+ * handles fullscreen activation or deactivation based on the checkbox state.
+ * @param {HTMLInputElement} fullscreenCheckbox - the fullscreen checkbox element.
  */
-function toggleFullscreen() {
+function handleFullscreen(fullscreenCheckbox) {
     const canvasContainer = document.getElementById("canvas-container");
 
-    if (!isFullscreenActive()) {
+    if (fullscreenCheckbox.checked) {
         enterFullscreen(canvasContainer);
         canvasContainer.classList.add("fullscreen");
-    } else {
+    } else if (isFullscreenActive()) {
         exitFullscreen();
         canvasContainer.classList.remove("fullscreen");
     }
@@ -210,6 +289,32 @@ function toggleFullscreen() {
 function isFullscreenActive() {
     return !!document.fullscreenElement;
 }
+
+
+/**
+ * synchronizes the fullscreen checkbox state with the current fullscreen mode.
+ */
+function syncFullscreenCheckbox() {
+    const fullscreenCheckbox = document.getElementById("chk-full-screen");
+    if (fullscreenCheckbox) {
+        fullscreenCheckbox.checked = isFullscreenActive();
+    }
+}
+
+
+/**
+ * handles Escape key to exit fullscreen mode and synchronize state.
+ */
+document.addEventListener("keydown", (event) => {
+    const canvasContainer = document.getElementById("canvas-container");
+
+    if (event.key === "Escape" && isFullscreenActive()) {
+        console.log("Escape key pressed: Exiting fullscreen");
+        exitFullscreen();
+        canvasContainer.classList.remove("fullscreen");
+        syncFullscreenCheckbox();
+    }
+});
 
 
 /**
@@ -230,12 +335,13 @@ function enterFullscreen(element) {
  * exits fullscreen mode.
  */
 function exitFullscreen() {
-    requestFullscreen(document, [
+    const methodNames = [
         "exitFullscreen",
         "mozCancelFullScreen",
         "webkitExitFullscreen",
         "msExitFullscreen"
-    ]);
+    ];
+    requestFullscreen(document, methodNames);
 }
 
 
@@ -252,3 +358,18 @@ function requestFullscreen(target, methodNames) {
         }
     }
 }
+
+
+/**
+ * event listener for changes in fullscreen mode to synchronize checkbox state and handle fullscreen class.
+ */
+document.addEventListener("fullscreenchange", () => {
+    console.log("Fullscreen mode changed.");
+    const canvasContainer = document.getElementById("canvas-container");
+
+    if (!isFullscreenActive()) {
+        canvasContainer.classList.remove("fullscreen");
+    }
+
+    syncFullscreenCheckbox();
+});

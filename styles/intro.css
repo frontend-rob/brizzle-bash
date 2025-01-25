@@ -23,9 +23,8 @@ header {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #121314fa;
+    background-color: #121314f5;
     backdrop-filter: blur(0.5rem);
-    z-index: 10;
 }
 
 .intro-container {
@@ -37,11 +36,12 @@ header {
     width: 100%;
     margin: 3rem 0;
     gap: 2rem;
+    user-select: none;
 }
 
 .fade-in {
-    -webkit-animation: fade-in 1.2s ease-in-out both;
-    animation: fade-in 1.2s ease-in-out both;
+    -webkit-animation: fade-in 750ms ease-in-out both;
+    animation: fade-in 750ms ease-in-out both;
 }
 
 @-webkit-keyframes fade-in {

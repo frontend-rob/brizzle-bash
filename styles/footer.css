@@ -39,6 +39,12 @@ footer {
     width: auto;
 }
 
+.footer-logo-txt {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.75px;
+}
+
 .footer-links {
     display: flex;
     justify-content: center;

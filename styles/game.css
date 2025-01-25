@@ -31,12 +31,28 @@ main {
 }
 
 .canvas-container.fullscreen {
+    .game-over-screen {
+        height: 100vh;
+        width: 100vw;
+        border-radius: unset;
+        border: unset;
+    }
+
     .game-over-screen-content {
         height: 100vh;
+        border-radius: unset;
+        border: unset;
     }
+
     canvas {
         border-radius: unset;
         border: unset;
+    }
+
+    .canvas-ctrl-container {
+        position: absolute;
+        padding: 1rem;
+        bottom: 0;
     }
 }
 
@@ -45,9 +61,25 @@ canvas {
     width: 100%;
     height: 100%;
     aspect-ratio: 16/9;
-    border: 2px solid var(--bg-neutral);
+    border: 2px solid var(--bg-neutral); /* ! ggfls border raus */
     border-radius: 1rem;
     background-color: var(--bg-base-200);
+}
+
+.canvas-header-ctrl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    z-index: 1;
+}
+
+.setting-bar-canvas {
+    display: flex;
+    gap: 1rem;
 }
 
 .canvas-ctrl-container {
@@ -71,6 +103,7 @@ canvas {
 .action-buttons-top {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
     gap: 1.5rem;
 }
 
@@ -81,9 +114,6 @@ canvas {
 }
 
 .progress-wrapper {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
     display: flex;
     flex-direction: column;
     width: calc(100% - 70%);
@@ -150,11 +180,15 @@ canvas {
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
+    header {
+        display: none;
+    }
+
     .canvas-container {
         position: absolute;
         top: 0;
         left: 0;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
     }
 

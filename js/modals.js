@@ -1,6 +1,6 @@
 /**
  * displays a modal by removing the 'hidden' class and adding 'no-scroll' to the body.
- * adds event listeners for clicking outside the modal and pressing the ESC key.
+ * also adds event listeners for clicking outside the modal and pressing the ESC key.
  * 
  * @param {string} modalId - the ID of the modal element to display.
  * @param {string} contentClass - the class name of the modal's content container.
@@ -8,7 +8,9 @@
 function showModal(modalId, contentClass) {
     const modal = document.getElementById(modalId);
     const body = document.body;
+    const modalContainer = modal.querySelector('.modal-container');
 
+    modalContainer.classList.add('modal-in')
     modal.classList.remove('hidden');
     body.classList.add('no-scroll');
 
@@ -23,12 +25,21 @@ function showModal(modalId, contentClass) {
  * 
  * @param {string} modalId - the ID of the modal element to close.
  */
+/**
+ * closes a modal by adding the 'hidden' class and removing 'no-scroll' from the body.
+ * also removes event listeners for clicking outside the modal and pressing the ESC key.
+ * 
+ * @param {string} modalId - the ID of the modal element to close.
+ */
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     const body = document.body;
+    const modalContainer = modal.querySelector('.modal-container');
 
+    modalContainer.classList.remove('modal-in');
     modal.classList.add('hidden');
     body.classList.remove('no-scroll');
+
 
     modal.removeEventListener('click', (event) => handleModalClick(event, modalId));
     document.removeEventListener('keydown', (event) => handleModalEsc(event, modalId));
@@ -85,7 +96,7 @@ function handleModalEsc(event, modalId) {
 function showInfoGuide() {
     const popupMenu = document.getElementById('popup-menu');
     if (popupMenu && !popupMenu.classList.contains('hidden')) {
-        closePopupMenu(); 
+        closePopupMenu();
     }
 
     showModal('info-guide-modal', 'modal-container');
@@ -172,33 +183,6 @@ function switchTab(event, tabId) {
 
 
 /**
- * toggles the state of the checkbox and updates the sound or other features accordingly.
- * 
- * @param {string} checkboxId - the id of the checkbox to toggle
- */
-function toggleCheckbox(checkboxId) {
-    const checkbox = document.getElementById(checkboxId);
-    if (checkbox) {
-        checkbox.checked = !checkbox.checked;
-
-        if (checkboxId === 'chk-sound') {
-            toggleSound();
-        }
-
-        if (checkboxId === 'chk-full-screen') {
-            toggleFullscreen();
-            closeGameSettings();
-            updateFullscreenCheckboxState();
-        }
-
-        if (checkboxId === 'chk-debug') {
-            MovableObject.setDebugMode(checkbox.checked);
-        }
-    }
-}
-
-
-/**
  * ensures the initial state of checkboxes when the page loads.
  */
 document.addEventListener('DOMContentLoaded', function () {
@@ -218,7 +202,6 @@ function addCheckboxEventListeners(checkboxIds) {
         if (checkbox) {
             checkbox.addEventListener('click', (event) => {
                 event.stopPropagation();
-                toggleCheckbox(checkboxId);
             });
         }
     });
@@ -232,5 +215,54 @@ function updateFullscreenCheckboxState() {
     const checkbox = document.getElementById('chk-full-screen');
     if (checkbox) {
         checkbox.checked = document.fullscreenElement !== null;
+    }
+}
+
+
+/**
+ * applies game settings based on the state of the checkboxes in the settings form.
+ * prevents the default form submission behavior and updates settings for sound, fullscreen, and debug mode.
+ *
+ * @param {Event} event - the event object associated with the form submission.
+ */
+function applySettings(event) {
+    event.preventDefault();
+    updateSoundSetting();
+    updateFullscreenSetting();
+    updateDebugSetting();
+    closeGameSettings();
+}
+
+
+/**
+ * updates the sound setting based on the checkbox state.
+ */
+function updateSoundSetting() {
+    const soundCheckbox = document.getElementById('chk-sound');
+    if (soundCheckbox && soundCheckbox.checked !== isSoundOn) {
+        toggleSound();
+    }
+}
+
+
+/**
+ * updates the fullscreen setting based on the checkbox state.
+ */
+function updateFullscreenSetting() {
+    const fullscreenCheckbox = document.getElementById('chk-full-screen');
+    if (fullscreenCheckbox) {
+        handleFullscreen(fullscreenCheckbox);
+        syncFullscreenCheckbox();
+    }
+}
+
+
+/**
+ * updates the debug mode setting based on the checkbox state.
+ */
+function updateDebugSetting() {
+    const debugCheckbox = document.getElementById('chk-debug');
+    if (debugCheckbox) {
+        MovableObject.setDebugMode(debugCheckbox.checked);
     }
 }
