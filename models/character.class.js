@@ -273,37 +273,37 @@ class Character extends MovableObject {
     }
 
 
-    /**
-     * executes the throw action when the throw button is pressed.
-     * @returns {boolean} true if the throw action is performed, otherwise false.
-     */
-    throw() {
-        if (this.world.isPaused) return false;
+    // /**
+    //  * executes the throw action when the throw button is pressed.
+    //  * @returns {boolean} true if the throw action is performed, otherwise false.
+    //  */
+    // throw() {
+    //     if (this.world.isPaused) return false;
 
-        if (this.world.keyboard.THROW_BALL && this.world.bombAmount > 0) {
-            this.checkThrowCollision();
-            return true;
-        }
-        return false;
-    }
+    //     if (this.world.keyboard.THROW_BALL && this.world.bombAmount > 0) {
+    //         // this.checkThrowCollision();
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 
-    /**
-     * checks for collisions between the throw and the enemies.
-     */
-    checkThrowCollision() {
-        const throwRange = {
-            x: this.X + (this.flipImage ? +10 : this.width + 10),
-            y: this.Y,
-            width: 5,
-            height: this.height
-        };
+    // /**
+    //  * checks for collisions between the throw and the enemies.
+    //  */
+    // checkThrowCollision() {
+    //     const throwRange = {
+    //         x: this.X + (this.flipImage ? +10 : this.width + 10),
+    //         y: this.Y,
+    //         width: 5,
+    //         height: this.height
+    //     };
 
-        this.world.level.enemies.forEach((enemy) => {
-            if (this.isColliding(enemy, throwRange.x, throwRange.y, throwRange.width, throwRange.height)) {
-                enemy.getHit(20);
-                console.log(`Enemy ${enemy.name} was hit by a throw! Current Life: ${enemy.enemyLife}`);
-            }
-        });
-    }
+    //     this.world.level.enemies.forEach((enemy) => {
+    //         if (this.isColliding(enemy, throwRange.x, throwRange.y, throwRange.width, throwRange.height)) {
+    //             enemy.getHit(20);
+    //             console.log(`Enemy ${enemy.name} was hit by a throw! Current Life: ${enemy.enemyLife}`);
+    //         }
+    //     });
+    // }
 }

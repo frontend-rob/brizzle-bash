@@ -129,21 +129,8 @@ class World {
                 soundManager.initializeSoundVolumes();
                 this.checkCollisions();
                 this.checkThrowObjects();
-                this.checkThrowableObjectCollision();
             }
         }, 250);
-    }
-
-
-    /**
-     * checks whether the player is throwing objects.
-     */
-    checkThrowObjects() {
-        if (this.keyboard.THROW_BALL && this.bombAmount > 0) {
-            this.throwSpikyBall();
-        } else if (this.keyboard.THROW_BALL && this.bombAmount <= 0) {
-            this.showThrowError();
-        }
     }
 
 
@@ -333,21 +320,6 @@ class World {
         setTimeout(() => {
             this.throwableObjects = this.throwableObjects.filter(obj => obj !== errorImage);
         }, 1000);
-    }
-
-
-    /**
-     * checks collisions between throwable objects and enemies.
-     */
-    checkThrowableObjectCollision() {
-        this.throwableObjects.forEach((throwableObject) => {
-            this.level.enemies.forEach((enemy) => {
-                if (throwableObject.isColliding(enemy, throwableObject.X, throwableObject.Y, throwableObject.width, throwableObject.height)) {
-                    enemy.getHit(20);
-                    console.log(`Enemy ${enemy.name} was hit by a throwable object! Current Life: ${enemy.enemyLife}`);
-                }
-            });
-        });
     }
 
 
