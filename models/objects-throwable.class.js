@@ -52,8 +52,7 @@ class ThrowableObject extends MovableObject {
 
         this.world.level.enemies.forEach((enemy) => {
             if (this.isColliding(enemy, throwRange.x, throwRange.y, throwRange.width, throwRange.height)) {
-                enemy.getHit(20);
-                console.log(`Enemy ${enemy.name} was hit by a throw! Current Life: ${enemy.enemyLife}`);
+                enemy.getHit(20);                
             }
         });
     }

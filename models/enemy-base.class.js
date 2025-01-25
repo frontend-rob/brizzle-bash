@@ -42,7 +42,7 @@ class Enemy extends MovableObject {
         if (this.enemyLife < 0) {
             this.enemyLife = 0;
         }
-        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
+
         if (this.enemyLife <= 0) {
             this.isDead();
         }
@@ -53,12 +53,10 @@ class Enemy extends MovableObject {
      * handles the logic when the enemy's life reaches zero.
      */
     isDead() {
-        console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('deadEnemy');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }
-        console.log(`Enemies alive:`, this.world.level.enemies);
     }
 }

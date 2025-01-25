@@ -80,8 +80,6 @@ class World {
      */
     pauseGame() {
         this.isPaused = true;
-        console.log("Game Paused");
-
         soundManager.pauseSound('gameMusic');
 
         cancelAnimationFrame(this.animationFrameId);
@@ -96,7 +94,6 @@ class World {
      */
     resumeGame() {
         this.isPaused = false;
-        console.log("Game Resumed");
         soundManager.playSound('gameMusic');
 
         this.character.resumeAnimation();
@@ -184,7 +181,6 @@ class World {
      */
     handleCollisionWithEnemy(enemy) {
         if (this.character.isHurt()) {
-            console.log("Character is hurt and cannot punch.");
             return;
         }
 
@@ -219,7 +215,6 @@ class World {
             soundManager.playSound('characterHurt');
             hasPlayedHurtSound = true;
         }
-        console.log(`Character collided with enemy: ${enemy.name}, Current Life: ${this.character.characterLife}`);
     }
 
 
@@ -235,7 +230,6 @@ class World {
                 soundManager.playSound('collectHealth');
                 this.character.heal();
                 this.level.healthObjects.splice(index, 1);
-                console.log('Healed! Current Life:', this.character.characterLife);
             }
         });
     }
@@ -252,8 +246,7 @@ class World {
         this.level.bombObjects.forEach((bombObject, index) => {
             if (this.character.isColliding(bombObject)) {
                 this.collectBomb();
-                this.level.bombObjects.splice(index, 1);
-                console.log('Bomb collected! Current Bomb progress:', this.bombAmount);
+                this.level.bombObjects.splice(index, 1);                
             }
         });
     }

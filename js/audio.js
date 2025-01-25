@@ -39,8 +39,6 @@ var soundManager = {
 
         if (this.sounds[key]) {
             this.sounds[key].play();
-        } else {
-            console.warn(`sound "${key}" not found.`);
         }
     },
 
@@ -75,8 +73,7 @@ var soundManager = {
             }
         }
         this.isMuted = true;
-        localStorage.setItem('isMuted', 'true');
-        console.log('sounds muted');
+        localStorage.setItem('isMuted', 'true');        
     },
 
     /**
@@ -90,7 +87,6 @@ var soundManager = {
         }
         this.isMuted = false;
         localStorage.setItem('isMuted', 'false');
-        console.log('sounds unmuted');
     },
 
     /**

@@ -24,8 +24,7 @@ class MovableObject extends DrawableObject {
      * @param {boolean} isEnabled - whether debug mode should be enabled or not.
      */
     static setDebugMode(isEnabled) {
-        MovableObject.debugMode = isEnabled;
-        console.log("Debug Mode: ", MovableObject.debugMode ? "enabled" : "disabled");
+        MovableObject.debugMode = isEnabled;        
     }
 
 

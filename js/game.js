@@ -315,7 +315,6 @@ document.addEventListener("keydown", (event) => {
     const canvasContainer = document.getElementById("canvas-container");
 
     if (event.key === "Escape" && isFullscreenActive()) {
-        console.log("Escape key pressed: Exiting fullscreen");
         exitFullscreen();
         canvasContainer.classList.remove("fullscreen");
         syncFullscreenCheckbox();
@@ -370,7 +369,6 @@ function requestFullscreen(target, methodNames) {
  * event listener for changes in fullscreen mode to synchronize checkbox state and handle fullscreen class.
  */
 document.addEventListener("fullscreenchange", () => {
-    console.log("Fullscreen mode changed.");
     const canvasContainer = document.getElementById("canvas-container");
 
     if (!isFullscreenActive()) {

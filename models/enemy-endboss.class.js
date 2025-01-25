@@ -80,7 +80,6 @@ class Endboss extends Enemy {
         if (this.enemyLife < 0) {
             this.enemyLife = 0;
         }
-        console.log(`Enemy ${this.name} was hit! Current Life: ${this.enemyLife}`);
     }
 
 
@@ -89,7 +88,6 @@ class Endboss extends Enemy {
      */
     increaseSpeed() {
         this.speedX += 0.5;
-        console.log(`Endboss speed increased to: ${this.speedX}`);
     }
 
 
@@ -107,7 +105,6 @@ class Endboss extends Enemy {
      * handles the logic when the enemy's life reaches zero.
      */
     isDead() {
-        console.log(`Enemy ${this.name} has died!`);
         soundManager.playSound('deadEndboss');
         const index = this.world.level.enemies.indexOf(this);
         if (index > -1) {
@@ -115,7 +112,5 @@ class Endboss extends Enemy {
         }
 
         showGameOverScreen("The Endboss has been defeated, and peace returns to Moustacheshire... for now.");
-
-        console.log(`Enemies alive:`, this.world.level.enemies);
     }
 }
