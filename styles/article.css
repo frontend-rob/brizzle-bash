@@ -112,6 +112,10 @@ code {
         display: block;
     }
 
+    .legal-notice-wrapper-inner {
+        padding-bottom: 6rem;
+    }
+
     .external-link {
         display: none;
     }
