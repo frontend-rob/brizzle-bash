@@ -31,11 +31,11 @@
     top: 0;
     right: 0;
     transform: translate(50%, -50%);
-    height: clamp(16rem, 10.909vw + 11.909rem, 25rem);
-    width: clamp(16rem, 10.909vw + 11.909rem, 25rem);
-    border-radius: 10rem;
+    height: clamp(10rem, 16.97vw + 3.636rem, 24rem);
+    width: clamp(10rem, 16.97vw + 3.636rem, 24rem);
+    border-radius: clamp(5rem, 8.485vw + 1.818rem, 12rem);
     background-color: var(--primary);
-    filter: blur(clamp(8rem, 8.485vw + 4.818rem, 15rem));
+    filter: blur(clamp(10rem, 16.97vw + 3.636rem, 24rem));
 }
 
 article {
