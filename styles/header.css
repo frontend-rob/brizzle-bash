@@ -139,26 +139,6 @@ header {
     }
 }
 
-/* @media (pointer: coarse) and (orientation: landscape) {
-    header {
-        z-index: 10;
-        background-color: unset;
-        backdrop-filter: unset;
-    }
-
-    #header-inner-game {
-        justify-content: flex-end;
-    }
-
-    .header-inner {
-        max-width: unset;
-    }
-
-    #main-logo {
-        display: none;
-    }
-} */
-
 @media screen and (max-width: 48rem) {
     .external-link {
         display: none;
