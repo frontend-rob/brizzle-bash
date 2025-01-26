@@ -144,10 +144,12 @@
     }
 }
 
-.external-link {
+.external-link,
+.internal-link {
     display: flex;
     align-items: center;
-    padding: .375rem 0.75rem;
+    width: fit-content;
+    padding: 0.5rem 1rem;
     border: 1px solid color-mix(in srgb, var(--bg-neutral) 70%, transparent 70%);
     border-radius: 1.5rem;
     background-color: unset;
@@ -156,18 +158,21 @@
     user-select: none;
 }
 
-.external-link svg {
+.external-link svg,
+.internal-link svg {
     height: 1.75rem;
     width: 1.75rem;
     fill: var(--base-content);
 }
 
-.external-link:hover {
+.external-link:hover,
+.internal-link:hover {
     border: 1px solid var(--primary);
     background-color: color-mix(in srgb, var(--primary) 10%, transparent 100%);
     color: var(--primary-content);
 }
 
-.external-link:hover svg {
+.external-link:hover svg,
+.internal-link:hover svg {
     fill: var(--primary-content);
 }
