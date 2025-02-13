@@ -40,7 +40,7 @@ To run this project locally, follow these steps:
 Download the source code by clicking the <kbd>Code</kbd> button or clone the repository using Git:
 
 ```
-git clone https://github.com/robsc0de/brizzle-bash.git
+git clone https://github.com/frontend-rob/brizzle-bash.git
 ```
 
 2. Start the Application
