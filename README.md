@@ -28,9 +28,6 @@ Here's an overview of the key functionalities:
 
 ![mockup-brizzle-bash-1](https://github.com/user-attachments/assets/f362f7c1-1d1e-4ce4-8f12-b109235071a8)
 
-![mockup-brizzle-bash-2](https://github.com/user-attachments/assets/de0c83cc-95bf-4f6d-87b0-a4eb653b9d3a)
-
-
 ## Setup Instructions
 
 To run this project locally, follow these steps:
